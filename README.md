@@ -37,7 +37,19 @@ While `private: true` in `src/site.config.js`, every page carries `noindex` and 
 
 Until `orgId` is set, both forms go straight to their thank-you pages so you can click through the journey.
 
-## Cloudflare Pages build settings
+## Branches
+
+- `master` is production. Anything merged here goes live on loomconnect.com.
+- `development` is where all work happens. Open a pull request from `development` into `master` to release.
+- Never push directly to `master`.
+
+## Security
+
+- `public/_headers` sets security headers on every page (HSTS, CSP, frame blocking and more). If you add a new third-party script, font or form target, add its domain to the Content-Security-Policy line or the browser will block it.
+- `public/.well-known/security.txt` tells security researchers how to report issues. Update the `Expires` date every year.
+- Dependabot opens weekly pull requests into `development` for dependency updates.
+
+## Cloudflare build settings
 
 - Framework preset: Astro
 - Build command: `npm run build`
