@@ -1,38 +1,20 @@
 ---
-import Base from '../layouts/Base.astro';
+import PolicyPage from '../layouts/PolicyPage.astro';
 import { site } from '../site.config.js';
 const sections = [
-  ['agreement', 'About these terms'],
-  ['licence', 'Your licence to use AI Assist'],
-  ['acceptable-use', 'Acceptable use'],
-  ['ai-output', 'AI-generated output'],
-  ['plans', 'Plans, fees and changes'],
-  ['data', 'Your data and AI providers'],
-  ['liability', 'Warranties and liability'],
-  ['termination', 'Ending the agreement'],
-  ['law', 'Governing law'],
+  { id: 'agreement', label: 'About these terms' },
+  { id: 'licence', label: 'Your licence to use AI Assist' },
+  { id: 'acceptable-use', label: 'Acceptable use' },
+  { id: 'ai-output', label: 'AI-generated output' },
+  { id: 'plans', label: 'Plans, fees and changes' },
+  { id: 'data', label: 'Your data and AI providers' },
+  { id: 'liability', label: 'Warranties and liability' },
+  { id: 'termination', label: 'Ending the agreement' },
+  { id: 'law', label: 'Governing law' },
 ];
 ---
-<Base title="Terms of service">
-  <section class="section-sm">
-    <div class="container narrow prose">
-      <nav class="legal-tabs" aria-label="Legal">
-        <a href="/privacy">Privacy policy</a>
-        <a href="/terms" aria-current="page">Terms of service</a>
-      </nav>
-      <h1 style="font-size: clamp(1.8rem, 4vw, 2.6rem)">Terms of service</h1>
-      <p class="muted small">Last updated {site.placeholders.legalLastUpdated}</p>
-      <p class="callout">Draft structure only. The full text is being prepared with a solicitor and must replace the placeholders below before launch.</p>
-      <nav class="toc" aria-label="Contents">
-        {sections.map(([id, label], i) => <a href={`#${id}`}>{i + 1}. {label}</a>)}
-      </nav>
-      {sections.map(([id, label], i) => (
-        <>
-          <h2 id={id}>{i + 1}. {label}</h2>
-          <p>[Text to come.]</p>
-        </>
-      ))}
-      <p>Questions about these terms: <a href={`mailto:${site.email.hello}`}>{site.email.hello}</a></p>
-    </div>
-  </section>
-</Base>
+<PolicyPage title="Terms of service" description="The terms for using AI Assist." draft sections={sections}>
+  <p slot="acceptable-use">Your use of AI Assist must follow our <a href="/acceptable-use">Acceptable Use Policy</a>. [Full text to come.]</p>
+  <p slot="ai-output">See <a href="/ai-transparency">AI transparency</a> for what AI Assist can and can't do. [Full text to come.]</p>
+  <p slot="after">Questions about these terms: <a href={`mailto:${site.email.hello}`}>{site.email.hello}</a></p>
+</PolicyPage>

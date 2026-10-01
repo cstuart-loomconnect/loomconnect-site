@@ -1,0 +1,42 @@
+---
+import Base from '../layouts/Base.astro';
+import Check from '../components/Check.astro';
+import { site } from '../site.config.js';
+
+// Add a new entry at the top for each promoted package version.
+const releases = [
+  {
+    version: site.placeholders.currentVersion,
+    date: site.placeholders.releaseDate,
+    title: 'First release',
+    notes: [
+      'AI chat assistant on Lightning record pages',
+      'Anthropic and OpenAI support using your own API key',
+      'Slash commands from prompt templates',
+      'PII pseudonymisation before data reaches the model',
+      'Audit log, usage rules and conversation retention',
+    ],
+  },
+];
+---
+<Base title="Release notes" description="What's new in each version of AI Assist.">
+  <section class="section-sm">
+    <div class="container narrow stack" style="gap: 24px">
+      <span class="eyebrow">Release notes</span>
+      <h1 style="font-size: clamp(1.8rem, 4vw, 2.6rem)">What's new in AI Assist</h1>
+      <p class="lead">Every package version, newest first. Upgrades install in place with no data loss.</p>
+      {releases.map((r) => (
+        <article class="release">
+          <div class="release-head">
+            <h2 style="font-size: 1.25rem">Version {r.version}</h2>
+            <span class="muted small">{r.date}</span>
+            <span class="pill">{r.title}</span>
+          </div>
+          <ul class="ticks" style="gap: 8px">
+            {r.notes.map((n) => <li><Check />{n}</li>)}
+          </ul>
+        </article>
+      ))}
+    </div>
+  </section>
+</Base>

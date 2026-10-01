@@ -23,7 +23,9 @@ Then open http://localhost:4321.
 
 ## Pages
 
-`/`, `/pricing`, `/security`, `/docs`, `/support`, `/support/thanks`, `/demo`, `/demo/thanks`, `/about`, `/privacy`, `/terms`, plus a 404 page.
+`/`, `/pricing`, `/security`, `/docs`, `/support`, `/support/thanks`, `/demo`, `/demo/thanks`, `/about`, `/release-notes`, plus policy pages `/privacy`, `/terms`, `/acceptable-use`, `/ai-transparency`, `/subprocessors`, `/support-policy`, `/accessibility` (all built on `src/layouts/PolicyPage.astro`) and a 404 page.
+
+Your legal name and correspondence address (required for a sole trader using a trading name) are set in `owner` in `src/site.config.js` and shown in the footer.
 
 ## Private mode
 

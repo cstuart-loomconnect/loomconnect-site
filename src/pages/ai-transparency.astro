@@ -1,0 +1,40 @@
+---
+import PolicyPage from '../layouts/PolicyPage.astro';
+import { site } from '../site.config.js';
+const sections = [
+  { id: 'what', label: 'What AI Assist is' },
+  { id: 'models', label: 'Which AI models it uses' },
+  { id: 'data', label: 'What data the model sees' },
+  { id: 'limits', label: 'What it can and can't do' },
+  { id: 'control', label: 'How you stay in control' },
+  { id: 'training', label: 'Is my data used to train models?' },
+  { id: 'questions', label: 'Questions' },
+];
+---
+<PolicyPage
+  title="AI transparency"
+  description="How AI Assist uses AI, what the model sees, and its limitations."
+  summary="AI Assist sends a question and the relevant record data to the AI provider your admin connects. Personal data is pseudonymised first. Answers can be wrong, so check them before acting."
+  sections={sections}
+>
+  <p slot="what">AI Assist is a chat assistant inside Salesforce. It uses a large language model to summarise records, draft text and answer questions about data your admin has made available to it. Everything AI Assist shows you is AI-generated unless it is labelled as a Salesforce field value.</p>
+  <p slot="models">Your admin chooses the provider and model, currently Anthropic or OpenAI, and connects it using your organisation's own API key. Loom Connect does not provide or host a model.</p>
+  <div slot="data">
+    <ul>
+      <li>Only records and fields the signed-in user can already see.</li>
+      <li>Only data sources your admin has enabled.</li>
+      <li>Names, email addresses, phone numbers and other fields your admin marks as personal data are replaced with tokens before they leave Salesforce, and restored when the answer comes back.</li>
+    </ul>
+  </div>
+  <div slot="limits">
+    <ul>
+      <li>It can state things confidently that are wrong or out of date.</li>
+      <li>It only knows what is in the data it is given and the model's general training.</li>
+      <li>It does not take actions in Salesforce without you confirming them.</li>
+      <li>It should not be the sole basis for decisions that significantly affect people.</li>
+    </ul>
+  </div>
+  <p slot="control">Admins control which data sources and actions are available, set usage rules that flag or block misuse, and can review the audit log of every request. Users can rate answers and report problems from the chat panel.</p>
+  <p slot="training">That depends on the terms between your organisation and your AI provider. Most business API agreements do not use your data for training by default, but check your provider's terms. Loom Connect never receives or trains on your data.</p>
+  <p slot="questions">Email <a href={`mailto:${site.email.security}`}>{site.email.security}</a>, or read the <a href="/security">security overview</a>.</p>
+</PolicyPage>

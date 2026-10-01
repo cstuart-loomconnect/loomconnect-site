@@ -1,0 +1,63 @@
+---
+// Shared layout for policy-style pages (legal, trust and support policies).
+// Props:
+//   title, description, updated (string), summary (string, optional),
+//   draft (boolean: shows the "being prepared with a solicitor" note),
+//   sections: [{ id, label }], each filled by a named slot with the same id,
+//   or "[Text to come.]" if no slot is given.
+import Base from './Base.astro';
+import { site } from '../site.config.js';
+
+const {
+  title,
+  description,
+  updated = site.placeholders.legalLastUpdated,
+  summary,
+  draft = false,
+  sections = [],
+} = Astro.props;
+
+const legalNav = [
+  { href: '/privacy', label: 'Privacy' },
+  { href: '/terms', label: 'Terms' },
+  { href: '/acceptable-use', label: 'Acceptable use' },
+  { href: '/ai-transparency', label: 'AI transparency' },
+  { href: '/subprocessors', label: 'Sub-processors' },
+  { href: '/support-policy', label: 'Support policy' },
+  { href: '/accessibility', label: 'Accessibility' },
+];
+const path = Astro.url.pathname.replace(/\/$/, '');
+
+const bodies = {};
+for (const s of sections) {
+  bodies[s.id] = Astro.slots.has(s.id) ? await Astro.slots.render(s.id) : null;
+}
+---
+<Base title={title} description={description}>
+  <section class="section-sm">
+    <div class="container narrow prose">
+      <nav class="legal-tabs" aria-label="Policies">
+        {legalNav.map((l) => (
+          <a href={l.href} aria-current={path === l.href ? 'page' : undefined}>{l.label}</a>
+        ))}
+      </nav>
+      <h1 style="font-size: clamp(1.8rem, 4vw, 2.6rem)">{title}</h1>
+      <p class="muted small">Last updated {updated}</p>
+      {summary && <div class="summary-box"><strong style="color: var(--ink)">The short version.</strong> {summary}</div>}
+      {draft && <p class="callout">Draft structure only. The full text is being prepared with a solicitor and must replace the placeholders before launch.</p>}
+      <slot />
+      {sections.length > 1 && (
+        <nav class="toc" aria-label="Contents">
+          {sections.map((s, i) => <a href={`#${s.id}`}>{i + 1}. {s.label}</a>)}
+        </nav>
+      )}
+      {sections.map((s, i) => (
+        <section class="prose" id={s.id}>
+          <h2>{i + 1}. {s.label}</h2>
+          {bodies[s.id] ? <Fragment set:html={bodies[s.id]} /> : <p>[Text to come.]</p>}
+        </section>
+      ))}
+      <slot name="after" />
+    </div>
+  </section>
+</Base>

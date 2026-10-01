@@ -17,20 +17,29 @@ const year = new Date().getFullYear();
           <a href="/pricing">Pricing</a>
           <a href="/security">Security</a>
           <a href="/docs">Docs</a>
+          <a href="/release-notes">Release notes</a>
         </nav>
         <nav aria-label="Company">
           <span>Company</span>
           <a href="/about">About</a>
           <a href="/demo">Request a demo</a>
           <a href="/support">Support</a>
+          <a href="/support-policy">Support policy</a>
         </nav>
-        <nav aria-label="Legal">
-          <span>Legal</span>
+        <nav aria-label="Trust and legal">
+          <span>Trust and legal</span>
           <a href="/privacy">Privacy policy</a>
           <a href="/terms">Terms of service</a>
+          <a href="/acceptable-use">Acceptable use</a>
+          <a href="/ai-transparency">AI transparency</a>
+          <a href="/subprocessors">Sub-processors</a>
+          <a href="/accessibility">Accessibility</a>
         </nav>
       </div>
     </div>
-    <p class="footer-legal">© {year} {site.name}. Salesforce and AppExchange are trademarks of Salesforce, Inc.</p>
+    <div class="footer-legal">
+      <p>{site.name} is a trading name of {site.owner.legalName}, {site.owner.address}.</p>
+      <p>© {year} {site.name}. Salesforce and AppExchange are trademarks of Salesforce, Inc.</p>
+    </div>
   </div>
 </footer>
