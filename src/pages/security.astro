@@ -1,0 +1,47 @@
+---
+import Base from '../layouts/Base.astro';
+import { site } from '../site.config.js';
+---
+<Base title="Security" description="How AI Assist handles your Salesforce data: permissions, PII pseudonymisation, Named Credentials, retention and audit logging.">
+  <section class="section">
+    <div class="container stack-lg">
+      <div class="stack">
+        <span class="eyebrow">Security and trust</span>
+        <h1>Security and data handling</h1>
+        <p class="lead">Exactly what happens to your data when someone asks AI Assist a question.</p>
+      </div>
+
+      <div class="stack">
+        <h2 style="font-size: 1.5rem">How a question flows</h2>
+        <div class="flow">
+          <div class="flow-step"><span class="step-num">1</span><strong>Your Salesforce org</strong><span>Reads only the records and fields the user can already see.</span></div>
+          <div class="flow-step"><span class="step-num">2</span><strong>Pseudonymise</strong><span>Names, emails and phone numbers are swapped for tokens.</span></div>
+          <div class="flow-step"><span class="step-num">3</span><strong>Your AI provider</strong><span>Sent through a Named Credential over TLS, using your own key.</span></div>
+          <div class="flow-step"><span class="step-num">4</span><strong>Back in your org</strong><span>Real values are restored and the answer is shown.</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section bg-soft">
+    <div class="container stack-lg">
+      <h2>Controls built in</h2>
+      <div class="grid grid-wide">
+        <div class="card"><h3>No Loom Connect servers</h3><p>AI Assist runs entirely inside your org. Requests go straight from Salesforce to the AI provider you choose, so we never receive your data.</p></div>
+        <div class="card"><h3>Permissions enforced</h3><p>Sharing rules, object permissions and field-level security apply to every query AI Assist makes.</p></div>
+        <div class="card"><h3>Secrets in Named Credentials</h3><p>Your AI provider key lives in Salesforce's credential store, never in code, settings or records.</p></div>
+        <div class="card"><h3>Retention you control</h3><p>Conversations and their pseudonymisation mappings are purged on the schedule your admin sets.</p></div>
+        <div class="card"><h3>Audit log and usage rules</h3><p>Every request is logged. Admins can set rules that flag or block misuse.</p></div>
+        <div class="card"><h3>Admin-approved data only</h3><p>AI Assist answers from the data sources your admin enables, and nothing else.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-sm">
+    <div class="container narrow stack">
+      <h2 style="font-size: 1.5rem">Review status and contact</h2>
+      <p class="muted">AppExchange security review: <strong style="color: var(--ink)">{site.placeholders.securityReviewStatus}</strong></p>
+      <p class="muted">Security questions or a vendor questionnaire to complete? Email <a href={`mailto:${site.email.security}`}>{site.email.security}</a>.</p>
+    </div>
+  </section>
+</Base>

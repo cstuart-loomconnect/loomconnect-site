@@ -1,0 +1,19 @@
+---
+import Base from '../../layouts/Base.astro';
+import Check from '../../components/Check.astro';
+import { site } from '../../site.config.js';
+---
+<Base title="Request received">
+  <section class="section">
+    <div class="container narrow stack center" style="gap: 20px">
+      <span class="confirm-icon"><Check size={36} /></span>
+      <h1>Request received</h1>
+      <p class="lead">Your case number is on its way to your inbox. Reply to that email to add details or screenshots.</p>
+      <p class="muted">Urgent? Email <a href={`mailto:${site.email.support}`}>{site.email.support}</a> and quote your case number.</p>
+      <div class="btn-row" style="justify-content: center">
+        <a class="btn btn-outline" href="/support">Raise another request</a>
+        <a class="btn btn-primary" href="/docs">Browse the docs</a>
+      </div>
+    </div>
+  </section>
+</Base>

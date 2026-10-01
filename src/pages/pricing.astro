@@ -1,0 +1,84 @@
+---
+import Base from '../layouts/Base.astro';
+import Check from '../components/Check.astro';
+import { site } from '../site.config.js';
+const p = site.placeholders;
+---
+<Base title="Pricing" description="AI Assist pricing: a free standard plan, Pro for growing teams and Enterprise for regulated industries.">
+  <section class="section">
+    <div class="container stack-lg">
+      <div class="stack center">
+        <h1>Start free. Grow when you need to.</h1>
+        <p class="lead">The Free plan is the full core product, not a trial. Pro and Enterprise add team, admin and compliance features.</p>
+      </div>
+
+      <div class="plans">
+        <div class="plan plan-featured">
+          <div class="plan-head"><h2 style="font-size: 1.4rem">Free</h2><span class="pill">Standard</span></div>
+          <div class="plan-price"><strong>£0</strong><span class="muted">forever</span></div>
+          <ul>
+            <li><Check />Chat assistant on any record page</li>
+            <li><Check />Summaries, email drafts and slash commands</li>
+            <li><Check />Anthropic or OpenAI, with your own API key</li>
+            <li><Check />PII pseudonymisation and audit log</li>
+            <li><Check />One AI agent, {p.freeDataSources} data sources</li>
+            <li><Check />Email support</li>
+          </ul>
+          <a class="btn btn-primary btn-block" href={site.appExchangeUrl}>Get it on AppExchange</a>
+        </div>
+
+        <div class="plan">
+          <div class="plan-head"><h2 style="font-size: 1.4rem">Pro</h2><span class="pill pill-violet">For growing teams</span></div>
+          <div class="plan-price"><strong>{p.proPrice}</strong><span class="muted">per user / month</span></div>
+          <ul>
+            <li class="includes">Everything in Free, plus:</li>
+            <li><Check />Multiple agents and personas</li>
+            <li><Check />Workflow actions with confirmation</li>
+            <li><Check />Shared team prompt library</li>
+            <li><Check />Admin usage dashboard and token limits</li>
+            <li><Check />Priority support</li>
+          </ul>
+          <a class="btn btn-outline btn-block" href="/demo">Start a Pro trial</a>
+        </div>
+
+        <div class="plan plan-muted">
+          <div class="plan-head"><h2 style="font-size: 1.4rem">Enterprise</h2><span class="pill pill-grey">Regulated industries</span></div>
+          <div class="plan-price"><strong>Custom</strong></div>
+          <ul>
+            <li class="includes">Everything in Pro, plus:</li>
+            <li><Check />Custom PII compliance groups</li>
+            <li><Check />Compliance export and retention controls</li>
+            <li><Check />Custom branding</li>
+            <li><Check />Onboarding and a support SLA</li>
+            <li><Check />Signed contract and data processing terms</li>
+          </ul>
+          <a class="btn btn-outline btn-block" href="/demo">Talk to us</a>
+        </div>
+      </div>
+
+      <div class="container narrow faq" style="padding: 0; width: 100%">
+        <h2 style="font-size: 1.6rem; margin-bottom: 8px">Questions</h2>
+        <details open>
+          <summary>Do I pay for AI usage?</summary>
+          <p>You pay your AI provider directly on every plan. Loom Connect never marks it up.</p>
+        </details>
+        <details>
+          <summary>Is the Free plan a trial?</summary>
+          <p>No. It's the full core product with no time limit.</p>
+        </details>
+        <details>
+          <summary>Can I switch plans?</summary>
+          <p>Yes. It's the same package, so upgrading unlocks features with nothing to reinstall.</p>
+        </details>
+        <details>
+          <summary>What happens if prices change?</summary>
+          <p>Existing customers get {p.noticePeriod} notice before any change takes effect.</p>
+        </details>
+        <details>
+          <summary>What data is sent to the AI model?</summary>
+          <p>Only fields the user can already see, with personal data pseudonymised first. The <a href="/security">security page</a> explains the full data flow.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+</Base>

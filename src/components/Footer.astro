@@ -1,0 +1,36 @@
+---
+import { site } from '../site.config.js';
+const year = new Date().getFullYear();
+---
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <strong>{site.name}</strong>
+        <p>AI tools for Salesforce teams, built on the platform you already trust.</p>
+        <a href={`mailto:${site.email.hello}`}>{site.email.hello}</a>
+      </div>
+      <div class="footer-cols">
+        <nav aria-label="Product">
+          <span>Product</span>
+          <a href="/">AI Assist</a>
+          <a href="/pricing">Pricing</a>
+          <a href="/security">Security</a>
+          <a href="/docs">Docs</a>
+        </nav>
+        <nav aria-label="Company">
+          <span>Company</span>
+          <a href="/about">About</a>
+          <a href="/demo">Request a demo</a>
+          <a href="/support">Support</a>
+        </nav>
+        <nav aria-label="Legal">
+          <span>Legal</span>
+          <a href="/privacy">Privacy policy</a>
+          <a href="/terms">Terms of service</a>
+        </nav>
+      </div>
+    </div>
+    <p class="footer-legal">© {year} {site.name}. Salesforce and AppExchange are trademarks of Salesforce, Inc.</p>
+  </div>
+</footer>

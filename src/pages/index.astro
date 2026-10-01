@@ -1,0 +1,124 @@
+---
+import Base from '../layouts/Base.astro';
+import { site } from '../site.config.js';
+---
+<Base description="AI Assist puts a secure AI chat assistant on your Salesforce record pages. Summarise records, draft emails and ask questions, with your permissions respected.">
+  <section class="hero">
+    <svg class="hero-weave" viewBox="0 0 1200 600" preserveAspectRatio="none" aria-hidden="true">
+      <path d="M0 120 C300 40 500 260 800 160 S1100 60 1200 140" stroke="#EDEBF6" stroke-width="2" fill="none" />
+      <path d="M0 220 C300 320 500 80 800 220 S1100 320 1200 220" stroke="#EDEBF6" stroke-width="2" fill="none" />
+      <path d="M0 420 C260 340 520 520 820 420 S1080 340 1200 420" stroke="#FCE9C7" stroke-width="2" fill="none" />
+      <path d="M0 500 C300 580 560 380 840 500 S1100 580 1200 500" stroke="#EDEBF6" stroke-width="2" fill="none" />
+    </svg>
+    <div class="container hero-inner">
+      <div class="hero-copy">
+        <span class="pill">Free during early access</span>
+        <h1>AI that works where your team works: inside Salesforce</h1>
+        <p class="lead">AI Assist puts a chat assistant on your record pages. Summarise records, draft emails and ask questions about your data, with your sharing rules and field-level security respected on every answer.</p>
+        <div class="btn-row">
+          <a class="btn btn-primary" href={site.appExchangeUrl}>Get it on AppExchange</a>
+          <a class="btn btn-outline" href="/demo">Request a demo</a>
+        </div>
+        <p class="small muted">Installs as a managed package. No credit card, no external portal.</p>
+      </div>
+
+      <div class="mock" role="img" aria-label="AI Assist summarising an opportunity on a Salesforce record page">
+        <div class="mock-bar">
+          <span class="mock-dot"></span><span class="mock-dot"></span><span class="mock-dot"></span>
+          <span class="mock-url">yourorg.lightning.force.com</span>
+        </div>
+        <div class="mock-body">
+          <div class="mock-record">
+            <span class="eyebrow" style="color: var(--muted)">Opportunity</span>
+            <strong style="font-size: 1.25rem">Northwind Renewal</strong>
+            <dl>
+              <div><dt>Stage</dt><dd>Negotiation</dd></div>
+              <div><dt>Close date</dt><dd>14 Nov</dd></div>
+              <div><dt>Owner</dt><dd>Sam Lee</dd></div>
+              <div><dt>Open tasks</dt><dd>2</dd></div>
+            </dl>
+          </div>
+          <div class="mock-chat">
+            <strong>AI Assist</strong>
+            <div class="bubble-user">/summarise this opportunity</div>
+            <div class="bubble-ai">Northwind is in negotiation, closing 14 Nov. Two tasks are open, including the pricing follow-up. Last contact was 6 days ago, so a check-in this week is a good next step.</div>
+            <div class="mock-input">Ask about this record…</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section bg-soft">
+    <div class="container stack-lg">
+      <div class="stack">
+        <span class="eyebrow">How it works</span>
+        <h2>Live in your org in an afternoon</h2>
+      </div>
+      <div class="grid">
+        <div class="card"><span class="step-num">1</span><h3>Install</h3><p>Install the managed package from AppExchange into a sandbox or production org.</p></div>
+        <div class="card"><span class="step-num">2</span><h3>Configure</h3><p>Connect your AI provider, assign permission sets and drop the component onto any record page.</p></div>
+        <div class="card"><span class="step-num">3</span><h3>Ask</h3><p>Your team asks questions in plain English, or uses slash commands for the tasks they repeat every day.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container stack-lg">
+      <div class="stack">
+        <span class="eyebrow">Features</span>
+        <h2>Everything happens on the record</h2>
+      </div>
+      <div class="grid">
+        <div class="feature">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="#1E1B4B" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 6h16M4 12h10M4 18h7" /></svg>
+          <h3>Summarise records</h3>
+          <p>Get the state of any record, its activity and related items in a few lines.</p>
+        </div>
+        <div class="feature">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="#1E1B4B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2" /><path d="M3 7l9 6 9-6" /></svg>
+          <h3>Draft emails</h3>
+          <p>Write follow-ups grounded in the record, ready for you to review and send.</p>
+        </div>
+        <div class="feature">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="#1E1B4B" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7" /><path d="M20 20l-3.5-3.5" /></svg>
+          <h3>Ask your data</h3>
+          <p>Answer questions from the data sources your admin approves, and nothing else.</p>
+        </div>
+        <div class="feature">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="#1E1B4B" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M9 4L5 20M19 4l-4 16" /></svg>
+          <h3>Slash commands</h3>
+          <p>Turn your team's best prompts into one-word commands like /summarise.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-sm bg-soft">
+    <div class="container stack-lg">
+      <h2>Built for admins who read the fine print</h2>
+      <div class="grid">
+        <div class="trust"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="#B45309" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l8 3v6c0 4.5-3.4 8-8 9-4.6-1-8-4.5-8-9V6z" /></svg>Respects sharing rules and field-level security</div>
+        <div class="trust"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="#B45309" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="8" r="4" /><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6M3 3l18 18" /></svg>Personal data pseudonymised before it reaches the model</div>
+        <div class="trust"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="#B45309" stroke-width="2" stroke-linecap="round" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2" /><path d="M8 11V8a4 4 0 0 1 8 0v3" /></svg>API keys held in Named Credentials, never in code</div>
+        <div class="trust"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="#B45309" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 4h16v16H4zM8 9h8M8 13h8M8 17h5" /></svg>Admin controls, usage rules and a full audit log</div>
+      </div>
+      <a href="/security" style="font-weight: 700">Read how AI Assist handles your data</a>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="cta-band">
+        <div class="stack">
+          <h2>Free while in early access</h2>
+          <p>Install today and help shape what AI Assist becomes. Early adopters hear about new features first.</p>
+        </div>
+        <div class="btn-row">
+          <a class="btn btn-primary" href={site.appExchangeUrl}>Get it on AppExchange</a>
+          <a class="btn btn-light" href="/demo">Request a demo</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</Base>

@@ -1,0 +1,31 @@
+---
+import Base from '../layouts/Base.astro';
+import { site } from '../site.config.js';
+---
+<Base title="About" description="Loom Connect builds AI tools for Salesforce teams.">
+  <section class="section">
+    <div class="container narrow stack" style="gap: 24px">
+      <span class="eyebrow">About</span>
+      <h1>Built by a Salesforce developer, for Salesforce teams</h1>
+      <div class="founder">
+        <span class="avatar" aria-hidden="true">CS</span>
+        <div><strong>Chandler Stuart</strong><br /><span class="muted small">Founder · Salesforce Developer</span></div>
+      </div>
+      <p class="lead">I started on Salesforce as an apprentice and have spent years building on the platform. AI Assist exists because teams wanted AI on their records without sending their data somewhere they couldn't see.</p>
+      <p class="lead">Loom Connect is named for the idea behind it: weaving AI into the platform you already use, thread by thread.</p>
+    </div>
+  </section>
+  <section class="section-sm bg-soft">
+    <div class="container stack-lg">
+      <h2>What we believe</h2>
+      <div class="grid">
+        <div class="card"><h3>Native first</h3><p>If Salesforce can already do it, we use Salesforce.</p></div>
+        <div class="card"><h3>Your data, your org</h3><p>No middleman servers between you and your AI provider.</p></div>
+        <div class="card"><h3>A real free plan</h3><p>Useful on day one, not a trial with a countdown.</p></div>
+      </div>
+      <div class="btn-row">
+        <a class="btn btn-outline" href={`mailto:${site.email.hello}`}>Get in touch</a>
+      </div>
+    </div>
+  </section>
+</Base>

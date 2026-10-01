@@ -1,0 +1,46 @@
+---
+import Base from '../../layouts/Base.astro';
+import { site } from '../../site.config.js';
+---
+<Base title="Docs: Install AI Assist" description="Install and configure AI Assist in your Salesforce org.">
+  <section class="section-sm">
+    <div class="container docs-layout">
+      <nav class="docs-nav" aria-label="Docs">
+        <span class="docs-nav-title">Docs</span>
+        <a href="#install" aria-current="page">Getting started</a>
+        <a href="#configure">Configuration</a>
+        <a href="#commands">Slash commands</a>
+        <a href="#pii">PII rules</a>
+        <a href="#troubleshooting">Troubleshooting</a>
+      </nav>
+
+      <article class="prose">
+        <span class="breadcrumb">Docs › Getting started</span>
+        <h1 id="install" style="font-size: clamp(1.8rem, 4vw, 2.6rem)">Install AI Assist</h1>
+        <p>About 20 minutes. You'll need System Administrator access and an API key from Anthropic or OpenAI.</p>
+
+        <ol>
+          <li><strong>Install the package.</strong> From AppExchange, choose <em>Install for Admins Only</em>. We recommend a sandbox first.</li>
+          <li><strong>Add your AI provider key.</strong> In Setup, open Named Credentials and edit the AI Assist credential.</li>
+          <li><strong>Assign permission sets.</strong> Give admins <em>AI Assist Admin</em> and everyone else <em>AI Assist User</em>.</li>
+          <li><strong>Add it to a record page.</strong> In Lightning App Builder, drag the AI Assist component onto the page, then save and activate.</li>
+          <li><strong>Accept the terms.</strong> The first admin to open AI Assist accepts the Loom Connect terms on behalf of your organisation.</li>
+        </ol>
+
+        <div class="callout">Before going live, review which fields count as personal data in AI Assist Setup › PII rules.</div>
+
+        <h2 id="configure">Configuration</h2>
+        <p>[Content to come: choosing a model, data sources, agents and retention settings.]</p>
+
+        <h2 id="commands">Slash commands</h2>
+        <p>[Content to come: built-in commands and creating your own from prompt templates.]</p>
+
+        <h2 id="pii">PII rules</h2>
+        <p>[Content to come: how fields are classified, compliance groups and masking rules.]</p>
+
+        <h2 id="troubleshooting">Troubleshooting</h2>
+        <p>[Content to come: common errors and fixes.] Still stuck? <a href="/support">Raise a support request</a> or email <a href={`mailto:${site.email.support}`}>{site.email.support}</a>.</p>
+      </article>
+    </div>
+  </section>
+</Base>

@@ -1,0 +1,22 @@
+---
+import Base from '../../layouts/Base.astro';
+import Check from '../../components/Check.astro';
+---
+<Base title="Thanks for your request">
+  <section class="section">
+    <div class="container narrow stack center" style="gap: 24px">
+      <span class="confirm-icon"><Check size={36} /></span>
+      <h1>Thanks, your request is in</h1>
+      <p class="lead">We'll email you within one working day to find a time. A confirmation is on its way to your inbox now.</p>
+      <div class="grid" style="width: 100%; text-align: left; margin-top: 16px">
+        <div class="card" style="background: var(--soft); border: 0; padding: 20px; gap: 8px"><span class="eyebrow" style="text-transform: none; letter-spacing: 0">Step 1</span><strong>Check your inbox for the confirmation email</strong></div>
+        <div class="card" style="background: var(--soft); border: 0; padding: 20px; gap: 8px"><span class="eyebrow" style="text-transform: none; letter-spacing: 0">Step 2</span><strong>Pick a 30-minute slot that suits you</strong></div>
+        <div class="card" style="background: var(--soft); border: 0; padding: 20px; gap: 8px"><span class="eyebrow" style="text-transform: none; letter-spacing: 0">Step 3</span><strong>See AI Assist live and plan your install</strong></div>
+      </div>
+      <div class="btn-row" style="justify-content: center">
+        <a class="btn btn-primary" href="/docs">Read the getting-started docs</a>
+        <a class="btn btn-outline" href="/">Back to home</a>
+      </div>
+    </div>
+  </section>
+</Base>

@@ -1,0 +1,88 @@
+---
+import Base from '../../layouts/Base.astro';
+import Check from '../../components/Check.astro';
+import { site, salesforce, salesforceReady } from '../../site.config.js';
+
+const wtl = salesforce.webToLead;
+// Until Salesforce is connected, the form goes straight to the thank-you page.
+const action = salesforceReady ? wtl.action : '/demo/thanks';
+const method = salesforceReady ? 'post' : 'get';
+const teamSizeName = wtl.teamSizeFieldId || 'team_size';
+---
+<Base title="Request a demo" description="Book a 30-minute walkthrough of AI Assist.">
+  <section class="section bg-soft">
+    <div class="container form-layout">
+      <div class="stack" style="gap: 22px">
+        <h1>See AI Assist working in a real org</h1>
+        <p class="lead">Book a 30-minute walkthrough. Bring your questions about setup, data handling and what your team could use it for.</p>
+        <ul class="ticks">
+          <li><Check color="#B45309" />A live demo on sample Salesforce records</li>
+          <li><Check color="#B45309" />How permissions and PII protection work</li>
+          <li><Check color="#B45309" />Help planning a sandbox install</li>
+        </ul>
+        <p class="note">Prefer email? Write to <a href={`mailto:${site.email.hello}`}><strong>{site.email.hello}</strong></a></p>
+      </div>
+
+      <!-- Web-to-Lead form. Settings live in src/site.config.js.
+           When you generate the form in Salesforce, also paste its reCAPTCHA
+           script and captcha_settings field where marked below. -->
+      <form class="form-card" action={action} method={method} aria-label="Request a demo">
+        {salesforceReady && (
+          <>
+            <input type="hidden" name="oid" value={salesforce.orgId} />
+            <input type="hidden" name="retURL" value={wtl.returnUrl} />
+            <input type="hidden" name="lead_source" value={wtl.leadSource} />
+          </>
+        )}
+        {!salesforceReady && <p class="dev-banner">Preview mode: this form isn't connected to Salesforce yet.</p>}
+
+        <div class="field-row">
+          <div class="field">
+            <label for="first_name">First name</label>
+            <input id="first_name" name="first_name" type="text" autocomplete="given-name" maxlength="40" required />
+          </div>
+          <div class="field">
+            <label for="last_name">Last name</label>
+            <input id="last_name" name="last_name" type="text" autocomplete="family-name" maxlength="80" required />
+          </div>
+        </div>
+        <div class="field">
+          <label for="email">Work email</label>
+          <input id="email" name="email" type="email" autocomplete="email" maxlength="80" placeholder="name@company.com" required />
+        </div>
+        <div class="field-row">
+          <div class="field">
+            <label for="company">Company</label>
+            <input id="company" name="company" type="text" autocomplete="organization" maxlength="40" required />
+          </div>
+          <div class="field">
+            <label for="title">Role</label>
+            <input id="title" name="title" type="text" autocomplete="organization-title" maxlength="40" />
+          </div>
+        </div>
+        <div class="field">
+          <label for="team_size">Salesforce users in your team</label>
+          <select id="team_size" name={teamSizeName}>
+            <option value="1–10">1–10</option>
+            <option value="11–50">11–50</option>
+            <option value="51–200">51–200</option>
+            <option value="200+">200+</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="description">What would you use AI Assist for?</label>
+          <textarea id="description" name="description" rows="4"></textarea>
+        </div>
+        <div class="check">
+          <input id="consent" type="checkbox" required />
+          <label for="consent">I agree to Loom Connect contacting me about this request. See the <a href="/privacy">privacy policy</a>.</label>
+        </div>
+
+        <!-- reCAPTCHA widget from Salesforce goes here -->
+
+        <button class="btn btn-primary btn-block" type="submit">Request my demo</button>
+        <p class="hint" style="text-align: center">Protected by reCAPTCHA. We usually reply within one working day.</p>
+      </form>
+    </div>
+  </section>
+</Base>

@@ -1,0 +1,43 @@
+---
+import Logo from './Logo.astro';
+import { site } from '../site.config.js';
+
+const path = Astro.url.pathname.replace(/\/$/, '') || '/';
+const links = [
+  { href: '/', label: 'AI Assist' },
+  { href: '/pricing', label: 'Pricing' },
+  { href: '/security', label: 'Security' },
+  { href: '/docs', label: 'Docs' },
+  { href: '/support', label: 'Support' },
+];
+const isCurrent = (href) => (href === '/' ? path === '/' : path === href || path.startsWith(href + '/'));
+---
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="brand" href="/" aria-label={`${site.name} home`}>
+      <Logo />
+      <span>{site.name}</span>
+    </a>
+
+    <nav class="nav" aria-label="Main">
+      {links.map((l) => (
+        <a href={l.href} aria-current={isCurrent(l.href) ? 'page' : undefined}>{l.label}</a>
+      ))}
+      <a class="btn btn-primary" href={site.appExchangeUrl}>Get it on AppExchange</a>
+    </nav>
+
+    <details class="mobile-nav">
+      <summary aria-label="Open menu">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" /></svg>
+      </summary>
+      <nav class="mobile-menu" aria-label="Mobile">
+        {links.map((l) => (
+          <a href={l.href} aria-current={isCurrent(l.href) ? 'page' : undefined}>{l.label}</a>
+        ))}
+        <a href="/about">About</a>
+        <a class="btn btn-outline" href="/demo">Request a demo</a>
+        <a class="btn btn-primary" href={site.appExchangeUrl}>Get it on AppExchange</a>
+      </nav>
+    </details>
+  </div>
+</header>
