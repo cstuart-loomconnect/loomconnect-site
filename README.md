@@ -42,6 +42,7 @@ Until `orgId` is set, both forms go straight to their thank-you pages so you can
 - `master` is production. Anything merged here goes live on loomconnect.com.
 - `development` is where all work happens. Open a pull request from `development` into `master` to release.
 - Never push directly to `master`.
+- `development` deploys to https://dev.loomconnect.com (Worker `loomconnect-site-dev`, deploy command `npx wrangler deploy --env dev`, build variable `SITE_ENV=development`, which shows a red banner).
 
 ## Security
 

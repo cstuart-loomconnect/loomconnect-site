@@ -10,6 +10,8 @@ const {
 } = Astro.props;
 const fullTitle = title ? `${title} · ${site.name}` : `${site.product} · ${site.name}`;
 const canonical = new URL(Astro.url.pathname, site.url).href;
+// Set SITE_ENV=development as a build variable on the dev Worker to show the banner.
+const isDev = process.env.SITE_ENV === 'development';
 ---
 <!doctype html>
 <html lang="en-GB">
@@ -31,6 +33,7 @@ const canonical = new URL(Astro.url.pathname, site.url).href;
   </head>
   <body>
     <a class="skip-link" href="#main">Skip to content</a>
+    {isDev && <div class="dev-site-banner" role="note">Development site: changes here are not live</div>}
     <Header />
     <main id="main">
       <slot />

@@ -5,5 +5,15 @@
   "assets": {
     "directory": "./dist",
     "not_found_handling": "404-page"
+  },
+  "env": {
+    // Development site: deploys as the "loomconnect-site-dev" Worker
+    // with `npx wrangler deploy --env dev`.
+    "dev": {
+      "assets": {
+        "directory": "./dist",
+        "not_found_handling": "404-page"
+      }
+    }
   }
 }
