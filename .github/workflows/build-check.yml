@@ -1,0 +1,24 @@
+# Temporary: runs the site build once so the error log can be read. Branch is deleted afterwards.
+name: Build check
+on:
+  push:
+    branches: [ci-build-check]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npm install
+      - run: npm run build
+      - name: Main Worker, branch build command
+        run: npx --yes wrangler@4 versions upload --dry-run --outdir /tmp/w1 2>&1 | tee /tmp/main.log
+        continue-on-error: true
+      - name: Dev Worker, branch build command (no env)
+        run: npx --yes wrangler@4 versions upload --dry-run --outdir /tmp/w2 2>&1 | tee /tmp/dev-noenv.log
+        continue-on-error: true
+      - name: Dev Worker, branch build command (env dev)
+        run: npx --yes wrangler@4 versions upload --dry-run --env dev --outdir /tmp/w3 2>&1 | tee /tmp/dev-env.log
+        continue-on-error: true
