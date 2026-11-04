@@ -8,7 +8,7 @@ export const glossary = [
   { term: 'External Credential', definition: 'A Salesforce Setup item that stores a secret, such as your AI provider\'s API key, so it never appears in code or records.', link: 'connect-your-ai-provider' },
   { term: 'Model', definition: 'The AI that writes the answers, such as a Claude or GPT model, reached through your own provider account.', link: 'connect-your-ai-provider' },
   { term: 'Named Credential', definition: 'A Salesforce Setup item that holds the address of your AI provider and uses an External Credential to sign in.', link: 'connect-your-ai-provider' },
-  { term: 'Personal data (PII)', definition: 'Details that identify a person, such as names, emails and phone numbers. AI Assist swaps them for placeholders before anything leaves Salesforce.', link: 'protect-personal-data' },
+  { term: 'Personal data (PII)', definition: 'Details that identify a person, such as names, emails and phone numbers. LoomConnect AI swaps them for placeholders before anything leaves Salesforce.', link: 'protect-personal-data' },
   { term: 'Principal', definition: 'The part of an External Credential that holds the key. Users need access to it through a permission set before their messages can reach your provider.', link: 'connect-your-ai-provider' },
   { term: 'Prompt template', definition: 'Written guidance on who the agent is, how it should sound and what it must never do.', link: 'prompt-templates' },
   { term: 'Retention', definition: 'How long conversations are kept before the nightly clean-up job deletes them.', link: 'org-settings' },

@@ -12,8 +12,8 @@ import ClickPath from '../../components/docs/ClickPath.astro';
     <table>
       <thead><tr><th>What you see</th><th>What to do</th></tr></thead>
       <tbody>
-        <tr><td>The AI Assist app isn't in the App Launcher</td><td>Assign yourself AI Assist Super User in <ClickPath steps={['Setup', 'Permission Sets']} />.</td></tr>
-        <tr><td>You can't open the wizard, models, tools or settings</td><td>Those tabs need AI Assist Super User. AI Assist Admin isn't enough.</td></tr>
+        <tr><td>The LoomConnect AI app isn't in the App Launcher</td><td>Assign yourself LoomConnect AI Super User in <ClickPath steps={['Setup', 'Permission Sets']} />.</td></tr>
+        <tr><td>You can't open the wizard, models, tools or settings</td><td>Those tabs need LoomConnect AI Super User. LoomConnect AI Admin isn't enough.</td></tr>
         <tr><td>The connection test says "setup problem"</td><td>Check the Named Credential's URL, that <code>LoomConnect</code> is in Allowed Namespaces for Callouts, and that you have the provider access permission set.</td></tr>
         <tr><td>The connection test says "authentication error"</td><td>The API key is wrong. Paste it again on the External Credential's principal, with no spaces.</td></tr>
         <tr><td>Your named credential isn't in the model's list</td><td>Refresh the AI Agent Models tab. Check the Named Credential saved and is enabled for callouts.</td></tr>
@@ -28,7 +28,7 @@ import ClickPath from '../../components/docs/ClickPath.astro';
       <thead><tr><th>What you see</th><th>What to do</th></tr></thead>
       <tbody>
         <tr><td>The chat window isn't on the page</td><td>Check the record page was activated for the user's app and profile, or that the utility item was saved.</td></tr>
-        <tr><td>"AI Assist has not been set up for your user"</td><td>No usage policy applies. Make an active policy the default on the AI Policies tab.</td></tr>
+        <tr><td>"LoomConnect AI has not been set up for your user"</td><td>No usage policy applies. Make an active policy the default on the AI Policies tab.</td></tr>
         <tr><td>"No AI agent is available for this record"</td><td>Check the agent is active and lists this object on its Basics step.</td></tr>
         <tr><td>Messages fail for users but work for you</td><td>Users are missing the provider access permission set, so they can't use the key.</td></tr>
         <tr><td>Answers leave out information</td><td>The user can't see that data, or the agent has no data source for it.</td></tr>

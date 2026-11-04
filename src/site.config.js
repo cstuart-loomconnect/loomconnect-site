@@ -3,7 +3,7 @@
 
 export const site = {
   name: 'Loom Connect',
-  product: 'AI Assist',
+  product: 'LoomConnect AI',
   url: 'https://loomconnect.com',
 
   // UK business-name rules: a sole trader using a trading name must show
@@ -24,12 +24,12 @@ export const site = {
     privacy: 'privacy@loomconnect.com',
   },
 
-  // Replace with the real listing URL once AI Assist is on AppExchange.
+  // Replace with the real listing URL once LoomConnect AI is on AppExchange.
   appExchangeUrl: '#',
 
   // Plan prices and limits shown on the pricing and support pages.
   // Prices are per Salesforce org per month, with unlimited users.
-  // Keep the limits in step with the MaxActiveAgents and MaxActiveDataSources feature parameters in the package.
+  // The package does not enforce these limits yet. They come back as feature parameters once there is a License Management Org.
   pricing: {
     freeAgents: 1,
     freeDataSources: 3,

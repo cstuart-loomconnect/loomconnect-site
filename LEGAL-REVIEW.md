@@ -21,13 +21,13 @@ All of these live in `src/site.config.js` unless noted.
 
 ## Assumptions the drafts make (check they are still true)
 
-- [ ] AI Assist calls the AI provider directly from the subscriber's org through their own Named Credential. Checked against the AIAssist repo on 4 Nov 2026: every callout uses `callout:<NamedCredential>`, and logs and platform events stay in the subscriber's org. Re-check before each release.
+- [ ] LoomConnect AI calls the AI provider directly from the subscriber's org through their own Named Credential. Checked against the LoomConnectAI repo on 4 Nov 2026: every callout uses `callout:<NamedCredential>`, and logs and platform events stay in the subscriber's org. Re-check before each release.
 - [ ] No telemetry, usage metering or error reporting is sent to Loom Connect.
 - [ ] Loom Connect never supplies a hosted or default AI key.
 - [ ] The only data Loom Connect receives from installs is Salesforce's License Management App data (Org ID, company, installing admin, licence count).
-- [ ] Admins accept the terms in the app, and each user acknowledges the Acceptable Use Policy the first time they open AI Assist (the AUP and Terms say this happens; confirm the package does it, or change the wording).
+- [ ] Admins accept the terms in the app, and each user acknowledges the Acceptable Use Policy the first time they open LoomConnect AI (the AUP and Terms say this happens; confirm the package does it, or change the wording).
 - [ ] Only Anthropic and OpenAI are supported providers (AI transparency page).
-- [ ] Uninstalling AI Assist deletes its objects and records.
+- [ ] Uninstalling LoomConnect AI deletes its objects and records.
 
 If any of these stop being true, Loom Connect becomes a processor for that flow. Update `src/components/legal/DataPath.astro`, the Data processing page and the sub-processors list, and you'll need a DPA.
 

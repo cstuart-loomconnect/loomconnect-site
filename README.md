@@ -1,6 +1,6 @@
 # loomconnect.com
 
-Marketing site for Loom Connect and AI Assist. Built with [Astro](https://astro.build) and hosted on Cloudflare.
+Marketing site for Loom Connect and LoomConnect AI. Built with [Astro](https://astro.build) and hosted on Cloudflare.
 
 ## Run it locally
 
@@ -66,7 +66,7 @@ Until `orgId` is set, both forms go straight to their thank-you pages so you can
 
 ## Documentation
 
-Admin documentation for AI Assist lives at `/documentation`. Everything you'd normally change is in `src/documentation/`:
+Admin documentation for LoomConnect AI lives at `/documentation`. Everything you'd normally change is in `src/documentation/`:
 
 | File | What to change there |
 | --- | --- |
@@ -101,7 +101,7 @@ Building blocks you can use inside a page:
 
 The legal pages use `src/layouts/PolicyPage.astro`. Settings you'll change are under `legal` in `src/site.config.js` (version, ICO number, liability cap, providers, retention periods).
 
-`src/components/legal/DataPath.astro` is the single explanation of how AI Assist handles customer data. It appears on Privacy, Terms, Data processing, Sub-processors and AI transparency, so change it in one place only. If AI Assist ever sends data through a Loom Connect server (a proxy, telemetry or a hosted AI key), that block and the Data processing page must change, and you'd need a DPA.
+`src/components/legal/DataPath.astro` is the single explanation of how LoomConnect AI handles customer data. It appears on Privacy, Terms, Data processing, Sub-processors and AI transparency, so change it in one place only. If LoomConnect AI ever sends data through a Loom Connect server (a proxy, telemetry or a hosted AI key), that block and the Data processing page must change, and you'd need a DPA.
 
 `LEGAL-REVIEW.md` lists everything to fill in or check with a solicitor before launch. When that's done, set `legal.draft` to `false`.
 
