@@ -11,27 +11,13 @@ const sections = [
   { id: 'contact', label: 'Contact us' },
 ];
 ---
-<Base title="Privacy policy">
-  <section class="section-sm">
-    <div class="container narrow prose">
-      <nav class="legal-tabs" aria-label="Legal">
-        <a href="/privacy" aria-current="page">Privacy policy</a>
-        <a href="/terms">Terms of service</a>
-      </nav>
-      <h1 class="page-title">Privacy policy</h1>
-      <p class="muted small">Last updated {site.placeholders.legalLastUpdated}</p>
-      <div class="summary-box"><strong class="text-ink">The short version.</strong> AI Assist runs inside your Salesforce org, so we never receive your customer data. We only hold what you send us directly through our website forms and support emails.</div>
-      <p class="callout">Draft structure only. The full text is being prepared with a solicitor and must replace the placeholders below before launch.</p>
-      <nav class="toc" aria-label="Contents">
-        {sections.map(([id, label], i) => <a href={`#${id}`}>{i + 1}. {label}</a>)}
-      </nav>
-      {sections.map(([id, label], i) => (
-        <>
-          <h2 id={id}>{i + 1}. {label}</h2>
-          <p>[Text to come.]</p>
-        </>
-      ))}
-      <p>Questions about privacy: <a href={`mailto:${site.email.privacy}`}>{site.email.privacy}</a></p>
-    </div>
-  </section>
-</Base>
+<PolicyPage
+  title="Privacy policy"
+  description="How Loom Connect handles personal data."
+  summary="AI Assist runs inside your Salesforce org, so we never receive your customer data. We only hold what you send us directly through our website forms and support emails."
+  draft
+  sections={sections}
+>
+  <p slot="who">{site.name} is a trading name of {site.owner.legalName}, {site.owner.address}. [Full text to come.]</p>
+  <p slot="contact">Questions about privacy: <a href={`mailto:${site.email.privacy}`}>{site.email.privacy}</a></p>
+</PolicyPage>

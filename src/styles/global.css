@@ -295,3 +295,7 @@ input:focus, select:focus, textarea:focus { outline: none; border-color: var(--i
 .next-steps { margin: 8px 0 0; padding: 0; list-style: none; counter-reset: next; display: flex; flex-direction: column; gap: 12px; text-align: left; align-self: stretch; }
 .next-steps li { counter-increment: next; display: flex; gap: 12px; align-items: center; padding: 14px 16px; background: var(--soft); border-radius: var(--radius); font-weight: 600; }
 .next-steps li::before { content: counter(next); width: 28px; height: 28px; border-radius: 50%; border: 2px solid var(--ink); display: grid; place-items: center; font-size: 0.85rem; flex: none; }
+
+/* Release notes */
+.h-release { font-size: 1.25rem; }
+.ticks-tight { gap: 8px; }

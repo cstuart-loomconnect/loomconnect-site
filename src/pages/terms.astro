@@ -13,26 +13,8 @@ const sections = [
   { id: 'law', label: 'Governing law' },
 ];
 ---
-<Base title="Terms of service">
-  <section class="section-sm">
-    <div class="container narrow prose">
-      <nav class="legal-tabs" aria-label="Legal">
-        <a href="/privacy">Privacy policy</a>
-        <a href="/terms" aria-current="page">Terms of service</a>
-      </nav>
-      <h1 class="page-title">Terms of service</h1>
-      <p class="muted small">Last updated {site.placeholders.legalLastUpdated}</p>
-      <p class="callout">Draft structure only. The full text is being prepared with a solicitor and must replace the placeholders below before launch.</p>
-      <nav class="toc" aria-label="Contents">
-        {sections.map(([id, label], i) => <a href={`#${id}`}>{i + 1}. {label}</a>)}
-      </nav>
-      {sections.map(([id, label], i) => (
-        <>
-          <h2 id={id}>{i + 1}. {label}</h2>
-          <p>[Text to come.]</p>
-        </>
-      ))}
-      <p>Questions about these terms: <a href={`mailto:${site.email.hello}`}>{site.email.hello}</a></p>
-    </div>
-  </section>
-</Base>
+<PolicyPage title="Terms of service" description="The terms for using AI Assist." draft sections={sections}>
+  <p slot="acceptable-use">Your use of AI Assist must follow our <a href="/acceptable-use">Acceptable Use Policy</a>. [Full text to come.]</p>
+  <p slot="ai-output">See <a href="/ai-transparency">AI transparency</a> for what AI Assist can and can't do. [Full text to come.]</p>
+  <p slot="after">Questions about these terms: <a href={`mailto:${site.email.hello}`}>{site.email.hello}</a></p>
+</PolicyPage>

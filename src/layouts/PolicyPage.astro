@@ -41,9 +41,9 @@ for (const s of sections) {
           <a href={l.href} aria-current={path === l.href ? 'page' : undefined}>{l.label}</a>
         ))}
       </nav>
-      <h1 style="font-size: clamp(1.8rem, 4vw, 2.6rem)">{title}</h1>
+      <h1 class="page-title">{title}</h1>
       <p class="muted small">Last updated {updated}</p>
-      {summary && <div class="summary-box"><strong style="color: var(--ink)">The short version.</strong> {summary}</div>}
+      {summary && <div class="summary-box"><strong class="text-ink">The short version.</strong> {summary}</div>}
       {draft && <p class="callout">Draft structure only. The full text is being prepared with a solicitor and must replace the placeholders before launch.</p>}
       <slot />
       {sections.length > 1 && (
