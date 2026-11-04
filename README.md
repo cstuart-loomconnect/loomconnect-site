@@ -30,7 +30,7 @@ Then open http://localhost:4321.
 
 ## Pages
 
-`/`, `/pricing`, `/security`, `/documentation` and its pages, `/support`, `/support/thanks`, `/demo`, `/demo/thanks`, `/about`, `/privacy`, `/terms`, plus a 404 page.
+`/`, `/pricing`, `/security`, `/documentation` and its pages, `/support`, `/support/thanks`, `/demo`, `/demo/thanks`, `/about`, `/privacy`, `/terms`, `/acceptable-use`, `/ai-transparency`, `/data-processing`, `/subprocessors`, `/support-policy`, `/accessibility`, `/release-notes`, plus a 404 page.
 
 ## Private mode
 
@@ -96,6 +96,14 @@ Building blocks you can use inside a page:
 - `<Tabs labels={['Anthropic', 'OpenAI']}>` with one `<div class="tabs-panel" data-tab-panel data-label="...">` per label.
 - `<ol class="docs-steps">` for numbered steps, and `<strong class="ui">` for a button or field name.
 - Give each `<h2>` an `id` so it appears under "On this page".
+
+## Legal pages
+
+The legal pages use `src/layouts/PolicyPage.astro`. Settings you'll change are under `legal` in `src/site.config.js` (version, ICO number, liability cap, providers, retention periods).
+
+`src/components/legal/DataPath.astro` is the single explanation of how AI Assist handles customer data. It appears on Privacy, Terms, Data processing, Sub-processors and AI transparency, so change it in one place only. If AI Assist ever sends data through a Loom Connect server (a proxy, telemetry or a hosted AI key), that block and the Data processing page must change, and you'd need a DPA.
+
+`LEGAL-REVIEW.md` lists everything to fill in or check with a solicitor before launch. When that's done, set `legal.draft` to `false`.
 
 ## Fonts
 

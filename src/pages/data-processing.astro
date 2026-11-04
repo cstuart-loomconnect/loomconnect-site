@@ -1,0 +1,58 @@
+---
+import PolicyPage from '../layouts/PolicyPage.astro';
+import DataPath from '../components/legal/DataPath.astro';
+import { site } from '../site.config.js';
+const sections = [
+  { id: 'statement', label: 'Our role under data protection law' },
+  { id: 'why-no-dpa', label: 'Why AI Assist needs no DPA' },
+  { id: 'what-we-do-hold', label: 'Data we do hold about you' },
+  { id: 'your-provider', label: 'Your agreement with your AI provider' },
+  { id: 'support-access', label: 'If we access your org for support' },
+  { id: 'dpa', label: 'If your procurement team still needs a DPA' },
+  { id: 'changes', label: 'If this ever changes' },
+];
+---
+<PolicyPage
+  title="Data processing"
+  description="Why Loom Connect is not a processor of your AI Assist data, and when a DPA applies."
+  summary="Your data goes straight from your Salesforce org to your AI provider. We never receive it, so we're not your data processor and AI Assist needs no data processing agreement with us."
+  sections={sections}
+>
+  <DataPath slot="statement" />
+
+  <div slot="why-no-dpa">
+    <p>Under UK and EU GDPR, a data processing agreement (DPA) is needed when a supplier processes personal data on your behalf. Processing includes simply receiving or passing data through a server, even briefly.</p>
+    <p>{site.product} doesn't do that. It is software that runs in your Salesforce org, like any other installed package. We provide the code, but we never receive, host or have access to the data it handles. So there is nothing for a DPA between us to cover.</p>
+    <p>The agreements that do cover your data are the ones you already have with Salesforce and with your AI provider.</p>
+  </div>
+
+  <div slot="what-we-do-hold">
+    <p>We do hold a small amount of personal data about your organisation's contacts: the admin who installed {site.product}, account and billing contacts, and people who raise support cases. We are the controller of that data, and our <a href="/privacy">privacy policy</a> explains how we handle it.</p>
+  </div>
+
+  <div slot="your-provider">
+    <p>Because you contract with your AI provider directly, you should check:</p>
+    <ul>
+      <li>you have a DPA with the provider (most business API terms include one)</li>
+      <li>whether the provider keeps or trains on API data, and for how long</li>
+      <li>where the provider processes data, and what transfer safeguards apply</li>
+      <li>whether you need a data protection impact assessment for your use case</li>
+    </ul>
+  </div>
+
+  <div slot="support-access">
+    <p>We never ask for your password. If a support case needs us to look inside your org, you can grant temporary login access through Salesforce's standard support access, which you control and can revoke. While that access is open we could see data in your org, so we:</p>
+    <ul>
+      <li>only use it to resolve the case you raised, and only for as long as you allow</li>
+      <li>don't copy, export or keep any of your data</li>
+      <li>keep what we see confidential</li>
+    </ul>
+    <p>If your organisation's policies treat support access as processing, ask us for our DPA template below and we'll sign it for that purpose.</p>
+  </div>
+
+  <div slot="dpa">
+    <p>Some procurement processes require a signed DPA from every supplier. If yours does, email <a href={`mailto:${site.email.privacy}`}>{site.email.privacy}</a> and we'll send our DPA template. It covers support access only, since that is the only time we could see your data. Enterprise customers can include it in their signed agreement.</p>
+  </div>
+
+  <p slot="changes">If we ever add a feature that sends your data through our systems, we'll tell you before it's switched on, update this page and the <a href="/subprocessors">sub-processors list</a>, and offer a DPA that covers it.</p>
+</PolicyPage>

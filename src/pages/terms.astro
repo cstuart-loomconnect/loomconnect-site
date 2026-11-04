@@ -1,20 +1,124 @@
 ---
 import PolicyPage from '../layouts/PolicyPage.astro';
+import DataPath from '../components/legal/DataPath.astro';
 import { site } from '../site.config.js';
+const legal = site.legal;
+const p = site.placeholders;
 const sections = [
   { id: 'agreement', label: 'About these terms' },
   { id: 'licence', label: 'Your licence to use AI Assist' },
+  { id: 'responsibilities', label: 'Your responsibilities' },
   { id: 'acceptable-use', label: 'Acceptable use' },
+  { id: 'data', label: 'Your data and AI providers' },
   { id: 'ai-output', label: 'AI-generated output' },
   { id: 'plans', label: 'Plans, fees and changes' },
-  { id: 'data', label: 'Your data and AI providers' },
+  { id: 'support', label: 'Support and updates' },
+  { id: 'ip', label: 'Intellectual property' },
   { id: 'liability', label: 'Warranties and liability' },
   { id: 'termination', label: 'Ending the agreement' },
+  { id: 'general', label: 'General' },
   { id: 'law', label: 'Governing law' },
 ];
 ---
-<PolicyPage title="Terms of service" description="The terms for using AI Assist." draft sections={sections}>
-  <p slot="acceptable-use">Your use of AI Assist must follow our <a href="/acceptable-use">Acceptable Use Policy</a>. [Full text to come.]</p>
-  <p slot="ai-output">See <a href="/ai-transparency">AI transparency</a> for what AI Assist can and can't do. [Full text to come.]</p>
+<PolicyPage
+  title="Terms of service"
+  description="The terms for using AI Assist."
+  summary="You get a licence to use AI Assist in your Salesforce org. You choose and pay your own AI provider, decide what data it sees, and check AI answers before relying on them. We provide the software, support and updates."
+  sections={sections}
+>
+  <div slot="agreement">
+    <p>These terms are an agreement between {site.owner.legalName}, trading as {site.name} ("we"), and the organisation that installs or uses {site.product} ("you"). The person who accepts them confirms they have authority to bind that organisation.</p>
+    <p>You accept these terms when you install {site.product}, accept them in the app, or sign an order form that refers to them. If you have a signed Enterprise agreement, it takes priority where it differs from these terms.</p>
+    <p>{site.product} is listed on Salesforce AppExchange. Your use of Salesforce and AppExchange is governed by your agreement with Salesforce, which these terms don't change.</p>
+    <p>{site.product} is for business use only. It is not offered to consumers.</p>
+  </div>
+
+  <div slot="licence">
+    <p>We give you a non-exclusive, non-transferable licence to install and use {site.product} in your Salesforce orgs, for your internal business purposes, for the number of users on your plan, while these terms are in force.</p>
+    <p>You must not copy, modify, reverse engineer, resell or sublicense {site.product}, or try to get around its licence or plan controls, except where the law allows this and can't be excluded.</p>
+  </div>
+
+  <div slot="responsibilities">
+    <p>You are responsible for:</p>
+    <ul>
+      <li>choosing your AI provider, agreeing its terms and paying for its usage</li>
+      <li>keeping your AI provider API keys secure and setting up Named Credentials correctly</li>
+      <li>deciding which data sources, fields and actions {site.product} can use, and which users can use it</li>
+      <li>having a lawful basis to send personal data to your AI provider, and any data processing agreement you need with that provider</li>
+      <li>telling your users and, where needed, your customers that you use AI</li>
+      <li>making sure your users follow these terms and the <a href="/acceptable-use">Acceptable Use Policy</a></li>
+    </ul>
+  </div>
+
+  <p slot="acceptable-use">Your use of {site.product} must follow our <a href="/acceptable-use">Acceptable Use Policy</a>. We may suspend access if it's broken, as described in that policy.</p>
+
+  <div slot="data">
+    <DataPath />
+    <p>You own your data. We don't receive it, so we don't process it on your behalf and don't need a licence to it.</p>
+    <p>Your AI provider is your supplier, not ours. We aren't responsible for its availability, costs, data handling, model changes or behaviour. See <a href="/data-processing">Data processing</a>.</p>
+  </div>
+
+  <div slot="ai-output">
+    <p>{site.product} produces text using AI models. AI output can be wrong, incomplete, out of date or inappropriate, even when it sounds confident.</p>
+    <ul>
+      <li>A person must review output before it is sent to anyone outside your organisation or used to make a decision.</li>
+      <li>Output is not legal, financial, mortgage, tax, medical or other professional advice.</li>
+      <li>You are responsible for how you use output, including any actions you confirm in Salesforce.</li>
+    </ul>
+    <p>See <a href="/ai-transparency">AI transparency</a> for what {site.product} can and can't do.</p>
+  </div>
+
+  <div slot="plans">
+    <ul>
+      <li>The Free plan has no charge and no time limit. Its features and limits are shown on the <a href="/pricing">pricing page</a> and may change.</li>
+      <li>Paid plans are charged per user per month, in advance, through {legal.paymentProvider}. Prices exclude VAT where it applies.</li>
+      <li>Paid plans renew automatically for successive periods of {legal.minimumTerm} unless cancelled before renewal.</li>
+      <li>We'll give existing customers {p.noticePeriod} notice of any price increase. You can cancel before it takes effect.</li>
+      <li>Fees already paid are not refundable, except where these terms or the law say otherwise.</li>
+      <li>Your AI provider charges you directly. We never mark up or resell AI usage.</li>
+    </ul>
+  </div>
+
+  <div slot="support">
+    <p>We provide support as described in our <a href="/support-policy">support policy</a>. We release updates to fix problems and add features; Salesforce delivers them to your org as package upgrades. We may change or remove features, and will give reasonable notice before removing anything significant from a paid plan.</p>
+  </div>
+
+  <div slot="ip">
+    <p>We own {site.product}, its code, design and documentation. You own your data and the output generated for you, subject to your AI provider's terms. If you send us feedback or ideas, we may use them freely.</p>
+  </div>
+
+  <div slot="liability">
+    <p>{site.product} is provided "as is". We'll use reasonable care and skill, but we don't promise it will be error-free or uninterrupted, or that AI output will be accurate.</p>
+    <p>Nothing in these terms limits liability for death or personal injury caused by negligence, fraud, or anything else the law doesn't allow us to limit.</p>
+    <p>Otherwise:</p>
+    <ul>
+      <li>neither of us is liable for loss of profit, revenue, business, goodwill or data, or for indirect or consequential loss</li>
+      <li>we are not liable for your AI provider's service, decisions you make based on AI output, or actions your users confirm in Salesforce</li>
+      <li>our total liability under or in connection with these terms is limited to {legal.liabilityCap}</li>
+    </ul>
+    <p>You agree to cover our reasonable costs if a third party brings a claim against us because of your data, your prompts, or your use of {site.product} in breach of these terms or the law.</p>
+  </div>
+
+  <div slot="termination">
+    <ul>
+      <li>You can stop using {site.product} at any time by uninstalling it. Paid plans end at the end of the current billing period.</li>
+      <li>We can end these terms with 30 days' notice, or straight away if you seriously break them or don't pay.</li>
+      <li>When the agreement ends, your licence ends and you must uninstall {site.product}. Your data stays in your Salesforce org; uninstalling removes {site.product}'s objects and records, so export anything you want to keep first.</li>
+      <li>Sections that by their nature should continue (such as liability and governing law) continue after the agreement ends.</li>
+    </ul>
+  </div>
+
+  <div slot="general">
+    <ul>
+      <li>We may update these terms. We'll show the new date and version at the top, and email the account contact before material changes take effect. Continuing to use {site.product} after that means you accept the change.</li>
+      <li>Neither of us is responsible for delays caused by events outside our reasonable control.</li>
+      <li>You can't transfer this agreement without our agreement. We may transfer it to a buyer of the business.</li>
+      <li>If any part of these terms is found unenforceable, the rest still applies.</li>
+      <li>These terms are the whole agreement between us about {site.product}.</li>
+    </ul>
+  </div>
+
+  <p slot="law">These terms are governed by the law of England and Wales, and the courts of England and Wales have exclusive jurisdiction.</p>
+
   <p slot="after">Questions about these terms: <a href={`mailto:${site.email.hello}`}>{site.email.hello}</a></p>
 </PolicyPage>

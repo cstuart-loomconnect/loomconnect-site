@@ -1,23 +1,115 @@
 ---
 import PolicyPage from '../layouts/PolicyPage.astro';
+import DataPath from '../components/legal/DataPath.astro';
 import { site } from '../site.config.js';
+const legal = site.legal;
 const sections = [
   { id: 'who', label: 'Who we are' },
-  { id: 'forms', label: 'Data we collect from our website' },
   { id: 'org', label: 'Data inside your Salesforce org' },
-  { id: 'providers', label: 'AI providers you connect' },
+  { id: 'collect', label: 'Data we collect' },
+  { id: 'why', label: 'Why we use it and our lawful basis' },
+  { id: 'sharing', label: 'Who we share it with' },
+  { id: 'transfers', label: 'Transfers outside the UK' },
   { id: 'retention', label: 'How long we keep data' },
-  { id: 'rights', label: 'Your rights under UK GDPR' },
-  { id: 'contact', label: 'Contact us' },
+  { id: 'cookies', label: 'Cookies' },
+  { id: 'security', label: 'How we protect data' },
+  { id: 'rights', label: 'Your rights' },
+  { id: 'changes', label: 'Changes to this policy' },
+  { id: 'contact', label: 'Contact and complaints' },
 ];
 ---
 <PolicyPage
   title="Privacy policy"
   description="How Loom Connect handles personal data."
-  summary="AI Assist runs inside your Salesforce org, so we never receive your customer data. We only hold what you send us directly through our website forms and support emails."
-  draft
+  summary="AI Assist runs inside your Salesforce org and talks directly to the AI provider you choose, so we never receive your customer data. We only hold what you send us yourself: demo requests, support cases, emails and billing details."
   sections={sections}
 >
-  <p slot="who">{site.name} is a trading name of {site.owner.legalName}, {site.owner.address}. [Full text to come.]</p>
-  <p slot="contact">Questions about privacy: <a href={`mailto:${site.email.privacy}`}>{site.email.privacy}</a></p>
+  <div slot="who">
+    <p>{site.name} is a trading name of {site.owner.legalName}, a sole trader based in the UK. Our address for correspondence is {site.owner.address}.</p>
+    <p>For the personal data described in this policy, we are the controller. We are registered with the Information Commissioner's Office (ICO) under number {legal.icoNumber}.</p>
+    <p>"We", "us" and "our" mean {site.name}. "You" means anyone whose personal data we handle: website visitors, people who request a demo or support, and contacts at our customers.</p>
+  </div>
+
+  <div slot="org">
+    <DataPath />
+    <p>Because we never receive this data, this policy does not cover it. Your organisation's own privacy notice does. If you are an end user with a question about how your organisation uses {site.product}, please contact your organisation directly.</p>
+    <p>More detail: <a href="/data-processing">Data processing</a> and <a href="/security">Security</a>.</p>
+  </div>
+
+  <div slot="collect">
+    <p>We collect only what you choose to send us, plus basic technical data when you visit this website.</p>
+    <ul>
+      <li><strong>Demo requests:</strong> your name, work email, company, team size and anything you write in the message box.</li>
+      <li><strong>Support requests:</strong> your name, work email, Salesforce Org ID, a description of the problem and anything you attach. Please don't send us customer data or screenshots that show it.</li>
+      <li><strong>Emails to us:</strong> your email address and whatever you include in your message.</li>
+      <li><strong>Customer and billing details:</strong> for paid plans, the name and contact details of the person responsible for the account, your company name, your Salesforce Org ID, the plan and number of licences. Card or bank payments are handled by {legal.paymentProvider}; we don't see or store your full card details.</li>
+      <li><strong>Installation details:</strong> when you install {site.product}, Salesforce's licence management system tells us your Org ID, company name, the installing admin's name and email, and the number of licences. This is how Salesforce manages AppExchange licences.</li>
+      <li><strong>Website visits:</strong> our host, Cloudflare, processes your IP address to deliver pages and block attacks, and produces cookie-free visitor statistics that don't identify you.</li>
+    </ul>
+  </div>
+
+  <div slot="why">
+    <div class="table-wrap">
+      <table class="table">
+        <thead><tr><th scope="col">What we do</th><th scope="col">Lawful basis (UK GDPR)</th></tr></thead>
+        <tbody>
+          <tr><td>Reply to demo requests and follow up about {site.product}</td><td>Legitimate interests: responding to business enquiries</td></tr>
+          <tr><td>Handle support requests</td><td>Contract, or legitimate interests if you are on the Free plan</td></tr>
+          <tr><td>Manage licences, plans and billing</td><td>Contract</td></tr>
+          <tr><td>Keep tax and accounting records</td><td>Legal obligation</td></tr>
+          <tr><td>Tell customers about important product, security or policy changes</td><td>Legitimate interests</td></tr>
+          <tr><td>Run and protect this website</td><td>Legitimate interests: keeping the site available and secure</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>We don't send marketing emails unless you've asked for them, and every one includes a way to unsubscribe. We don't sell personal data, and we don't use it for automated decisions that affect you.</p>
+  </div>
+
+  <div slot="sharing">
+    <p>We share personal data only with the service providers we use to run the business, listed on our <a href="/subprocessors">sub-processors page</a>. Each one acts on our instructions under a written contract.</p>
+    <p>We may also share data if the law requires it, or to an adviser such as an accountant or solicitor under a duty of confidentiality. If the business is ever sold, the buyer would take on this policy.</p>
+  </div>
+
+  <div slot="transfers">
+    <p>Some of our providers are based in, or have support teams in, countries outside the UK, including the United States. When personal data leaves the UK, we rely on a UK adequacy decision (including the UK Extension to the EU-US Data Privacy Framework where the provider is certified) or the UK International Data Transfer Addendum to the EU Standard Contractual Clauses.</p>
+  </div>
+
+  <div slot="retention">
+    <ul>
+      <li><strong>Demo requests with no further contact:</strong> {legal.leadRetention}, then deleted.</li>
+      <li><strong>Support cases:</strong> {legal.caseRetention} after the case closes.</li>
+      <li><strong>Customer and billing records:</strong> {legal.caseRetention} after the end of the financial year they relate to, as UK tax law requires.</li>
+      <li><strong>Emails:</strong> as long as needed for the matter they relate to, then deleted.</li>
+      <li><strong>Website logs:</strong> as set by Cloudflare, typically a few days.</li>
+    </ul>
+  </div>
+
+  <div slot="cookies">
+    <p>This website doesn't set any cookies for analytics, advertising or tracking, and our fonts are served from our own site rather than Google. Cloudflare may set a strictly necessary security cookie to protect the site from attacks; this doesn't need your consent.</p>
+    <p>[If reCAPTCHA is added to the forms: Our demo and support forms use Google reCAPTCHA to stop spam. It sets cookies and sends data to Google when you use those forms. Google's privacy policy applies.]</p>
+  </div>
+
+  <div slot="security">
+    <p>We use multi-factor authentication on every account that holds personal data, keep access to the minimum needed, and use providers that encrypt data in transit and at rest. If a breach is likely to put you at risk, we'll tell you and the ICO as the law requires.</p>
+  </div>
+
+  <div slot="rights">
+    <p>Under UK data protection law you can ask us to:</p>
+    <ul>
+      <li>give you a copy of your personal data</li>
+      <li>correct anything that's wrong</li>
+      <li>delete your data</li>
+      <li>restrict or object to how we use it, including any marketing</li>
+      <li>send your data to you or another organisation in a reusable format</li>
+    </ul>
+    <p>Email <a href={`mailto:${site.email.privacy}`}>{site.email.privacy}</a>. We'll reply within one month and it's free. We may need to confirm who you are first. Some rights have limits; for example, we must keep billing records for tax purposes.</p>
+    <p>For data held in your organisation's Salesforce org, including {site.product} conversations, contact your organisation. We can't access that data.</p>
+  </div>
+
+  <p slot="changes">We'll update this page when anything changes and show the new date and version at the top. If a change materially affects customers, we'll email the account contact before it takes effect.</p>
+
+  <div slot="contact">
+    <p>Questions or requests: <a href={`mailto:${site.email.privacy}`}>{site.email.privacy}</a>, or write to {site.owner.legalName}, {site.owner.address}.</p>
+    <p>If you're unhappy with how we've handled your data, please tell us first so we can put it right. You can also complain to the Information Commissioner's Office at <a href="https://ico.org.uk/make-a-complaint/">ico.org.uk</a> or on 0303 123 1113.</p>
+  </div>
 </PolicyPage>

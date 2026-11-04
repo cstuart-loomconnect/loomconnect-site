@@ -2,7 +2,7 @@
 // Shared layout for policy-style pages (legal, trust and support policies).
 // Props:
 //   title, description, updated (string), summary (string, optional),
-//   draft (boolean: shows the "being prepared with a solicitor" note),
+//   draft (boolean: shows the "draft for solicitor review" note; defaults to site.legal.draft),
 //   sections: [{ id, label }], each filled by a named slot with the same id,
 //   or "[Text to come.]" if no slot is given.
 import Base from './Base.astro';
@@ -13,7 +13,7 @@ const {
   description,
   updated = site.placeholders.legalLastUpdated,
   summary,
-  draft = false,
+  draft = site.legal.draft,
   sections = [],
 } = Astro.props;
 
@@ -22,6 +22,7 @@ const legalNav = [
   { href: '/terms', label: 'Terms' },
   { href: '/acceptable-use', label: 'Acceptable use' },
   { href: '/ai-transparency', label: 'AI transparency' },
+  { href: '/data-processing', label: 'Data processing' },
   { href: '/subprocessors', label: 'Sub-processors' },
   { href: '/support-policy', label: 'Support policy' },
   { href: '/accessibility', label: 'Accessibility' },
@@ -42,9 +43,9 @@ for (const s of sections) {
         ))}
       </nav>
       <h1 class="page-title">{title}</h1>
-      <p class="muted small">Last updated {updated}</p>
+      <p class="muted small">Last updated {updated} · Version {site.legal.version}</p>
       {summary && <div class="summary-box"><strong class="text-ink">The short version.</strong> {summary}</div>}
-      {draft && <p class="callout">Draft structure only. The full text is being prepared with a solicitor and must replace the placeholders before launch.</p>}
+      {draft && <p class="callout">Draft for solicitor review. Text in [square brackets] still needs filling in before launch.</p>}
       <slot />
       {sections.length > 1 && (
         <nav class="toc" aria-label="Contents">
