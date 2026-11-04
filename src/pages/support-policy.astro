@@ -1,0 +1,46 @@
+---
+import PolicyPage from '../layouts/PolicyPage.astro';
+import { site } from '../site.config.js';
+const p = site.placeholders;
+---
+<PolicyPage
+  title="Support policy"
+  description="How to get help with AI Assist, and how quickly we respond."
+  summary="Email or raise a request on the support page. We reply in UK working hours, with faster responses on paid plans."
+>
+  <h2>How to get help</h2>
+  <ul>
+    <li>Raise a request on the <a href="/support">support page</a>.</li>
+    <li>Email <a href={`mailto:${site.email.support}`}>{site.email.support}</a>. Every email becomes a tracked case.</li>
+    <li>Check the <a href="/docs">docs</a> for setup and troubleshooting.</li>
+  </ul>
+
+  <h2>Hours</h2>
+  <p>Monday to Friday, 09:00 to 17:00 UK time, excluding UK bank holidays.</p>
+
+  <h2>Response times</h2>
+  <div class="table-wrap">
+    <table class="table">
+      <thead><tr><th scope="col">Plan</th><th scope="col">First response</th><th scope="col">Channels</th></tr></thead>
+      <tbody>
+        <tr><td>Free</td><td>{p.freeResponseTime}</td><td>Email, support form</td></tr>
+        <tr><td>Pro</td><td>Next working day</td><td>Email, support form</td></tr>
+        <tr><td>Enterprise</td><td>As set out in your agreement</td><td>Email, support form, scheduled calls</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="muted small">Response times are targets for a first reply, not for a fix.</p>
+
+  <h2>Priority levels</h2>
+  <ul>
+    <li><strong>High:</strong> AI Assist is unusable for your team.</li>
+    <li><strong>Medium:</strong> a feature isn't working but there's a workaround.</li>
+    <li><strong>Low:</strong> questions, how-tos and feature requests.</li>
+  </ul>
+
+  <h2>What we support</h2>
+  <p>Installation, configuration and problems with the AI Assist package. We can't support issues in your AI provider's service, your wider Salesforce customisations, or unsupported Salesforce editions.</p>
+
+  <h2>Access to your org</h2>
+  <p>We will never ask for your password. If we need to look inside your org, we'll ask you to grant temporary login access through Salesforce's standard support access, which you control and can revoke at any time.</p>
+</PolicyPage>

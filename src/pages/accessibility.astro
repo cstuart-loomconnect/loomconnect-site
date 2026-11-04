@@ -1,0 +1,29 @@
+---
+import PolicyPage from '../layouts/PolicyPage.astro';
+import { site } from '../site.config.js';
+---
+<PolicyPage
+  title="Accessibility statement"
+  description="Our commitment to making loomconnect.com and AI Assist accessible."
+  summary="We aim for this website and AI Assist to meet WCAG 2.2 level AA. If something doesn't work for you, tell us and we'll fix it."
+>
+  <h2>What we aim for</h2>
+  <ul>
+    <li>Everything works with a keyboard alone.</li>
+    <li>Text has strong colour contrast and can be zoomed to 200% without breaking.</li>
+    <li>Forms have proper labels and clear error messages.</li>
+    <li>Pages make sense to screen readers, with a skip-to-content link.</li>
+  </ul>
+
+  <h2>AI Assist in Salesforce</h2>
+  <p>AI Assist is built with Salesforce's Lightning components, which follow Salesforce's accessibility standards. Chat messages are announced to screen readers as they arrive.</p>
+
+  <h2>Known issues</h2>
+  <p>[None known. List any here once testing is complete.]</p>
+
+  <h2>Report a problem</h2>
+  <p>Email <a href={`mailto:${site.email.support}`}>{site.email.support}</a> with the page and what went wrong. We'll reply within five working days.</p>
+
+  <h2>How we tested</h2>
+  <p>[Describe testing before launch, e.g. automated checks with Lighthouse plus manual keyboard and screen reader testing.]</p>
+</PolicyPage>

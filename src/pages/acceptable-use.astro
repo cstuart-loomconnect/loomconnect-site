@@ -1,0 +1,33 @@
+---
+import PolicyPage from '../layouts/PolicyPage.astro';
+import { site } from '../site.config.js';
+const sections = [
+  { id: 'scope', label: 'Who this applies to' },
+  { id: 'not-allowed', label: 'What you must not do' },
+  { id: 'human-review', label: 'Human review of AI output' },
+  { id: 'data', label: 'Data you put into AI Assist' },
+  { id: 'enforcement', label: 'What happens if the policy is broken' },
+  { id: 'report', label: 'Reporting misuse' },
+];
+---
+<PolicyPage
+  title="Acceptable Use Policy"
+  description="The rules for using AI Assist."
+  summary="Use AI Assist for legitimate business work, check its output before acting on it, and don't use it to harm people or break the law."
+  draft
+  sections={sections}
+>
+  <p slot="scope">This policy applies to every user in an organisation that has installed AI Assist. Admins agree to it on behalf of their organisation when they accept the terms in the app, and each user acknowledges it the first time they open AI Assist.</p>
+  <div slot="not-allowed">
+    <p>The final list will come from our solicitors. It is expected to cover:</p>
+    <ul>
+      <li>Breaking the law, or helping anyone else to.</li>
+      <li>Harassing, discriminating against or deceiving people.</li>
+      <li>Making decisions with legal or similarly significant effects on people (for example credit, employment or insurance decisions) based solely on AI output.</li>
+      <li>Trying to get around AI Assist's permission, privacy or usage controls.</li>
+      <li>Generating malware, spam or content that infringes someone else's rights.</li>
+    </ul>
+  </div>
+  <p slot="human-review">AI can make mistakes. A person should review AI-generated content before it is sent to a customer or used to make a decision.</p>
+  <p slot="report">Report suspected misuse to <a href={`mailto:${site.email.security}`}>{site.email.security}</a>.</p>
+</PolicyPage>

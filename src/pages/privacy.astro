@@ -1,14 +1,14 @@
 ---
-import Base from '../layouts/Base.astro';
+import PolicyPage from '../layouts/PolicyPage.astro';
 import { site } from '../site.config.js';
 const sections = [
-  ['who', 'Who we are'],
-  ['forms', 'Data we collect from our website'],
-  ['org', 'Data inside your Salesforce org'],
-  ['providers', 'AI providers you connect'],
-  ['retention', 'How long we keep data'],
-  ['rights', 'Your rights under UK GDPR'],
-  ['contact', 'Contact us'],
+  { id: 'who', label: 'Who we are' },
+  { id: 'forms', label: 'Data we collect from our website' },
+  { id: 'org', label: 'Data inside your Salesforce org' },
+  { id: 'providers', label: 'AI providers you connect' },
+  { id: 'retention', label: 'How long we keep data' },
+  { id: 'rights', label: 'Your rights under UK GDPR' },
+  { id: 'contact', label: 'Contact us' },
 ];
 ---
 <Base title="Privacy policy">

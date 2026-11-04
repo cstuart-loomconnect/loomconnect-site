@@ -1,0 +1,37 @@
+---
+import PolicyPage from '../layouts/PolicyPage.astro';
+import { site } from '../site.config.js';
+---
+<PolicyPage
+  title="Sub-processors"
+  description="Third parties involved in providing AI Assist and loomconnect.com."
+  summary="AI Assist runs inside your own Salesforce org and connects to an AI provider you choose and contract with directly. Loom Connect does not receive your Salesforce data, so it uses no sub-processors for it."
+  draft
+>
+  <h2>AI Assist (the Salesforce package)</h2>
+  <p>Your organisation, not Loom Connect, chooses and contracts with these providers. Data goes directly from your Salesforce org to them.</p>
+  <div class="table-wrap">
+    <table class="table">
+      <thead><tr><th scope="col">Provider</th><th scope="col">Purpose</th><th scope="col">Contracted by</th></tr></thead>
+      <tbody>
+        <tr><td>Salesforce</td><td>Hosts your org and runs AI Assist</td><td>You</td></tr>
+        <tr><td>Anthropic or OpenAI</td><td>Generates AI responses, using your API key</td><td>You</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2>loomconnect.com and support</h2>
+  <p>These providers handle the details you send us through this website and by email.</p>
+  <div class="table-wrap">
+    <table class="table">
+      <thead><tr><th scope="col">Provider</th><th scope="col">Purpose</th><th scope="col">Location</th></tr></thead>
+      <tbody>
+        <tr><td>Cloudflare</td><td>Website hosting, security and cookie-free analytics</td><td>[TO CONFIRM]</td></tr>
+        <tr><td>Salesforce</td><td>Our CRM: demo requests and support cases</td><td>[TO CONFIRM]</td></tr>
+        <tr><td>Google</td><td>reCAPTCHA spam protection on forms</td><td>[TO CONFIRM]</td></tr>
+        <tr><td>[EMAIL PROVIDER]</td><td>Email</td><td>[TO CONFIRM]</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>We'll update this page before adding a new sub-processor. Questions: <a href={`mailto:${site.email.privacy}`}>{site.email.privacy}</a></p>
+</PolicyPage>

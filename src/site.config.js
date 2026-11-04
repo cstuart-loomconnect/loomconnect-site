@@ -6,6 +6,13 @@ export const site = {
   product: 'AI Assist',
   url: 'https://loomconnect.com',
 
+  // UK business-name rules: a sole trader using a trading name must show
+  // their legal name and a UK address for correspondence on the website.
+  owner: {
+    legalName: 'Chandler Stuart',
+    address: '[UK ADDRESS FOR CORRESPONDENCE]',
+  },
+
   // While true, every page is marked noindex and robots.txt blocks crawlers.
   // Set to false on launch day.
   private: true,
@@ -28,6 +35,8 @@ export const site = {
     noticePeriod: '[NOTICE PERIOD]',
     securityReviewStatus: '[IN PROGRESS]',
     legalLastUpdated: '[DATE]',
+    currentVersion: '[1.0]',
+    releaseDate: '[DATE]',
   },
 };
 
