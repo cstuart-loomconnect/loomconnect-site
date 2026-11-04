@@ -6,13 +6,12 @@ import { site } from '../site.config.js';
   <section class="section">
     <div class="container stack-lg">
       <div class="stack">
-        <span class="eyebrow">Security and trust</span>
         <h1>Security and data handling</h1>
         <p class="lead">Exactly what happens to your data when someone asks AI Assist a question.</p>
       </div>
 
       <div class="stack">
-        <h2 style="font-size: 1.5rem">How a question flows</h2>
+        <h2 class="h-section">How a question flows</h2>
         <div class="flow">
           <div class="flow-step"><span class="step-num">1</span><strong>Your Salesforce org</strong><span>Reads only the records and fields the user can already see.</span></div>
           <div class="flow-step"><span class="step-num">2</span><strong>Pseudonymise</strong><span>Names, emails and phone numbers are swapped for tokens.</span></div>
@@ -39,8 +38,8 @@ import { site } from '../site.config.js';
 
   <section class="section-sm">
     <div class="container narrow stack">
-      <h2 style="font-size: 1.5rem">Review status and contact</h2>
-      <p class="muted">AppExchange security review: <strong style="color: var(--ink)">{site.placeholders.securityReviewStatus}</strong></p>
+      <h2 class="h-section">Review status and contact</h2>
+      <p class="muted">AppExchange security review: <strong class="text-ink">{site.placeholders.securityReviewStatus}</strong></p>
       <p class="muted">Security questions or a vendor questionnaire to complete? Email <a href={`mailto:${site.email.security}`}>{site.email.security}</a>.</p>
     </div>
   </section>

@@ -1,0 +1,32 @@
+---
+// /documentation/review-conversations
+import DocsLayout from '../../layouts/DocsLayout.astro';
+import Note from '../../components/docs/Note.astro';
+import Screenshot from '../../components/docs/Screenshot.astro';
+---
+<DocsLayout slug="review-conversations">
+  <p class="docs-lede">Three tabs in the AI Assist app show how it's being used and what users think of it.</p>
+
+  <h2 id="conversations">AI Conversations</h2>
+  <p>Every conversation, with its agent, record, status and how much it used. Ready-made list views:</p>
+  <div class="docs-table">
+    <table>
+      <thead><tr><th>List view</th><th>Shows</th></tr></thead>
+      <tbody>
+        <tr><td>Active Conversations</td><td>Conversations still open.</td></tr>
+        <tr><td>Closed Today and Closed This Week</td><td>Recently finished conversations.</td></tr>
+        <tr><td>Hit a Limit</td><td>Conversations stopped by a message or token limit. A good sign your limits are too low.</td></tr>
+        <tr><td>Expiring In 30 Days</td><td>Conversations the clean-up job will delete soon.</td></tr>
+        <tr><td>On Legal Hold</td><td>Conversations kept past their deletion date.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <Screenshot id="conversations-list" />
+  <Note type="check" title="Keeping a conversation">Tick <strong>On Legal Hold</strong> on a conversation to stop the clean-up job deleting it.</Note>
+
+  <h2 id="feedback">AI Feedback</h2>
+  <p>Every Helpful and Not helpful rating, with the reason the user picked: inaccurate, incomplete, not relevant, too slow, unsafe or inappropriate, or other. Read the Not helpful ones when you tune your prompt template.</p>
+
+  <h2 id="log">AI Platform Log</h2>
+  <p>Errors and warnings, with the time and the user. When a user reports a problem, look here first. Each entry's message is listed on the <a href="/documentation/error-messages">Error messages</a> page.</p>
+</DocsLayout>

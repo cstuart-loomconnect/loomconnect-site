@@ -1,0 +1,36 @@
+---
+// /documentation/create-an-agent
+import DocsLayout from '../../layouts/DocsLayout.astro';
+import Note from '../../components/docs/Note.astro';
+import Screenshot from '../../components/docs/Screenshot.astro';
+---
+<DocsLayout slug="create-an-agent">
+  <p class="docs-lede">An agent is the assistant your users talk to. The AI Agent Wizard builds one from the model and prompt template you've already set up.</p>
+  <Note type="check" title="Start read-only">Leave out workflow actions on your first agent. It can answer questions and draft text, but can't change records. You can add actions later without rebuilding it.</Note>
+
+  <h2 id="start">Start the wizard</h2>
+  <p>Open the <strong class="ui">AI Agent Wizard</strong> tab and click <strong class="ui">+ New agent</strong>. Pick <strong class="ui">Blank agent</strong>, or <strong class="ui">Copy an existing agent</strong> to start from one you already have.</p>
+
+  <h2 id="steps">The wizard, step by step</h2>
+  <ol class="docs-steps">
+    <li><div><strong>Basics.</strong> Name the agent and pick the record pages it appears on, such as Account or Case. Choose its prompt template and write a greeting for the start of each conversation.</div></li>
+    <li><div><strong>Model.</strong> Pick the model you connected. Only active models are listed.</div></li>
+    <li><div><strong>Skills.</strong> Jobs the agent can do, if you've built any. Fine to skip on a first agent.</div></li>
+    <li><div><strong>Data sources.</strong> What the agent can read beyond the open record. Skip for now if you haven't built any.</div></li>
+    <li><div><strong>Workflow actions.</strong> What the agent can change. Click <strong class="ui">Continue read-only</strong> to skip.</div></li>
+    <li><div><strong>Conversations.</strong> Whether a conversation reloads when the user comes back, whether colleagues can see it, and how long it's kept.</div></li>
+    <li><div><strong>Limits.</strong> The most messages and tokens in one conversation. The wizard estimates the daily cost as you go.</div></li>
+    <li><div><strong>Access.</strong> Everyone with AI Assist User, or only the users and permission sets you add. Use <strong class="ui">Check a user</strong> to confirm someone will see it.</div></li>
+    <li><div><strong>Review.</strong> Send a test message, fix anything flagged, then activate. Or save it as a draft and come back.</div></li>
+  </ol>
+  <Screenshot id="wizard-basics" />
+
+  <h2 id="private-global">Private or global conversations</h2>
+  <p>On the Conversations step, <strong>Private</strong> means only the person who started a conversation can see it. That suits most agents. <strong>Global</strong> lets anyone with the agent pick up a colleague's conversation, which suits a shared queue.</p>
+  <Note type="watch" title="Only choose Global when users share the same access">A global conversation can show record data one user could see to another user who can't.</Note>
+
+  <h2 id="review">Test before you activate</h2>
+  <p>The test on the Review step uses the model, prompt template and persona only. Data sources and actions aren't used, so test those on a real record once the agent is on a page.</p>
+  <Screenshot id="wizard-review" />
+  <Note type="watch">The wizard only uses things that already exist. It never creates models, data sources or actions, so build those first.</Note>
+</DocsLayout>

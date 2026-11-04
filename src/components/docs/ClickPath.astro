@@ -1,0 +1,14 @@
+---
+// Shows where to click in Salesforce, the way the admin sees it on screen: Setup › Named Credentials.
+// Use: <ClickPath steps={['Setup', 'Named Credentials']} />
+const { steps = [] } = Astro.props;
+---
+<span class="click-path">
+  {steps.map((step, index) => (
+    <Fragment>
+      {index > 0 && <span class="click-path-sep" aria-hidden="true">›</span>}
+      {index > 0 && <span class="sr-only">then</span>}
+      <span class="click-path-step">{step}</span>
+    </Fragment>
+  ))}
+</span>

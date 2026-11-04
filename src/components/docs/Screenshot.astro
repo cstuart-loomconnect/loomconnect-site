@@ -1,0 +1,25 @@
+---
+// A screenshot, looked up by its id in src/documentation/screenshots.js.
+// Use: <Screenshot id="model-connected" />
+// If the file hasn't been added yet, it shows a dashed box saying what to capture (or nothing, if placeholders are off).
+import { screenshots } from '../../documentation/screenshots.js';
+import { showScreenshotPlaceholders } from '../../documentation/settings.js';
+
+const { id } = Astro.props;
+const shot = screenshots[id];
+if (!shot) throw new Error(`No screenshot with id "${id}" in src/documentation/screenshots.js`);
+
+// Where screenshot files live inside the public folder
+const folder = '/documentation/screenshots/';
+---
+{shot.file ? (
+  <figure class="docs-shot">
+    <img src={folder + shot.file} alt={shot.alt} width={shot.width} height={shot.height} loading="lazy" decoding="async" />
+  </figure>
+) : showScreenshotPlaceholders && (
+  <div class="docs-shot-missing">
+    <strong>Screenshot to add</strong>
+    <span>{shot.capture}</span>
+    <span>Save it as <code>public{folder}{id}.png</code>, then set its file in <code>screenshots.js</code>.</span>
+  </div>
+)}

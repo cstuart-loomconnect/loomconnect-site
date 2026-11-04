@@ -18,9 +18,9 @@ const sections = [
         <a href="/privacy" aria-current="page">Privacy policy</a>
         <a href="/terms">Terms of service</a>
       </nav>
-      <h1 style="font-size: clamp(1.8rem, 4vw, 2.6rem)">Privacy policy</h1>
+      <h1 class="page-title">Privacy policy</h1>
       <p class="muted small">Last updated {site.placeholders.legalLastUpdated}</p>
-      <div class="summary-box"><strong style="color: var(--ink)">The short version.</strong> AI Assist runs inside your Salesforce org, so we never receive your customer data. We only hold what you send us directly through our website forms and support emails.</div>
+      <div class="summary-box"><strong class="text-ink">The short version.</strong> AI Assist runs inside your Salesforce org, so we never receive your customer data. We only hold what you send us directly through our website forms and support emails.</div>
       <p class="callout">Draft structure only. The full text is being prepared with a solicitor and must replace the placeholders below before launch.</p>
       <nav class="toc" aria-label="Contents">
         {sections.map(([id, label], i) => <a href={`#${id}`}>{i + 1}. {label}</a>)}

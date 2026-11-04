@@ -1,0 +1,35 @@
+---
+// /documentation/slash-commands
+import DocsLayout from '../../layouts/DocsLayout.astro';
+import ClickPath from '../../components/docs/ClickPath.astro';
+import Note from '../../components/docs/Note.astro';
+---
+<DocsLayout slug="slash-commands">
+  <p class="docs-lede">A slash command is a shortcut users type in the chat window, such as <code>/summarise</code>. It sends a prompt you've written, so everyone gets the same good result for the jobs they do every day.</p>
+  <p>Users type <code>/</code> in the chat window to see the commands available to them on that page.</p>
+
+  <h2 id="create">Create a command</h2>
+  <ol class="docs-steps">
+    <li><div>Go to <ClickPath steps={['Setup', 'Custom Metadata Types']} /> and click <strong class="ui">Manage Records</strong> next to <strong>AI Chat Command</strong>.</div></li>
+    <li><div>Click <strong class="ui">New</strong> and fill in the fields below.</div></li>
+    <li><div>Tick <strong class="ui">Is Active</strong> and save. The command appears the next time the chat window loads.</div></li>
+  </ol>
+
+  <h2 id="fields">The fields</h2>
+  <div class="docs-table">
+    <table>
+      <thead><tr><th>Field</th><th>What to enter</th></tr></thead>
+      <tbody>
+        <tr><td>Command</td><td>What the user types, including the slash, such as <code>/summarise</code>.</td></tr>
+        <tr><td>Description</td><td>One line shown next to the command in the list.</td></tr>
+        <tr><td>Prompt Text</td><td>The message sent when the command is used, such as "Summarise this record in five bullet points."</td></tr>
+        <tr><td>Prompt Template Developer Name</td><td>Optional. Use a different prompt template for this command, by its API name.</td></tr>
+        <tr><td>Object API Name</td><td>Optional. Only offer the command on this object, such as <code>Opportunity</code>.</td></tr>
+        <tr><td>Agent Developer Name</td><td>Optional. Only offer the command with this agent.</td></tr>
+        <tr><td>Available To</td><td>All Users, Super Users and Admins, or Admins Only.</td></tr>
+        <tr><td>Display Order</td><td>Where it sits in the list. Lower numbers come first.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <Note type="check">Custom metadata records can be deployed with change sets, so build commands in a sandbox and move them to production with the rest of your changes.</Note>
+</DocsLayout>

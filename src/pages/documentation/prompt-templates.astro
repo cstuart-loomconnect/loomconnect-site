@@ -1,0 +1,42 @@
+---
+// /documentation/prompt-templates
+import DocsLayout from '../../layouts/DocsLayout.astro';
+import Note from '../../components/docs/Note.astro';
+import Screenshot from '../../components/docs/Screenshot.astro';
+---
+<DocsLayout slug="prompt-templates">
+  <p class="docs-lede">A prompt template tells the assistant who it is, how to sound and what it must never do. Every agent uses one, so write it before you build the agent.</p>
+
+  <h2 id="create">Create a template</h2>
+  <ol class="docs-steps">
+    <li><div>Open the <strong class="ui">AI Prompt Templates</strong> tab and click <strong class="ui">New template</strong>.</div></li>
+    <li><div>Give it a name admins will recognise, such as <code>Sales assistant</code>. The API name fills in from it and can't be changed later.</div></li>
+    <li><div>Fill in the four parts below, then click <strong class="ui">Create template</strong>.</div></li>
+  </ol>
+  <Screenshot id="prompt-editor" />
+
+  <h2 id="parts">The four parts</h2>
+  <div class="docs-table">
+    <table>
+      <thead><tr><th>Part</th><th>What to write</th><th>Example</th></tr></thead>
+      <tbody>
+        <tr><td>Context</td><td>Who the agent is, who it helps and what they're looking at. Facts that stay the same go here.</td><td><code>{'You are {!Agent.Name}, an assistant for {!Org.Name}. You help with the {!Record.ObjectLabel} the user has open.'}</code></td></tr>
+        <tr><td>Tone</td><td>How formal, how long and which spelling. Leave blank if the instructions cover it.</td><td>Concise and factual. British English. Up to five bullet points.</td></tr>
+        <tr><td>Instructions</td><td>What to base answers on, and when to ask before acting. Required.</td><td>Answer from the data your tools return. If something isn't there, say so.</td></tr>
+        <tr><td>Never</td><td>Hard rules, one per line, checked on every reply. Anything that matters for compliance goes here.</td><td>Never give regulated advice. Say what the data shows and let the user decide.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>Use the <strong class="ui">Insert</strong> bar to add merge fields such as the user's first name or today's date. They're filled in for each conversation.</p>
+
+  <h2 id="try">Try it, then publish</h2>
+  <ol class="docs-steps">
+    <li><div>Click <strong class="ui">Try it</strong>, pick an agent and type a message a user would send. <strong class="ui">Run both</strong> compares your edit with the live version.</div></li>
+    <li><div>Mark each reply <strong class="ui">Better</strong> or <strong class="ui">Worse</strong>, and save messages worth re-running after future changes.</div></li>
+    <li><div>When you're happy, click <strong class="ui">Publish</strong>. The dialog shows which agents and users the change reaches.</div></li>
+  </ol>
+  <Note type="check" title="Drafts are safe">Agents always use the published version. Editing a template changes nothing for users until you publish.</Note>
+
+  <h2 id="default">The default template</h2>
+  <p>One active template can be the default. Use <strong class="ui">Make default</strong> on the one most agents should start from. The default can't be archived; make another template the default first.</p>
+</DocsLayout>

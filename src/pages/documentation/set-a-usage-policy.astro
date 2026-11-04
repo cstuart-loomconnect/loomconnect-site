@@ -1,0 +1,40 @@
+---
+// /documentation/set-a-usage-policy
+import DocsLayout from '../../layouts/DocsLayout.astro';
+import Note from '../../components/docs/Note.astro';
+import Screenshot from '../../components/docs/Screenshot.astro';
+---
+<DocsLayout slug="set-a-usage-policy">
+  <p class="docs-lede">A usage policy sets how much each person can use AI Assist in a day, and what they're allowed to do. Every user needs one, so start with a default policy that covers everyone.</p>
+  <Note type="watch" title="Without a policy, nobody can chat">AI Assist doesn't create a policy when it's installed. Until one is the default, users see "AI Assist has not been set up for your user".</Note>
+
+  <h2 id="default">Create the default policy</h2>
+  <ol class="docs-steps">
+    <li><div>Open the <strong class="ui">AI Policies</strong> tab and click <strong class="ui">+ New policy</strong>. Call it something like <code>Everyone</code>.</div></li>
+    <li><div>Switch on <strong class="ui">Active</strong> and <strong class="ui">Default</strong>. A default policy applies to anyone who isn't given another one.</div></li>
+    <li><div>Set the daily limits. Start modest; you can raise them once you see real use on the AI Conversations tab.</div></li>
+    <li><div>Save.</div></li>
+  </ol>
+  <Screenshot id="default-policy" />
+
+  <h2 id="settings">What each setting does</h2>
+  <div class="docs-table">
+    <table>
+      <thead><tr><th>Setting</th><th>What it controls</th></tr></thead>
+      <tbody>
+        <tr><td>Tokens per 24 hours</td><td>Total AI use across all of a person's conversations. Leave blank for no limit.</td></tr>
+        <tr><td>Conversations per 24 hours</td><td>How many new conversations a person can start.</td></tr>
+        <tr><td>Open conversations at once</td><td>How many conversations a person can have open together.</td></tr>
+        <tr><td>When a limit is hit</td><td><strong>Block new messages</strong> stops them straight away. <strong>Block new conversations only</strong> lets them finish what they're doing. <strong>Notify only</strong> shows a warning.</td></tr>
+        <tr><td>Start a chat themselves</td><td>Off means users can only use suggested prompts and slash commands.</td></tr>
+        <tr><td>See conversations</td><td>Whose conversations appear in a person's history: their own, their team's, or everyone's.</td></tr>
+        <tr><td>Channels</td><td>Where they can use AI Assist: Record Page Chat, Utility Bar or Mobile. Tick none to allow every channel.</td></tr>
+        <tr><td>Debug mode</td><td>Shows the steps behind each reply. Useful while testing, not for everyone.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2 id="more">More than one policy</h2>
+  <p>To give a team different limits, create another policy and assign it to their users or a permission set. Use <strong class="ui">Check a user</strong> on the AI Policies tab to see which policy applies to someone.</p>
+  <Note type="check">Agents have their own limits per conversation too. Where both apply, the stricter one wins.</Note>
+</DocsLayout>

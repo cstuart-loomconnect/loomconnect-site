@@ -1,0 +1,24 @@
+---
+// /documentation/glossary
+// Terms come from src/documentation/glossary.js. Add or change them there.
+import DocsLayout from '../../layouts/DocsLayout.astro';
+import { glossary } from '../../documentation/glossary.js';
+import { pageUrl } from '../../documentation/navigation.js';
+
+// Turns "Usage policy" into "usage-policy" so each term can be linked to directly
+const anchor = (term) => term.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+---
+<DocsLayout slug="glossary">
+  <p class="docs-lede">The words used across these pages, in plain English.</p>
+  <dl class="glossary">
+    {glossary.map((item) => (
+      <div>
+        <dt id={anchor(item.term)}>{item.term}</dt>
+        <dd>
+          {item.definition}
+          {item.link && <Fragment> <a href={pageUrl(item.link)}>Read more</a></Fragment>}
+        </dd>
+      </div>
+    ))}
+  </dl>
+</DocsLayout>

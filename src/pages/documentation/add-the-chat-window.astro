@@ -1,0 +1,44 @@
+---
+// /documentation/add-the-chat-window
+import DocsLayout from '../../layouts/DocsLayout.astro';
+import ClickPath from '../../components/docs/ClickPath.astro';
+import Note from '../../components/docs/Note.astro';
+import Screenshot from '../../components/docs/Screenshot.astro';
+import Tabs from '../../components/docs/Tabs.astro';
+---
+<DocsLayout slug="add-the-chat-window">
+  <p class="docs-lede">Put the chat window on a record page, or in an app's utility bar so it's always one click away.</p>
+
+  <h2 id="add">Add it</h2>
+  <Tabs label="Where to add the chat window" labels={['Record page', 'Utility bar']}>
+    <div class="tabs-panel" data-tab-panel data-label="Record page">
+      <ol class="docs-steps">
+        <li><div>Open a record of the type your agent works on, click the gear icon, then <strong class="ui">Edit Page</strong>.</div></li>
+        <li><div>Find <strong>AI Assist Chat</strong> in the component list and drag it into a column at least 320 pixels wide. The right-hand column usually works.</div></li>
+        <li><div>Click <strong class="ui">Save</strong>, then <strong class="ui">Activate</strong>, and choose which apps and profiles get the page.</div></li>
+      </ol>
+    </div>
+    <div class="tabs-panel" data-tab-panel data-label="Utility bar">
+      <ol class="docs-steps">
+        <li><div>Go to <ClickPath steps={['Setup', 'App Manager']} /> and edit the Lightning app your users work in.</div></li>
+        <li><div>Open <strong class="ui">Utility Items</strong>, click <strong class="ui">Add Utility Item</strong> and pick <strong>AI Assist Chat</strong>.</div></li>
+        <li><div>Click <strong class="ui">Save</strong>. The chat window now opens from the bar at the bottom of every page in that app.</div></li>
+      </ol>
+    </div>
+  </Tabs>
+  <Screenshot id="app-builder-chat" />
+
+  <h2 id="settings">Settings on the component</h2>
+  <div class="docs-table">
+    <table>
+      <thead><tr><th>Setting</th><th>What it does</th></tr></thead>
+      <tbody>
+        <tr><td>Channel</td><td>Leave it as it is. Usage policies use it to allow chat in some places and not others.</td></tr>
+        <tr><td>AI Agent (optional)</td><td>Leave blank to use the first active agent for that object. To fix one agent to this page, enter its API name.</td></tr>
+        <tr><td>Height (px)</td><td>Record pages only. Between 480 and 1,200. The default is 680.</td></tr>
+        <tr><td>Accent colour</td><td>The colour of buttons and the user's own messages, as a hex code such as <code>#3040C4</code>.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <Note type="check">Users who don't have access to an agent on that object see a short message telling them to ask their admin. Nothing is sent to your provider until they can chat.</Note>
+</DocsLayout>

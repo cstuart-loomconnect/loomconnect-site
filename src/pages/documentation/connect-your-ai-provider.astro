@@ -1,0 +1,72 @@
+---
+// /documentation/connect-your-ai-provider
+import DocsLayout from '../../layouts/DocsLayout.astro';
+import ClickPath from '../../components/docs/ClickPath.astro';
+import Note from '../../components/docs/Note.astro';
+import Screenshot from '../../components/docs/Screenshot.astro';
+import Tabs from '../../components/docs/Tabs.astro';
+---
+<DocsLayout slug="connect-your-ai-provider">
+  <p class="docs-lede">Your API key is stored in Salesforce's own credential store, never in an AI Assist record or in code. There are three parts: save the key in Setup, let your users use it, then tell AI Assist which model to call.</p>
+
+  <h2 id="save-key">Part 1: Save your key in Setup</h2>
+  <p>Pick your provider. The steps are the same apart from the header and the address.</p>
+
+  <Tabs label="Your AI provider" labels={['Anthropic', 'OpenAI']}>
+    <div class="tabs-panel" data-tab-panel data-label="Anthropic">
+      <ol class="docs-steps">
+        <li><div>Go to <ClickPath steps={['Setup', 'Named Credentials']} />, open the <strong class="ui">External Credentials</strong> tab and click <strong class="ui">New</strong>.</div></li>
+        <li><div>Enter <code>Anthropic</code> as both the label and the name, choose <strong class="ui">Custom</strong> as the authentication protocol, and save.</div></li>
+        <li><div>Under <strong class="ui">Principals</strong>, click <strong class="ui">New</strong>. Name it <code>AIAssist</code>, then add an authentication parameter named <code>ApiKey</code> with your API key as the value.</div></li>
+        <li><div>Under <strong class="ui">Custom Headers</strong>, click <strong class="ui">New</strong>. Name it <code>x-api-key</code> with the value <code>{'{!$Credential.Anthropic.ApiKey}'}</code>.</div></li>
+        <li><div>Open the <strong class="ui">Named Credentials</strong> tab and click <strong class="ui">New</strong>. Enter <code>Anthropic</code> as the label and name, <code>https://api.anthropic.com</code> as the URL, and pick the <code>Anthropic</code> external credential.</div></li>
+        <li><div>Under <strong class="ui">Callout Options</strong>, tick <strong class="ui">Allow Formulas in HTTP Header</strong> and add <code>LoomConnect</code> to <strong class="ui">Allowed Namespaces for Callouts</strong>. Then save.</div></li>
+      </ol>
+    </div>
+    <div class="tabs-panel" data-tab-panel data-label="OpenAI">
+      <ol class="docs-steps">
+        <li><div>Go to <ClickPath steps={['Setup', 'Named Credentials']} />, open the <strong class="ui">External Credentials</strong> tab and click <strong class="ui">New</strong>.</div></li>
+        <li><div>Enter <code>OpenAI</code> as both the label and the name, choose <strong class="ui">Custom</strong> as the authentication protocol, and save.</div></li>
+        <li><div>Under <strong class="ui">Principals</strong>, click <strong class="ui">New</strong>. Name it <code>AIAssist</code>, then add an authentication parameter named <code>ApiKey</code> with your API key as the value.</div></li>
+        <li><div>Under <strong class="ui">Custom Headers</strong>, click <strong class="ui">New</strong>. Name it <code>Authorization</code> with the value <code>{'Bearer {!$Credential.OpenAI.ApiKey}'}</code>.</div></li>
+        <li><div>Open the <strong class="ui">Named Credentials</strong> tab and click <strong class="ui">New</strong>. Enter <code>OpenAI</code> as the label and name, <code>https://api.openai.com</code> as the URL, and pick the <code>OpenAI</code> external credential.</div></li>
+        <li><div>Under <strong class="ui">Callout Options</strong>, untick <strong class="ui">Generate Authorization Header</strong>, tick <strong class="ui">Allow Formulas in HTTP Header</strong>, and add <code>LoomConnect</code> to <strong class="ui">Allowed Namespaces for Callouts</strong>. Then save.</div></li>
+      </ol>
+      <p>Using a service that works like OpenAI, such as Azure OpenAI? Follow these steps with that service's address instead.</p>
+    </div>
+  </Tabs>
+
+  <Screenshot id="external-credential" />
+  <Note type="watch" title="The name in the header must match">The word between <code>$Credential.</code> and <code>.ApiKey</code> is the name of your external credential. If you named it something else, use that name.</Note>
+
+  <h2 id="user-access">Part 2: Let your users use the key</h2>
+  <p>Each message is sent as the user who wrote it, so every AI Assist user needs access to the key. The AI Assist permission sets can't include it, because they come from the package and you can't edit them. Create one small permission set of your own.</p>
+  <ol class="docs-steps">
+    <li><div>Go to <ClickPath steps={['Setup', 'Permission Sets']} /> and click <strong class="ui">New</strong>. Call it <code>AI Assist Provider Access</code> and save.</div></li>
+    <li><div>Open <strong class="ui">External Credential Principal Access</strong>, click <strong class="ui">Edit</strong>, add the <code>AIAssist</code> principal you created, and save.</div></li>
+    <li><div>Assign this permission set to everyone who will use AI Assist, including yourself.</div></li>
+  </ol>
+  <Screenshot id="principal-access" />
+  <Note type="check" title="Tip">Put this permission set and AI Assist User into one permission set group. Then each new user needs one assignment instead of two.</Note>
+
+  <h2 id="add-model">Part 3: Add a model in AI Assist</h2>
+  <ol class="docs-steps">
+    <li><div>Open the <strong class="ui">AI Agent Models</strong> tab and click <strong class="ui">New</strong>.</div></li>
+    <li><div>Pick your provider. <strong>Anthropic</strong> is for Claude models, <strong>OpenAI</strong> for GPT models. <strong>AnthropicAgent</strong> is for Anthropic managed agents and also needs an environment ID from your Anthropic account.</div></li>
+    <li><div>Enter the model name exactly as your provider writes it, such as <code>claude-sonnet-5-5</code>, and pick the named credential you created. The API path fills itself in.</div></li>
+    <li><div>Click <strong class="ui">Test connection</strong>. When it says Connected, switch on <strong class="ui">Active</strong> and save.</div></li>
+  </ol>
+  <Screenshot id="model-connected" />
+  <Note type="check" title="A model can't go live until its test passes">If you save a model as active and the test fails, it's saved switched off. The test result says why. <a href="/documentation/error-messages">Error messages</a> lists every result.</Note>
+
+  <h2 id="settings">Optional settings on the model</h2>
+  <div class="docs-table">
+    <table>
+      <thead><tr><th>Setting</th><th>What it does</th></tr></thead>
+      <tbody>
+        <tr><td>Max output tokens</td><td>The longest reply the model can write. Higher costs more per reply.</td></tr>
+        <tr><td>Temperature</td><td>How varied replies are. Lower is more predictable, which suits most business use.</td></tr>
+      </tbody>
+    </table>
+  </div>
+</DocsLayout>

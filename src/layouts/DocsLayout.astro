@@ -1,0 +1,81 @@
+---
+// The shell every documentation page sits in: menu, breadcrumb, heading, next step and footer.
+// Use at the top of a page: <DocsLayout slug="install"> ...page content... </DocsLayout>
+// The title, step number and next page all come from src/documentation/settings.js.
+import Base from './Base.astro';
+import DocsSidebar from '../components/docs/DocsSidebar.astro';
+import { checkedAgainst } from '../documentation/settings.js';
+import { getPage, getSection, getStep, getPrevNext, pageUrl, setupPages } from '../documentation/navigation.js';
+import '../styles/docs.css';
+
+const { slug } = Astro.props;
+const page = getPage(slug);
+const section = getSection(page);
+const step = getStep(slug);
+const { previous, next } = getPrevNext(slug);
+
+// The label above the next-page link: "Next setup step" while on the setup path, "Next" elsewhere
+const nextIsSetup = step && next && getStep(next.slug);
+const nextLabel = nextIsSetup ? 'Next setup step' : 'Next';
+---
+<Base title={page.title} description={page.description}>
+  <div class="docs">
+    <aside class="docs-sidebar">
+      <DocsSidebar current={slug} />
+    </aside>
+
+    <article class="docs-article">
+      <div class="docs-mobile">
+        <details>
+          <summary>Documentation menu</summary>
+          <div><DocsSidebar current={slug} /></div>
+        </details>
+        {step && (
+          <div class="docs-progress">
+            <div class="docs-progress-bar" aria-hidden="true">
+              {setupPages.map((_, index) => (
+                <span class={index + 1 < step.number ? 'is-done' : index + 1 === step.number ? 'is-current' : ''}></span>
+              ))}
+            </div>
+          </div>
+        )}
+      </div>
+
+      {slug !== '' && (
+        <nav class="docs-crumbs" aria-label="Breadcrumb">
+          <a href={pageUrl('')}>Documentation</a>
+          <span aria-hidden="true">/</span>
+          <span>{section.title}</span>
+        </nav>
+      )}
+
+      {step && <p class="docs-step">Step {step.number} of {step.total}, about {page.minutes} minutes</p>}
+      <h1>{page.title}</h1>
+
+      <slot />
+
+      {next && (
+        <a class="docs-next" href={pageUrl(next.slug)}>
+          <span>
+            <small>{nextLabel}</small>
+            <strong>{next.title}</strong>
+          </span>
+          {next.minutes && <em>{next.minutes} min</em>}
+        </a>
+      )}
+      {previous && <a class="docs-prev" href={pageUrl(previous.slug)}>Back to {previous.title}</a>}
+
+      <footer class="docs-foot">
+        <p>Checked against {checkedAgainst}.</p>
+        <p>Something unclear? <a href="/support">Tell us</a></p>
+      </footer>
+    </article>
+
+    <nav class="docs-toc" aria-label="On this page" data-on-this-page></nav>
+  </div>
+</Base>
+
+<script>
+  import { buildOnThisPage } from '../scripts/on-this-page.js';
+  buildOnThisPage();
+</script>

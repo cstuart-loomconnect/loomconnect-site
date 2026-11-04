@@ -1,0 +1,32 @@
+---
+// /documentation/install
+import DocsLayout from '../../layouts/DocsLayout.astro';
+import ClickPath from '../../components/docs/ClickPath.astro';
+import Note from '../../components/docs/Note.astro';
+import Screenshot from '../../components/docs/Screenshot.astro';
+---
+<DocsLayout slug="install">
+  <p class="docs-lede">Most of the 10 minutes is waiting for Salesforce.</p>
+
+  <h2 id="install">Install from AppExchange</h2>
+  <ol class="docs-steps">
+    <li><div>Open the AI Assist listing on AppExchange and click <strong class="ui">Get It Now</strong>.</div></li>
+    <li><div>Choose your sandbox or production org and log in.</div></li>
+    <li><div>Pick <strong class="ui">Install for Admins Only</strong>. You'll give everyone else access once it's set up.</div></li>
+    <li><div>Wait for the email from Salesforce saying the install finished.</div></li>
+  </ol>
+  <Screenshot id="install-for-admins" />
+
+  <h2 id="automatic">What happens automatically</h2>
+  <ul>
+    <li>You're given the <strong>AI Assist Super User</strong> permission set, so every AI Assist tab is open to you.</li>
+    <li>The nightly clean-up job is scheduled. It deletes conversations past their retention date and old log entries.</li>
+  </ul>
+
+  <h2 id="check">Check it worked</h2>
+  <p>Open the App Launcher and search for <strong>AI Assist</strong>. You should see tabs including AI Agent Wizard, AI Agent Models and AI Assist Settings.</p>
+  <Note type="watch" title="Can't see the app?">Assign yourself the AI Assist Super User permission set in <ClickPath steps={['Setup', 'Permission Sets']} />, then refresh the page.</Note>
+
+  <h2 id="upgrades">Upgrades</h2>
+  <p>Upgrading keeps all your settings, agents and permission set assignments. The clean-up job is checked and rescheduled if it was stopped.</p>
+</DocsLayout>
