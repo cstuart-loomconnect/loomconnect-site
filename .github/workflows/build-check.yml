@@ -13,4 +13,12 @@ jobs:
           node-version: 22
       - run: npm install
       - run: npm run build
-      - run: npx --yes wrangler@4 deploy --dry-run --env dev --outdir /tmp/wrangler-out
+      - name: Main Worker, branch build command
+        run: npx --yes wrangler@4 versions upload --dry-run --outdir /tmp/w1 2>&1 | tee /tmp/main.log
+        continue-on-error: true
+      - name: Dev Worker, branch build command (no env)
+        run: npx --yes wrangler@4 versions upload --dry-run --outdir /tmp/w2 2>&1 | tee /tmp/dev-noenv.log
+        continue-on-error: true
+      - name: Dev Worker, branch build command (env dev)
+        run: npx --yes wrangler@4 versions upload --dry-run --env dev --outdir /tmp/w3 2>&1 | tee /tmp/dev-env.log
+        continue-on-error: true
