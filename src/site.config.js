@@ -27,12 +27,23 @@ export const site = {
   // Replace with the real listing URL once AI Assist is on AppExchange.
   appExchangeUrl: '#',
 
+  // Plan prices and limits shown on the pricing and support pages.
+  // Prices are per Salesforce org per month, with unlimited users.
+  // Keep the limits in step with the MaxActiveAgents and MaxActiveDataSources feature parameters in the package.
+  pricing: {
+    freeAgents: 1,
+    freeDataSources: 3,
+    freeResponseTime: '3 working days',
+    proAnnual: '£250', // billed annually
+    proMonthly: '£300', // billed monthly
+    proAgents: 10,
+    proDataSources: 25,
+    enterpriseFrom: '£750', // annual only
+    noticePeriod: '60 days', // notice existing customers get before a price change
+  },
+
   // Placeholders shown on the site until you fill them in.
   placeholders: {
-    proPrice: '[£X]',
-    freeDataSources: '[X]',
-    freeResponseTime: '[X working days]',
-    noticePeriod: '[NOTICE PERIOD]',
     securityReviewStatus: '[IN PROGRESS]',
     legalLastUpdated: '[DATE]',
     currentVersion: '[1.0]',
