@@ -38,6 +38,19 @@ export const site = {
     currentVersion: '[1.0]',
     releaseDate: '[DATE]',
   },
+
+  // Legal pages. Fill these in with your solicitor, then set legal.draft to false.
+  legal: {
+    draft: true, // Shows the "draft for solicitor review" note on every legal page
+    version: '0.1', // Bump this whenever a legal page changes
+    icoNumber: '[ICO REGISTRATION NUMBER]', // From ico.org.uk once you've paid the data protection fee
+    liabilityCap: '[the fees you paid us in the 12 months before the claim, or £100 if you are on the Free plan]',
+    paymentProvider: '[PAYMENT PROVIDER, e.g. AppExchange Checkout or Stripe]',
+    emailProvider: '[EMAIL PROVIDER]',
+    minimumTerm: '[one month]',
+    leadRetention: '[24 months]', // How long demo requests are kept with no further contact
+    caseRetention: '[6 years]', // How long support cases and billing records are kept
+  },
 };
 
 // Salesforce form settings. Leave orgId empty until your Partner Business Org

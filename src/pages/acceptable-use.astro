@@ -6,6 +6,7 @@ const sections = [
   { id: 'not-allowed', label: 'What you must not do' },
   { id: 'human-review', label: 'Human review of AI output' },
   { id: 'data', label: 'Data you put into AI Assist' },
+  { id: 'provider', label: "Your AI provider's rules" },
   { id: 'enforcement', label: 'What happens if the policy is broken' },
   { id: 'report', label: 'Reporting misuse' },
 ];
@@ -14,20 +15,40 @@ const sections = [
   title="Acceptable Use Policy"
   description="The rules for using AI Assist."
   summary="Use AI Assist for legitimate business work, check its output before acting on it, and don't use it to harm people or break the law."
-  draft
   sections={sections}
 >
-  <p slot="scope">This policy applies to every user in an organisation that has installed AI Assist. Admins agree to it on behalf of their organisation when they accept the terms in the app, and each user acknowledges it the first time they open AI Assist.</p>
+  <p slot="scope">This policy forms part of our <a href="/terms">terms of service</a>. It applies to every user in an organisation that has installed {site.product}. Admins agree to it on behalf of their organisation when they accept the terms, and each user acknowledges it the first time they open {site.product}.</p>
+
   <div slot="not-allowed">
-    <p>The final list will come from our solicitors. It is expected to cover:</p>
+    <p>Don't use {site.product} to:</p>
     <ul>
-      <li>Breaking the law, or helping anyone else to.</li>
-      <li>Harassing, discriminating against or deceiving people.</li>
-      <li>Making decisions with legal or similarly significant effects on people (for example credit, employment or insurance decisions) based solely on AI output.</li>
-      <li>Trying to get around AI Assist's permission, privacy or usage controls.</li>
-      <li>Generating malware, spam or content that infringes someone else's rights.</li>
+      <li>break the law, or help anyone else to</li>
+      <li>harass, threaten, discriminate against or deceive people</li>
+      <li>make decisions with legal or similarly significant effects on people, such as credit, lending, employment, insurance or housing decisions, based solely on AI output</li>
+      <li>pretend AI-generated content was written by a person where that would mislead someone</li>
+      <li>create malware, spam, phishing or content that infringes someone else's rights</li>
+      <li>get around {site.product}'s permissions, pseudonymisation, usage rules or plan limits</li>
+      <li>get around your AI provider's safety controls</li>
+      <li>overload, attack or probe the security of {site.product}, Salesforce or your AI provider, except authorised testing of your own org</li>
+      <li>build a competing product by copying {site.product}</li>
     </ul>
   </div>
-  <p slot="human-review">AI can make mistakes. A person should review AI-generated content before it is sent to a customer or used to make a decision.</p>
+
+  <p slot="human-review">AI can make mistakes. A person must review AI-generated content before it is sent to a customer or used to make a decision, and must confirm any action {site.product} proposes in Salesforce before it runs.</p>
+
+  <div slot="data">
+    <ul>
+      <li>Only connect data sources and fields your organisation is allowed to send to its AI provider.</li>
+      <li>Mark personal data fields so {site.product} pseudonymises them before they leave Salesforce.</li>
+      <li>Avoid sending special category data (such as health, ethnicity or religious beliefs), criminal records or payment card numbers unless your organisation has assessed it and your AI provider agreement allows it.</li>
+    </ul>
+  </div>
+
+  <p slot="provider">Your AI provider has its own usage policy, which also applies to everything you send it through {site.product}. If the two conflict, follow the stricter rule.</p>
+
+  <div slot="enforcement">
+    <p>We can't see how you use {site.product}, because your data never reaches us. If we're told about a breach of this policy, we may ask you to stop, and if it's serious or continues we may suspend or end your licence under our <a href="/terms">terms</a>. Admins can use {site.product}'s audit log and usage rules to spot and block misuse within their own org.</p>
+  </div>
+
   <p slot="report">Report suspected misuse to <a href={`mailto:${site.email.security}`}>{site.email.security}</a>.</p>
 </PolicyPage>
