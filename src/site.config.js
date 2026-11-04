@@ -6,6 +6,13 @@ export const site = {
   product: 'AI Assist',
   url: 'https://loomconnect.com',
 
+  // UK business-name rules: a sole trader using a trading name must show
+  // their legal name and a UK address for correspondence on the website.
+  owner: {
+    legalName: 'Chandler Stuart',
+    address: '[UK ADDRESS FOR CORRESPONDENCE]',
+  },
+
   // While true, every page is marked noindex and robots.txt blocks crawlers.
   // Set to false on launch day.
   private: true,
@@ -20,14 +27,40 @@ export const site = {
   // Replace with the real listing URL once AI Assist is on AppExchange.
   appExchangeUrl: '#',
 
+  // Plan prices and limits shown on the pricing and support pages.
+  // Prices are per Salesforce org per month, with unlimited users.
+  // Keep the limits in step with the MaxActiveAgents and MaxActiveDataSources feature parameters in the package.
+  pricing: {
+    freeAgents: 1,
+    freeDataSources: 3,
+    freeResponseTime: '3 working days',
+    proAnnual: '£250', // billed annually
+    proMonthly: '£300', // billed monthly
+    proAgents: 10,
+    proDataSources: 25,
+    enterpriseFrom: '£750', // annual only
+    noticePeriod: '60 days', // notice existing customers get before a price change
+  },
+
   // Placeholders shown on the site until you fill them in.
   placeholders: {
-    proPrice: '[£X]',
-    freeDataSources: '[X]',
-    freeResponseTime: '[X working days]',
-    noticePeriod: '[NOTICE PERIOD]',
     securityReviewStatus: '[IN PROGRESS]',
     legalLastUpdated: '[DATE]',
+    currentVersion: '[1.0]',
+    releaseDate: '[DATE]',
+  },
+
+  // Legal pages. Fill these in with your solicitor, then set legal.draft to false.
+  legal: {
+    draft: true, // Shows the "draft for solicitor review" note on every legal page
+    version: '0.1', // Bump this whenever a legal page changes
+    icoNumber: '[ICO REGISTRATION NUMBER]', // From ico.org.uk once you've paid the data protection fee
+    liabilityCap: '[the fees you paid us in the 12 months before the claim, or £100 if you are on the Free plan]',
+    paymentProvider: '[PAYMENT PROVIDER, e.g. AppExchange Checkout or Stripe]',
+    emailProvider: '[EMAIL PROVIDER]',
+    minimumTerm: '[one month]',
+    leadRetention: '[24 months]', // How long demo requests are kept with no further contact
+    caseRetention: '[6 years]', // How long support cases and billing records are kept
   },
 };
 

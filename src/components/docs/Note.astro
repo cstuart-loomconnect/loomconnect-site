@@ -1,0 +1,18 @@
+---
+// A highlighted note inside a documentation page.
+// type="check": green, for confirming something worked or a safe default.
+// type="watch": amber, for things that catch people out.
+// Use: <Note type="watch" title="Optional bold first line">The rest of the note.</Note>
+const { type = 'check', title } = Astro.props;
+---
+<div class={`docs-note docs-note-${type}`}>
+  {type === 'check' ? (
+    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><circle cx="10" cy="10" r="8.5" stroke="currentColor" stroke-width="1.8" /><path d="M6.2 10.4l2.5 2.4 5-5.2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" /></svg>
+  ) : (
+    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M10 2.8l8 14H2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" /><path d="M10 8v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" /><circle cx="10" cy="14.6" r="1" fill="currentColor" /></svg>
+  )}
+  <div class="docs-note-body">
+    {title && <p class="docs-note-title">{title}</p>}
+    <p><slot /></p>
+  </div>
+</div>

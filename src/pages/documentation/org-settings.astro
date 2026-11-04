@@ -1,0 +1,55 @@
+---
+// /documentation/org-settings
+import DocsLayout from '../../layouts/DocsLayout.astro';
+import Note from '../../components/docs/Note.astro';
+import Screenshot from '../../components/docs/Screenshot.astro';
+---
+<DocsLayout slug="org-settings">
+  <p class="docs-lede">Org-wide switches live on the <strong class="ui">AI Assist Settings</strong> tab. Only AI Assist Super Users can change them. The defaults suit most orgs, so you rarely need to.</p>
+  <Screenshot id="settings-tab" />
+
+  <h2 id="availability">Switching AI Assist off</h2>
+  <div class="docs-table">
+    <table>
+      <thead><tr><th>Setting</th><th>What happens</th></tr></thead>
+      <tbody>
+        <tr><td>AI Assist enabled</td><td>The master switch. Off stops all of AI Assist straight away.</td></tr>
+        <tr><td>Maintenance mode</td><td>The chat window shows a maintenance message and accepts no new messages. Conversations are kept.</td></tr>
+        <tr><td>Chat window enabled</td><td>Hides the chat window without switching AI Assist off.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2 id="limits">Message limits</h2>
+  <div class="docs-table">
+    <table>
+      <thead><tr><th>Setting</th><th>What it controls</th></tr></thead>
+      <tbody>
+        <tr><td>Maximum message length</td><td>The longest message a user can send.</td></tr>
+        <tr><td>Messages per user per minute</td><td>Stops one user flooding the queue.</td></tr>
+        <tr><td>Messages in flight</td><td>How many messages are answered at once across the org. Extra ones wait their turn.</td></tr>
+        <tr><td>Callout timeout</td><td>How long to wait for your provider. Salesforce allows 120,000 ms at most.</td></tr>
+        <tr><td>Retry attempts</td><td>Extra tries after a call to your provider fails.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2 id="terms">Terms and policy</h2>
+  <p><strong>AI usage policy URL</strong> adds a link to your company's policy on the terms screen. Raise <strong>Current terms version</strong>, for example from 1.0 to 1.1, to make every user accept the terms again.</p>
+
+  <h2 id="retention">Data retention</h2>
+  <div class="docs-table">
+    <table>
+      <thead><tr><th>Setting</th><th>What it controls</th></tr></thead>
+      <tbody>
+        <tr><td>Conversation retention</td><td>How long conversations are kept. It's also the most any agent can keep them for. Changing it recalculates every conversation's deletion date.</td></tr>
+        <tr><td>Log retention</td><td>How long error and warning entries stay on the AI Platform Log tab.</td></tr>
+        <tr><td>Audit log retention</td><td>How long records of credential and access changes are kept. Usually longer than the log.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2 id="cleanup">The nightly clean-up job</h2>
+  <p>Runs at 2am. It deletes conversations past their retention date, along with their messages and masking records, and old log entries. It runs as the admin who started it.</p>
+  <Note type="watch" title="If that admin leaves, the job stops">While it's stopped, nothing is deleted. Stop the job and start it again as another admin on this tab.</Note>
+</DocsLayout>

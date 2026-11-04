@@ -1,0 +1,34 @@
+---
+// /documentation/data-sources
+import DocsLayout from '../../layouts/DocsLayout.astro';
+import Note from '../../components/docs/Note.astro';
+import Screenshot from '../../components/docs/Screenshot.astro';
+---
+<DocsLayout slug="data-sources">
+  <p class="docs-lede">Without a data source, an agent only knows what's on the open record and in the conversation. A data source lets it look up more, such as a contact's open cases or an account's recent orders.</p>
+  <Note type="check" title="Users only see what they already could">Data sources run as the user asking. Sharing rules and field-level security still apply, and results are masked by the PII Registry before they reach the provider.</Note>
+
+  <h2 id="types">Two kinds</h2>
+  <div class="docs-split">
+    <div><h3>SOQL query</h3><p>Build it visually or write it. Nothing to deploy. Best for most lookups.</p></div>
+    <div><h3>Apex class</h3><p>For logic a query can't do. A developer writes a class that implements <code>IAIDataSourceExecutor</code>.</p></div>
+  </div>
+
+  <h2 id="bound">Tied to the record, or not</h2>
+  <p><strong>Bound to the open record</strong> means the query uses the record the user has open, such as "this account's open cases". It only runs when a record is open.</p>
+  <p><strong>Unbound</strong> means it can run anywhere, and the agent fills in every input itself, such as "find accounts in this city".</p>
+
+  <h2 id="build">Build one</h2>
+  <ol class="docs-steps">
+    <li><div>Open the <strong class="ui">AI Tools</strong> tab, go to <strong class="ui">Data Sources</strong> and create a new one.</div></li>
+    <li><div><strong>Type:</strong> pick a query or an Apex class, and whether it's bound to the open record.</div></li>
+    <li><div><strong>Query:</strong> build the query. Keep the results to 200 rows or fewer.</div></li>
+    <li><div><strong>Inputs:</strong> describe each value the agent fills in, so it knows what to send.</div></li>
+    <li><div><strong>Test:</strong> run it on a real record, as yourself or as a user you want to check.</div></li>
+    <li><div><strong>Details:</strong> give it a clear name and a description. The agent reads the description to decide when to use it.</div></li>
+  </ol>
+  <Screenshot id="data-source-builder" />
+  <p>Then add it to an agent on the Data sources step of the AI Agent Wizard, or to a skill.</p>
+
+  <Note type="watch" title="Add the object to the PII Registry">If the data source reads an object that isn't in the registry, its fields reach your provider unmasked.</Note>
+</DocsLayout>

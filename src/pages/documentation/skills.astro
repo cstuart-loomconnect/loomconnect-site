@@ -1,0 +1,25 @@
+---
+// /documentation/skills
+import DocsLayout from '../../layouts/DocsLayout.astro';
+import Note from '../../components/docs/Note.astro';
+import Screenshot from '../../components/docs/Screenshot.astro';
+---
+<DocsLayout slug="skills">
+  <p class="docs-lede">A skill is one job an agent can do, such as summarising an account or drafting a renewal email. It brings its own instructions, data sources and actions, so you can give the same job to several agents.</p>
+
+  <h2 id="how">How the agent picks a skill</h2>
+  <p>The model only sees each skill's name and its <strong>When To Use It</strong> text. When a question matches, it picks the skill and only then gets the instructions and tools. Clear, specific When To Use It text is what makes a skill work.</p>
+
+  <h2 id="build">Build one</h2>
+  <ol class="docs-steps">
+    <li><div>Open the <strong class="ui">AI Tools</strong> tab, go to <strong class="ui">Skills</strong> and create a new one.</div></li>
+    <li><div><strong>Basics:</strong> name the skill and write When To Use It, between 40 and 400 characters.</div></li>
+    <li><div><strong>Tools:</strong> add up to 20 existing data sources and actions, in the order the instructions use them.</div></li>
+    <li><div><strong>Instructions:</strong> how to do the job, step by step. Mention a tool by typing @ and its name.</div></li>
+    <li><div><strong>Test:</strong> pick an agent and a record, type what a user would ask, and check the model picks the skill.</div></li>
+  </ol>
+  <Screenshot id="skill-wizard" />
+
+  <Note type="watch" title="One object per skill">Data sources bound to the open record must all be on the same object, because a skill runs against one record. Make one skill per object if you need more.</Note>
+  <p>Add finished skills to agents on the Skills step of the AI Agent Wizard.</p>
+</DocsLayout>

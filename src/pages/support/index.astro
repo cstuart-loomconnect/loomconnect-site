@@ -7,28 +7,25 @@ const action = salesforceReady ? wtc.action : '/support/thanks';
 const method = salesforceReady ? 'post' : 'get';
 const orgIdName = wtc.orgIdFieldId || 'salesforce_org_id';
 ---
-<Base title="Support" description="Get help with AI Assist: docs, email support and support requests.">
+<Base title="Support" description="Get help with AI Assist: documentation, email support and support requests.">
   <section class="section-sm bg-soft">
     <div class="container stack-lg">
       <div class="stack">
         <h1>How can we help?</h1>
-        <p class="lead">Most setup questions are answered in the docs. If not, raise a request and you'll get a case number straight away.</p>
+        <p class="lead">Most setup questions are answered in the documentation. If not, raise a request and you'll get a case number straight away.</p>
       </div>
       <div class="grid">
-        <a class="card card-link" href="/docs">
-          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="#1E1B4B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5a2 2 0 0 1 2-2h12v16H6a2 2 0 0 0-2 2zM4 19V5" /></svg>
-          <h2 style="font-size: 1.1rem">Getting-started docs</h2>
-          <p>Install, permission sets and page setup</p>
+        <a class="card card-link" href="/documentation">
+          <h2 class="h-card">Documentation</h2>
+          <p>Setup steps, every error message and how to fix it</p>
         </a>
         <a class="card card-link" href={`mailto:${site.email.support}`}>
-          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="#1E1B4B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2" /><path d="M3 7l9 6 9-6" /></svg>
-          <h2 style="font-size: 1.1rem">{site.email.support}</h2>
+          <h2 class="h-card">{site.email.support}</h2>
           <p>Emails become a support case automatically</p>
         </a>
         <div class="card">
-          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="#1E1B4B" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9" /><path d="M12 7v5l3 2" /></svg>
-          <h2 style="font-size: 1.1rem">Response times</h2>
-          <p>Free: {site.placeholders.freeResponseTime}. Pro: next working day. Enterprise: per your SLA. UK hours, Monday to Friday.</p>
+          <h2 class="h-card">Response times</h2>
+          <p>Free: {site.pricing.freeResponseTime}. Pro: next working day. Enterprise: per your SLA. UK hours, Monday to Friday.</p>
         </div>
       </div>
     </div>
@@ -44,7 +41,7 @@ const orgIdName = wtc.orgIdFieldId || 'salesforce_org_id';
             <input type="hidden" name="retURL" value={wtc.returnUrl} />
           </>
         )}
-        <h2 style="font-size: 1.5rem">Raise a support request</h2>
+        <h2 class="h-section">Raise a support request</h2>
         {!salesforceReady && <p class="dev-banner">Preview mode: this form isn't connected to Salesforce yet.</p>}
 
         <div class="field-row">
@@ -94,7 +91,7 @@ const orgIdName = wtc.orgIdFieldId || 'salesforce_org_id';
         <!-- reCAPTCHA widget from Salesforce goes here -->
 
         <button class="btn btn-primary btn-block" type="submit">Submit request</button>
-        <p class="hint" style="text-align: center">You'll get a confirmation email with your case number.</p>
+        <p class="hint text-center">You'll get a confirmation email with your case number.</p>
       </form>
     </div>
   </section>

@@ -2,38 +2,44 @@
 import Base from '../layouts/Base.astro';
 import Check from '../components/Check.astro';
 import { site } from '../site.config.js';
-const p = site.placeholders;
+const p = site.pricing;
 ---
-<Base title="Pricing" description="AI Assist pricing: a free standard plan, Pro for growing teams and Enterprise for regulated industries.">
+<Base title="Pricing" description={`AI Assist pricing: one price per Salesforce org with unlimited users. Free forever, Pro at ${p.proAnnual} a month, and Enterprise for regulated industries.`}>
   <section class="section">
     <div class="container stack-lg">
       <div class="stack center">
-        <h1>Start free. Grow when you need to.</h1>
-        <p class="lead">The Free plan is the full core product, not a trial. Pro and Enterprise add team, admin and compliance features.</p>
+        <h1>Pay for the data you connect, not the people who use it.</h1>
+        <p class="lead">One price per Salesforce org, with unlimited users on every plan. Plans grow with the data sources and agents you configure.</p>
       </div>
 
       <div class="plans">
         <div class="plan plan-featured">
-          <div class="plan-head"><h2 style="font-size: 1.4rem">Free</h2><span class="pill">Standard</span></div>
-          <div class="plan-price"><strong>£0</strong><span class="muted">forever</span></div>
+          <div class="plan-head"><h2 class="h-plan">Free</h2><span class="pill">Standard</span></div>
+          <div class="plan-pricing">
+            <div class="plan-price"><strong>£0</strong><span class="muted">forever</span></div>
+            <p class="plan-note muted small">Unlimited users.</p>
+          </div>
           <ul>
-            <li><Check />Chat assistant on any record page</li>
-            <li><Check />Summaries, email drafts and slash commands</li>
-            <li><Check />Anthropic or OpenAI, with your own API key</li>
-            <li><Check />PII pseudonymisation and audit log</li>
-            <li><Check />One AI agent, {p.freeDataSources} data sources</li>
-            <li><Check />Email support</li>
+            <li><Check />{p.freeDataSources} Salesforce data sources connected to {p.freeAgents} configured agent</li>
+            <li><Check />Send to Anthropic or OpenAI with your own API key</li>
+            <li><Check />Personal data pseudonymised before it reaches your provider</li>
+            <li><Check />Audit log of what was sent</li>
+            <li><Check />Chat, summaries, drafts and slash commands on any record page</li>
+            <li><Check />Email support, reply within {p.freeResponseTime}</li>
           </ul>
           <a class="btn btn-primary btn-block" href={site.appExchangeUrl}>Get it on AppExchange</a>
         </div>
 
         <div class="plan">
-          <div class="plan-head"><h2 style="font-size: 1.4rem">Pro</h2><span class="pill pill-violet">For growing teams</span></div>
-          <div class="plan-price"><strong>{p.proPrice}</strong><span class="muted">per user / month</span></div>
+          <div class="plan-head"><h2 class="h-plan">Pro</h2><span class="pill pill-violet">For growing teams</span></div>
+          <div class="plan-pricing">
+            <div class="plan-price"><strong>{p.proAnnual}</strong><span class="muted">per org / month, billed annually</span></div>
+            <p class="plan-note muted small">or {p.proMonthly} billed monthly. Unlimited users.</p>
+          </div>
           <ul>
             <li class="includes">Everything in Free, plus:</li>
-            <li><Check />Multiple agents and personas</li>
-            <li><Check />Workflow actions with confirmation</li>
+            <li><Check />Up to {p.proDataSources} data sources and {p.proAgents} agents and personas</li>
+            <li><Check />Workflow actions that write back to Salesforce, with confirmation</li>
             <li><Check />Shared team prompt library</li>
             <li><Check />Admin usage dashboard and token limits</li>
             <li><Check />Priority support</li>
@@ -42,10 +48,14 @@ const p = site.placeholders;
         </div>
 
         <div class="plan plan-muted">
-          <div class="plan-head"><h2 style="font-size: 1.4rem">Enterprise</h2><span class="pill pill-grey">Regulated industries</span></div>
-          <div class="plan-price"><strong>Custom</strong></div>
+          <div class="plan-head"><h2 class="h-plan">Enterprise</h2><span class="pill pill-grey">Regulated industries</span></div>
+          <div class="plan-pricing">
+            <div class="plan-price"><span class="muted">from</span><strong>{p.enterpriseFrom}</strong><span class="muted">per org / month</span></div>
+            <p class="plan-note muted small">Billed annually. Unlimited users.</p>
+          </div>
           <ul>
             <li class="includes">Everything in Pro, plus:</li>
+            <li><Check />Unlimited data sources and agents</li>
             <li><Check />Custom PII compliance groups</li>
             <li><Check />Compliance export and retention controls</li>
             <li><Check />Custom branding</li>
@@ -56,15 +66,23 @@ const p = site.placeholders;
         </div>
       </div>
 
-      <div class="container narrow faq" style="padding: 0; width: 100%">
-        <h2 style="font-size: 1.6rem; margin-bottom: 8px">Questions</h2>
+      <div class="narrow faq">
+        <h2 class="h-section">Questions</h2>
         <details open>
           <summary>Do I pay for AI usage?</summary>
           <p>You pay your AI provider directly on every plan. Loom Connect never marks it up.</p>
         </details>
         <details>
+          <summary>Do you charge per user?</summary>
+          <p>No. Every plan is one price per Salesforce org, with unlimited users. Plans differ by how many data sources and agents you configure.</p>
+        </details>
+        <details>
           <summary>Is the Free plan a trial?</summary>
           <p>No. It's the full core product with no time limit.</p>
+        </details>
+        <details>
+          <summary>Is there a discount for paying annually?</summary>
+          <p>Yes. Pro is {p.proAnnual} a month billed annually, against {p.proMonthly} billed monthly. That's 2 months free each year.</p>
         </details>
         <details>
           <summary>Can I switch plans?</summary>

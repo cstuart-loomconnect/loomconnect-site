@@ -1,0 +1,17 @@
+---
+// The one explanation of how AI Assist handles customer data.
+// Used on Privacy, Terms, Data processing, Sub-processors and AI transparency so the wording is identical everywhere.
+// If the architecture ever changes (a proxy, telemetry, a hosted AI key), change it here and re-check every page with a solicitor.
+import { site } from '../../site.config.js';
+---
+<div class="summary-box stack">
+  <p><strong class="text-ink">How {site.product} handles your data.</strong></p>
+  <ul>
+    <li>{site.product} is a Salesforce package that runs entirely inside your own Salesforce org.</li>
+    <li>Your organisation chooses its AI provider, agrees that provider's terms and connects it with its own API key, stored in a Salesforce Named Credential.</li>
+    <li>When someone asks a question, the request goes directly from your Salesforce org to your AI provider. It does not pass through any {site.name} server.</li>
+    <li>{site.name} never receives, sees, stores or trains on your Salesforce data, your prompts or the AI's answers.</li>
+    <li>Conversations, audit logs and settings are kept in your Salesforce org, under your control and your retention settings.</li>
+  </ul>
+  <p>So for this data your organisation is the controller, your AI provider and Salesforce are your processors, and {site.name} is a software supplier, not a processor.</p>
+</div>

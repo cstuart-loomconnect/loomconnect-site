@@ -1,0 +1,20 @@
+---
+// Flat tabs for when one step differs by choice, such as Anthropic or OpenAI.
+// Use: <Tabs label="Your provider" labels={['Anthropic', 'OpenAI']}>
+//        <div class="tabs-panel" data-tab-panel data-label="Anthropic">...</div>
+//        <div class="tabs-panel" data-tab-panel data-label="OpenAI">...</div>
+//      </Tabs>
+// Give one panel per label, in the same order. Without JavaScript every panel shows, each with its name above it.
+const { label = 'Choose one', labels = [] } = Astro.props;
+---
+<div class="tabs" data-tabs>
+  <div class="tabs-list" role="tablist" aria-label={label} hidden>
+    {labels.map((text) => <button type="button" class="tabs-tab" role="tab">{text}</button>)}
+  </div>
+  <slot />
+</div>
+
+<script>
+  import { setUpTabs } from '../../scripts/tabs.js';
+  setUpTabs();
+</script>

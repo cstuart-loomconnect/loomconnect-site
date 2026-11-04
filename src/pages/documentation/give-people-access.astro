@@ -1,0 +1,32 @@
+---
+// /documentation/give-people-access
+import DocsLayout from '../../layouts/DocsLayout.astro';
+import ClickPath from '../../components/docs/ClickPath.astro';
+import Note from '../../components/docs/Note.astro';
+---
+<DocsLayout slug="give-people-access">
+  <p class="docs-lede">Give each person one AI Assist permission set, based on what they'll do, plus the provider access permission set you made in the last step.</p>
+
+  <h2 id="which">Which permission set</h2>
+  <div class="docs-table">
+    <table>
+      <thead><tr><th>Permission set</th><th>Who it's for</th><th>What they can do</th></tr></thead>
+      <tbody>
+        <tr><td>AI Assist User</td><td>Everyone who chats</td><td>Use the chat window, give feedback and see their own conversations.</td></tr>
+        <tr><td>AI Assist Admin</td><td>Team leads and compliance</td><td>Also edit prompt templates, usage policies and personal-data masking, and review shared conversations.</td></tr>
+        <tr><td>AI Assist Super User</td><td>Salesforce admins</td><td>Everything, including the AI Agent Wizard, AI Agent Models, AI Tools and AI Assist Settings tabs.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <Note type="watch" title="AI Assist Admin can't build agents">Only AI Assist Super User opens the wizard, models, tools and settings. Give it to the people who set AI Assist up.</Note>
+
+  <h2 id="assign">Assign them</h2>
+  <ol class="docs-steps">
+    <li><div>Go to <ClickPath steps={['Setup', 'Permission Sets']} /> and open the permission set.</div></li>
+    <li><div>Click <strong class="ui">Manage Assignments</strong>, then <strong class="ui">Add Assignment</strong>.</div></li>
+    <li><div>Tick the users and click <strong class="ui">Assign</strong>.</div></li>
+  </ol>
+  <p>Permission set groups work too, and are easier to keep up to date as people join.</p>
+
+  <Note type="check">A permission set lets someone use AI Assist. Which agents they see is set separately, when you create an agent.</Note>
+</DocsLayout>

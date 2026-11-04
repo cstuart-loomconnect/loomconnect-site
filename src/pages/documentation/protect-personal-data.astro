@@ -1,0 +1,33 @@
+---
+// /documentation/protect-personal-data
+import DocsLayout from '../../layouts/DocsLayout.astro';
+import Note from '../../components/docs/Note.astro';
+import Screenshot from '../../components/docs/Screenshot.astro';
+---
+<DocsLayout slug="protect-personal-data">
+  <p class="docs-lede">Before anything leaves Salesforce, AI Assist swaps names, emails, phone numbers and other personal details for placeholders like <code>‹PERSON_1›</code>. The real values go back into the answer your user sees, so your AI provider never receives them.</p>
+  <p>You choose which objects are checked, on the <strong class="ui">AI PII Registry</strong> tab. Add every object your agents will read before you go live.</p>
+
+  <h2 id="add">Add an object</h2>
+  <ol class="docs-steps">
+    <li><div>Open the <strong class="ui">AI PII Registry</strong> tab and click <strong class="ui">+ Add object</strong>.</div></li>
+    <li><div>Type part of the object's name, such as Contact, and pick it. The dialog shows how many data sources already read it.</div></li>
+    <li><div>Click <strong class="ui">Add and sync</strong>. AI Assist sorts the object's fields into personal and not personal in the background.</div></li>
+    <li><div>When it shows <strong>Synced</strong>, check the field list. Filter by <strong class="ui">PII only</strong> to see what will be masked.</div></li>
+  </ol>
+  <Screenshot id="pii-registry" />
+
+  <h2 id="correct">Correct a field</h2>
+  <p>If a field has been sorted wrongly, change its PII type in the list. It's marked <strong>Overridden</strong>. Click <strong class="ui">Reset</strong> to hand it back to the automatic rules.</p>
+
+  <h2 id="test">Test the masking</h2>
+  <p>Click <strong class="ui">Test masking</strong>, pick a record and click <strong class="ui">Run masking</strong>. You see each real value next to what would be sent to the provider. Nothing is saved or sent during a test.</p>
+
+  <h2 id="warning">Watch for the warning</h2>
+  <Screenshot id="pii-warning" />
+  <Note type="watch" title="Unmasked objects are listed at the top of the tab">If an agent can read an object that isn't in the registry, its fields go to your provider unmasked. The warning stays until you add the object.</Note>
+
+  <h2 id="new-fields">When fields change</h2>
+  <p>If you add fields to an object, open it on the tab and click <strong class="ui">Sync again</strong> so the new fields are checked.</p>
+  <Note type="check">If masking ever fails, AI Assist doesn't send the message at all. It never falls back to sending it unmasked.</Note>
+</DocsLayout>

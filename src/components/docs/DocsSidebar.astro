@@ -1,0 +1,47 @@
+---
+// The documentation menu: the numbered setup path, then the reference groups.
+// Used twice by DocsLayout: in the left column on big screens and in the drop-down menu on phones.
+// Everything comes from src/documentation/settings.js, so you never edit this to add a page.
+import { sections } from '../../documentation/settings.js';
+import { pageUrl, pagesInSection, getStep, setupMinutes } from '../../documentation/navigation.js';
+
+const { current } = Astro.props; // the slug of the page being shown
+const currentStep = getStep(current); // null when the page isn't on the setup path
+
+// Whether a setup step is behind, on, or ahead of the current page
+function stepState(stepNumber) {
+  if (!currentStep) return '';
+  if (stepNumber < currentStep.number) return 'is-done';
+  if (stepNumber === currentStep.number) return 'is-current';
+  return '';
+}
+---
+<nav class="docs-side" aria-label="Documentation">
+  <a class="docs-side-home" href={pageUrl('')} aria-current={current === '' ? 'page' : undefined}>Documentation home</a>
+
+  {sections.map((section) => (
+    section.setup ? (
+      <div>
+        <p class="docs-side-title">{section.title}</p>
+        <p class="docs-side-meta">About {Math.round(setupMinutes / 15) * 15} minutes, in this order</p>
+        <ol class="docs-thread">
+          {pagesInSection(section.id).map((page, index) => (
+            <li class={stepState(index + 1)}>
+              <span class="docs-thread-num" aria-hidden="true">{index + 1}</span>
+              <a href={pageUrl(page.slug)} aria-current={page.slug === current ? 'step' : undefined}>{page.nav}</a>
+            </li>
+          ))}
+        </ol>
+      </div>
+    ) : (
+      <div>
+        <p class="docs-side-title">{section.title}</p>
+        <ul class="docs-side-list">
+          {pagesInSection(section.id).map((page) => (
+            <li><a href={pageUrl(page.slug)} aria-current={page.slug === current ? 'page' : undefined}>{page.nav}</a></li>
+          ))}
+        </ul>
+      </div>
+    )
+  ))}
+</nav>

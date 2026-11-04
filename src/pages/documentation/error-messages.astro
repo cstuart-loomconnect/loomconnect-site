@@ -1,0 +1,51 @@
+---
+// /documentation/error-messages
+// Every entry comes from src/documentation/errors.js. Add or change messages there, not here.
+import DocsLayout from '../../layouts/DocsLayout.astro';
+import { areas, errors } from '../../documentation/errors.js';
+
+// The messages for one area, in the order they're written in errors.js
+const errorsIn = (areaId) => errors.filter((error) => error.area === areaId);
+
+// The text the search box looks through, in lower case so searching ignores capitals
+const searchText = (error) => `${error.message} ${error.cause} ${error.fix} ${error.source}`.toLowerCase();
+---
+<DocsLayout slug="error-messages">
+  <p class="docs-lede">Every message AI Assist shows, why it appears and how to fix it. Type a few words of the message you're seeing.</p>
+
+  <div class="errors-tools">
+    <label class="sr-only" for="error-search">Search error messages</label>
+    <input class="errors-search" id="error-search" type="search" placeholder="Type part of the message" autocomplete="off" data-error-search />
+    <div class="errors-filters" role="group" aria-label="Show messages from">
+      <button type="button" class="errors-filter" aria-pressed="true" data-error-filter="all">All<span>{errors.length}</span></button>
+      {areas.map((area) => (
+        <button type="button" class="errors-filter" aria-pressed="false" data-error-filter={area.id}>{area.title}<span>{errorsIn(area.id).length}</span></button>
+      ))}
+    </div>
+    <p class="errors-count" aria-live="polite" data-error-count></p>
+  </div>
+
+  {areas.map((area) => (
+    <section class="errors-area" data-error-area={area.id}>
+      <h2 id={area.id}>{area.title}</h2>
+      <p>{area.description}</p>
+      {errorsIn(area.id).map((error) => (
+        <div class="error-item" data-error-item data-search={searchText(error)}>
+          <p class="error-message">{error.message}</p>
+          <dl class="error-detail">
+            <dt>Why</dt><dd>{error.cause}</dd>
+            <dt>What to do</dt><dd>{error.fix}</dd>
+          </dl>
+          <p class="error-source">For support: <code>{error.source}</code></p>
+        </div>
+      ))}
+    </section>
+  ))}
+
+  <p class="errors-empty" hidden data-error-empty>No messages match. Try fewer words, or check the <a href="/documentation/troubleshooting">Troubleshooting</a> page.</p>
+</DocsLayout>
+
+<script>
+  import { setUpErrorSearch } from '../../scripts/error-search.js';
+  setUpErrorSearch();
+</script>

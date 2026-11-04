@@ -1,0 +1,33 @@
+---
+// /documentation/before-you-install
+import DocsLayout from '../../layouts/DocsLayout.astro';
+import Note from '../../components/docs/Note.astro';
+---
+<DocsLayout slug="before-you-install">
+  <p class="docs-lede">Have these ready and the rest of setup goes in one sitting.</p>
+
+  <h2 id="you-need">What you need</h2>
+  <div class="docs-table">
+    <table>
+      <thead><tr><th>You need</th><th>Why</th></tr></thead>
+      <tbody>
+        <tr><td>System Administrator access</td><td>To install the package, create credentials and edit record pages.</td></tr>
+        <tr><td>An API key from Anthropic or OpenAI</td><td>AI Assist uses your company's own AI account, so you control the contract and the bill. Ask whoever manages that account.</td></tr>
+        <tr><td>A sandbox</td><td>We recommend trying AI Assist there before production.</td></tr>
+        <tr><td>Lightning Experience</td><td>The chat window is a Lightning component and runs on desktop.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2 id="what-it-adds">What AI Assist adds to your org</h2>
+  <ul>
+    <li>An app called <strong>AI Assist</strong> in the App Launcher.</li>
+    <li>Tabs for building agents, connecting models, writing prompts, setting limits and masking personal data.</li>
+    <li>Three permission sets: AI Assist User, AI Assist Admin and AI Assist Super User.</li>
+    <li>A clean-up job that runs every night at 2am.</li>
+  </ul>
+  <Note type="check">Installing changes nothing your users can see. The chat window only appears once you add it to a page.</Note>
+
+  <h2 id="data">Where your data goes</h2>
+  <p>Messages go from Salesforce straight to your AI provider. Loom Connect never receives them. Personal details such as names, emails and phone numbers are swapped for placeholders before they leave Salesforce, and you choose which fields count as personal.</p>
+</DocsLayout>

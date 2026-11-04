@@ -1,0 +1,37 @@
+---
+// /documentation/workflow-actions
+import DocsLayout from '../../layouts/DocsLayout.astro';
+import Note from '../../components/docs/Note.astro';
+import Screenshot from '../../components/docs/Screenshot.astro';
+---
+<DocsLayout slug="workflow-actions">
+  <p class="docs-lede">A workflow action lets an agent do something, like create a follow-up task or update a field. It runs a flow or an Apex class you already have.</p>
+
+  <h2 id="types">Three kinds</h2>
+  <div class="docs-table">
+    <table>
+      <thead><tr><th>Kind</th><th>How it runs</th><th>Good for</th></tr></thead>
+      <tbody>
+        <tr><td>Autolaunched flow</td><td>In the background, with inputs the agent fills in.</td><td>Most actions. Built in Flow Builder with no code.</td></tr>
+        <tr><td>Screen flow</td><td>Opens in a window and the user finishes it.</td><td>When the user should check or enter details themselves.</td></tr>
+        <tr><td>Apex</td><td>A class that implements <code>IAIWorkflowActionExecutor</code>.</td><td>Complex logic a developer writes.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2 id="confirm">Users always confirm first</h2>
+  <p>Any action that changes data is a write action. Before it runs, the agent shows your confirmation message and the values it filled in, and waits for the user to click <strong class="ui">Confirm</strong>.</p>
+  <Screenshot id="action-confirm" />
+  <p>For a screen flow, clicking <strong class="ui">Finish</strong> in the window is the confirmation.</p>
+
+  <h2 id="build">Build one</h2>
+  <ol class="docs-steps">
+    <li><div>Open the <strong class="ui">AI Tools</strong> tab, go to <strong class="ui">Workflow Actions</strong> and create a new one.</div></li>
+    <li><div><strong>Type:</strong> pick what runs it and whether it changes data.</div></li>
+    <li><div><strong>Source:</strong> pick the flow or class. Only active flows are listed.</div></li>
+    <li><div><strong>Inputs:</strong> describe each value the agent fills in.</div></li>
+    <li><div><strong>Confirmation:</strong> write the message users see before it runs, and choose which inputs to show them.</div></li>
+    <li><div><strong>Test:</strong> run it on a record. Changes are rolled back afterwards, so nothing is saved.</div></li>
+  </ol>
+  <Note type="watch" title="Changes to a live action take effect straight away">If an active agent uses the action, saving a change makes it live immediately. Test in a sandbox first.</Note>
+</DocsLayout>
