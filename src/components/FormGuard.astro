@@ -1,0 +1,23 @@
+---
+// Spam traps for a Salesforce Web-to-Lead or Web-to-Case form. Place inside the <form>.
+//
+// honeypotFieldId: API field ID of a text field on Lead/Case that people never fill in. Bots fill every field.
+// timerFieldId:    API field ID of a number field that receives the seconds taken to submit.
+//
+// Salesforce silently drops any field name it doesn't recognise, so each trap only renders once
+// its field ID is set in src/site.config.js. Leave an ID empty and that trap is skipped.
+const { honeypotFieldId = '', timerFieldId = '' } = Astro.props;
+---
+{honeypotFieldId && (
+  <div class="hp" aria-hidden="true">
+    <label for="contact_me_by_fax">Leave this field empty</label>
+    <input id="contact_me_by_fax" name={honeypotFieldId} type="text" tabindex="-1" autocomplete="off" />
+  </div>
+)}
+{timerFieldId && <input type="hidden" name={timerFieldId} value="" data-form-timer />}
+{(honeypotFieldId || timerFieldId) && (
+  <script>
+    import { setUpFormGuard } from '../scripts/form-guard.js';
+    setUpFormGuard();
+  </script>
+)}

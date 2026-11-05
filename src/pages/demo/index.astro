@@ -1,6 +1,7 @@
 ---
 import Base from '../../layouts/Base.astro';
 import Check from '../../components/Check.astro';
+import FormGuard from '../../components/FormGuard.astro';
 import { site, salesforce, salesforceReady } from '../../site.config.js';
 
 const wtl = salesforce.webToLead;
@@ -77,6 +78,8 @@ const teamSizeName = wtl.teamSizeFieldId || 'team_size';
           <input id="consent" type="checkbox" required />
           <label for="consent">I agree to LoomConnect contacting me about this request. See the <a href="/privacy">privacy policy</a>.</label>
         </div>
+
+        <FormGuard honeypotFieldId={wtl.honeypotFieldId} timerFieldId={wtl.timerFieldId} />
 
         <!-- reCAPTCHA widget from Salesforce goes here -->
 

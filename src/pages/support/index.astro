@@ -1,5 +1,6 @@
 ---
 import Base from '../../layouts/Base.astro';
+import FormGuard from '../../components/FormGuard.astro';
 import { site, salesforce, salesforceReady } from '../../site.config.js';
 
 const wtc = salesforce.webToCase;
@@ -87,6 +88,8 @@ const orgIdName = wtc.orgIdFieldId || 'salesforce_org_id';
           <label for="description">What's happening?</label>
           <textarea id="description" name="description" rows="5" required></textarea>
         </div>
+
+        <FormGuard honeypotFieldId={wtc.honeypotFieldId} timerFieldId={wtc.timerFieldId} />
 
         <!-- reCAPTCHA widget from Salesforce goes here -->
 

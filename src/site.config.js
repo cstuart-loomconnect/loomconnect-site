@@ -75,12 +75,18 @@ export const salesforce = {
     returnUrl: 'https://loomconnect.com/demo/thanks',
     leadSource: 'Website - Demo',
     teamSizeFieldId: '', // Field ID of TeamSize__c on Lead, e.g. 00N5g00000ABCDE
+    // Spam traps. Create these two fields on Lead, then paste their field IDs. See the README for the Flow that uses them.
+    honeypotFieldId: '', // Text field a human never fills in, e.g. WebsiteTrap__c
+    timerFieldId: '', // Number field for seconds taken to submit, e.g. SecondsToSubmit__c
   },
 
   webToCase: {
     action: 'https://webto.salesforce.com/servlet/servlet.WebToCase?encoding=UTF-8',
     returnUrl: 'https://loomconnect.com/support/thanks',
     orgIdFieldId: '', // Field ID of SalesforceOrgId__c on Case
+    // Spam traps, same as Web-to-Lead. Create these two fields on Case, then paste their field IDs.
+    honeypotFieldId: '',
+    timerFieldId: '',
   },
 };
 

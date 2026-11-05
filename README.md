@@ -42,6 +42,17 @@ While `private: true` in `src/site.config.js`, every page carries `noindex` and 
 2. Copy the Org ID and custom field IDs into `salesforce` in `src/site.config.js`.
 3. Paste the reCAPTCHA script and widget into the marked spots in `src/pages/demo/index.astro` and `src/pages/support/index.astro`.
 
+### Spam traps
+
+Each form can carry two hidden traps. Salesforce drops any field it doesn't know, so a trap only appears on the page once you create its field and paste the field ID into `src/site.config.js`.
+
+| Object | Field | Type | Config key |
+| --- | --- | --- | --- |
+| Lead and Case | Website trap (e.g. `WebsiteTrap__c`) | Text(80) | `honeypotFieldId` |
+| Lead and Case | Seconds to submit (e.g. `SecondsToSubmit__c`) | Number(6,0) | `timerFieldId` |
+
+In the org, a record-triggered Flow on Lead and Case (after save) should treat a record as spam when the trap field is not blank, or the seconds field is blank or under about 3. Blank means the script never ran. Route spam to a Spam queue or flag it, rather than deleting it, until you trust the rules. Test with a real submission, since a field that doesn't receive a value is easy to miss.
+
 Until `orgId` is set, both forms go straight to their thank-you pages so you can click through the journey.
 
 ## Branches

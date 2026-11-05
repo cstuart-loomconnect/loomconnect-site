@@ -4,17 +4,19 @@
 # Content-Security-Policy says where the browser may load things from. Everything comes from this site, except:
 #   form-action  - the demo and support forms post to Salesforce Web-to-Lead and Web-to-Case.
 # If you add the Salesforce reCAPTCHA to those forms, also add https://www.google.com and https://www.gstatic.com
-# to script-src and add "frame-src https://www.google.com", or the captcha won't load.
+# to script-src and add "frame-src https://www.google.com" (replacing frame-src 'none'), or the captcha won't load.
 # Nothing runs or styles inline: keep it that way by putting CSS in src/styles and scripts in src/scripts.
 
 /*
-  Content-Security-Policy: default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self'; font-src 'self'; connect-src 'self'; form-action 'self' https://webto.salesforce.com; frame-ancestors 'none'; base-uri 'self'; object-src 'none'; upgrade-insecure-requests
+  Content-Security-Policy: default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self'; font-src 'self'; connect-src 'self'; media-src 'self'; manifest-src 'self'; worker-src 'none'; frame-src 'none'; form-action 'self' https://webto.salesforce.com; frame-ancestors 'none'; base-uri 'self'; object-src 'none'; upgrade-insecure-requests
   Strict-Transport-Security: max-age=31536000
   X-Content-Type-Options: nosniff
   X-Frame-Options: DENY
   Referrer-Policy: strict-origin-when-cross-origin
-  Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=(), usb=()
+  Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=(), usb=(), accelerometer=(), gyroscope=(), magnetometer=(), bluetooth=(), serial=(), interest-cohort=()
   Cross-Origin-Opener-Policy: same-origin
+  Cross-Origin-Resource-Policy: same-origin
+  X-Permitted-Cross-Domain-Policies: none
 
 # Fonts and built files never change at the same address, so browsers can keep them for a year
 /fonts/*
