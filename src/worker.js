@@ -157,8 +157,11 @@ async function verifyTurnstile(env, token, ip) {
   try {
     const response = await fetch(turnstile.verifyUrl, { method: 'POST', body });
     const result = await response.json();
+    // Log why a check failed (for example "invalid-input-secret") so it shows in Workers Logs. No form data is logged.
+    if (result.success !== true) console.warn('Turnstile check failed:', JSON.stringify(result['error-codes'] || []));
     return result.success === true;
-  } catch {
+  } catch (error) {
+    console.warn('Turnstile check could not run:', String(error));
     return false;
   }
 }
