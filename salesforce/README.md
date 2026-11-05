@@ -14,6 +14,10 @@ Re-deploy from this folder with:
 sf project deploy start -d force-app -o LoomConnect
 ```
 
+Email setup:
+- The auto-response is sent from the org-wide address `support@loomconnect.com` (a Google Group that accepts outside email).
+- DKIM is active for `loomconnect.com` (two CNAME records in Cloudflare: `loomconnect._domainkey` and `loomconnect2._domainkey`, DNS only), so Gmail and others accept the mail.
+
 Things to change later:
-- The auto-response is sent from `cstuart@loomconnect.com`. Once there is an org-wide email address for `support@loomconnect.com` (Setup, Organization-Wide Addresses, then verify it), change `senderEmail` in the rule.
 - New cases are owned by `cstuart@loomconnect.com`. Change the default case owner to a queue when other people handle support.
+- No DMARC record exists for `loomconnect.com` yet.

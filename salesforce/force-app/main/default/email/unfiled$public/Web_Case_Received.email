@@ -1,0 +1,12 @@
+Hello {!Case.SuppliedName},
+
+Thanks for contacting LoomConnect support. We've received your request.
+
+Your case number is {!Case.CaseNumber}.
+Subject: {!Case.Subject}
+
+Reply to this email to add details or screenshots, and keep the case number in the subject line.
+
+You'll find setup steps and every error message at https://loomconnect.com/documentation.
+
+LoomConnect Support
