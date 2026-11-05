@@ -1,11 +1,14 @@
 ---
 import Base from '../../layouts/Base.astro';
-import { site, salesforce, salesforceReady } from '../../site.config.js';
+import FormGuard from '../../components/FormGuard.astro';
+import Turnstile from '../../components/Turnstile.astro';
+import { site } from '../../site.config.js';
+import { useProxy } from '../../site-key.js';
 
-const wtc = salesforce.webToCase;
-const action = salesforceReady ? wtc.action : '/support/thanks';
-const method = salesforceReady ? 'post' : 'get';
-const orgIdName = wtc.orgIdFieldId || 'salesforce_org_id';
+// The form posts to the Worker, which adds the org ID and talks to Salesforce.
+// With no Turnstile key (local preview) it goes straight to the thank-you page instead.
+const action = useProxy ? '/api/support' : '/support/thanks';
+const method = useProxy ? 'post' : 'get';
 ---
 <Base title="Support" description="Get help with LoomConnect AI: documentation, email support and support requests.">
   <section class="section-sm bg-soft">
@@ -33,16 +36,10 @@ const orgIdName = wtc.orgIdFieldId || 'salesforce_org_id';
 
   <section class="section-sm">
     <div class="container narrow">
-      <!-- Web-to-Case form. Settings live in src/site.config.js. -->
+      <!-- Support form. Posts to the Worker (src/worker.js), which forwards to Salesforce Web-to-Case. -->
       <form class="form-card" action={action} method={method} aria-label="Raise a support request">
-        {salesforceReady && (
-          <>
-            <input type="hidden" name="orgid" value={salesforce.orgId} />
-            <input type="hidden" name="retURL" value={wtc.returnUrl} />
-          </>
-        )}
         <h2 class="h-section">Raise a support request</h2>
-        {!salesforceReady && <p class="dev-banner">Preview mode: this form isn't connected to Salesforce yet.</p>}
+        {!useProxy && <p class="dev-banner">Preview mode: this form isn't connected to Salesforce yet.</p>}
 
         <div class="field-row">
           <div class="field">
@@ -56,7 +53,7 @@ const orgIdName = wtc.orgIdFieldId || 'salesforce_org_id';
         </div>
         <div class="field">
           <label for="org_id">Salesforce Org ID (optional)</label>
-          <input id="org_id" name={orgIdName} type="text" maxlength="18" placeholder="00D5g000001AbCd" />
+          <input id="org_id" name="org_id" type="text" maxlength="18" placeholder="00D5g000001AbCd" />
           <span class="hint">Find it in Setup › Company Information. It helps us find your licence quickly.</span>
         </div>
         <div class="field-row">
@@ -88,7 +85,8 @@ const orgIdName = wtc.orgIdFieldId || 'salesforce_org_id';
           <textarea id="description" name="description" rows="5" required></textarea>
         </div>
 
-        <!-- reCAPTCHA widget from Salesforce goes here -->
+        <FormGuard proxy={useProxy} />
+        <Turnstile />
 
         <button class="btn btn-primary btn-block" type="submit">Submit request</button>
         <p class="hint text-center">You'll get a confirmation email with your case number.</p>

@@ -64,24 +64,25 @@ export const site = {
   },
 };
 
-// Salesforce form settings. Leave orgId empty until your Partner Business Org
-// is live: the forms then skip Salesforce and go straight to the thank-you
-// pages, so you can click through the journey while building.
+// Salesforce form settings. The org ID is NOT stored here: the Worker (src/worker.js) reads it from the
+// Worker secret SALESFORCE_ORG_ID, so it never appears in the code or the page. See the README.
 export const salesforce = {
-  orgId: '', // 15-character Org ID, e.g. 00D5g000001AbCd
-
   webToLead: {
     action: 'https://webto.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8',
     returnUrl: 'https://loomconnect.com/demo/thanks',
     leadSource: 'Website - Demo',
-    teamSizeFieldId: '', // Field ID of TeamSize__c on Lead, e.g. 00N5g00000ABCDE
+    teamSizeFieldId: '', // Field ID of TeamSize__c on Lead, e.g. 00N5g00000ABCDE. If empty, team size goes in the description.
   },
 
   webToCase: {
     action: 'https://webto.salesforce.com/servlet/servlet.WebToCase?encoding=UTF-8',
     returnUrl: 'https://loomconnect.com/support/thanks',
-    orgIdFieldId: '', // Field ID of SalesforceOrgId__c on Case
+    orgIdFieldId: '', // Field ID of SalesforceOrgId__c on Case. If empty, the customer's Org ID goes in the description.
   },
 };
 
-export const salesforceReady = salesforce.orgId.length > 0;
+// Cloudflare Turnstile (the anti-bot check). The site key is public but kept out of the code: it comes from the
+// build variable PUBLIC_TURNSTILE_SITE_KEY (see src/site-key.js). The secret key is the Worker secret TURNSTILE_SECRET.
+export const turnstile = {
+  verifyUrl: 'https://challenges.cloudflare.com/turnstile/v0/siteverify',
+};

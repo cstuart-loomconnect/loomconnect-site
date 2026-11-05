@@ -1,19 +1,34 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "loomconnect-site",
+  "main": "src/worker.js",
   "compatibility_date": "2026-09-01",
   "assets": {
     "directory": "./dist",
-    "not_found_handling": "404-page"
+    "binding": "ASSETS",
+    "not_found_handling": "404-page",
+    // Only the form endpoints run the Worker first; everything else is served as static files
+    "run_worker_first": ["/api/*"]
   },
+  // Allows 5 form posts per visitor per minute, per form. Raise or lower "limit" as needed.
+  "ratelimits": [
+    { "name": "FORM_LIMITER", "namespace_id": "1001", "simple": { "limit": 5, "period": 60 } }
+  ],
+  // Secret (not stored here): TURNSTILE_SECRET. Set it with `npx wrangler secret put TURNSTILE_SECRET`.
   "env": {
     // Development site: deploys as the "loomconnect-site-dev" Worker
     // with `npx wrangler deploy --env dev`.
     "dev": {
+      "main": "src/worker.js",
       "assets": {
         "directory": "./dist",
-        "not_found_handling": "404-page"
-      }
+        "binding": "ASSETS",
+        "not_found_handling": "404-page",
+        "run_worker_first": ["/api/*"]
+      },
+      "ratelimits": [
+        { "name": "FORM_LIMITER", "namespace_id": "1002", "simple": { "limit": 5, "period": 60 } }
+      ]
     }
   }
 }

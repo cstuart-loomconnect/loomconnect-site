@@ -1,0 +1,21 @@
+---
+// Spam traps and the error message for the demo and support forms. Place inside the <form>.
+// The Worker (src/worker.js) checks the honeypot and the timer, and never forwards them to Salesforce,
+// so no Salesforce fields are needed. Names are shared with the Worker through src/form-fields.js.
+import { HONEYPOT_NAME, TIMER_NAME } from '../form-fields.js';
+const { proxy = false } = Astro.props;
+---
+{proxy && (
+  <>
+    <p class="form-error" role="alert" data-form-error hidden></p>
+    <div class="hp" aria-hidden="true">
+      <label for="contact_me_by_fax">Leave this field empty</label>
+      <input id="contact_me_by_fax" name={HONEYPOT_NAME} type="text" tabindex="-1" autocomplete="off" />
+    </div>
+    <input type="hidden" name={TIMER_NAME} value="" data-form-timer />
+    <script>
+      import { setUpFormGuard } from '../scripts/form-guard.js';
+      setUpFormGuard();
+    </script>
+  </>
+)}

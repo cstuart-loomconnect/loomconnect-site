@@ -1,13 +1,15 @@
 ---
 import Base from '../../layouts/Base.astro';
 import Check from '../../components/Check.astro';
-import { site, salesforce, salesforceReady } from '../../site.config.js';
+import FormGuard from '../../components/FormGuard.astro';
+import Turnstile from '../../components/Turnstile.astro';
+import { site } from '../../site.config.js';
+import { useProxy } from '../../site-key.js';
 
-const wtl = salesforce.webToLead;
-// Until Salesforce is connected, the form goes straight to the thank-you page.
-const action = salesforceReady ? wtl.action : '/demo/thanks';
-const method = salesforceReady ? 'post' : 'get';
-const teamSizeName = wtl.teamSizeFieldId || 'team_size';
+// The form posts to the Worker, which adds the org ID and talks to Salesforce.
+// With no Turnstile key (local preview) it goes straight to the thank-you page instead.
+const action = useProxy ? '/api/demo' : '/demo/thanks';
+const method = useProxy ? 'post' : 'get';
 ---
 <Base title="Request a demo" description="Book a 30-minute walkthrough of LoomConnect AI.">
   <section class="section bg-soft">
@@ -23,18 +25,9 @@ const teamSizeName = wtl.teamSizeFieldId || 'team_size';
         <p class="note">Prefer email? Write to <a href={`mailto:${site.email.hello}`}><strong>{site.email.hello}</strong></a></p>
       </div>
 
-      <!-- Web-to-Lead form. Settings live in src/site.config.js.
-           When you generate the form in Salesforce, also paste its reCAPTCHA
-           script and captcha_settings field where marked below. -->
+      <!-- Demo form. Posts to the Worker (src/worker.js), which forwards to Salesforce Web-to-Lead. -->
       <form class="form-card" action={action} method={method} aria-label="Request a demo">
-        {salesforceReady && (
-          <>
-            <input type="hidden" name="oid" value={salesforce.orgId} />
-            <input type="hidden" name="retURL" value={wtl.returnUrl} />
-            <input type="hidden" name="lead_source" value={wtl.leadSource} />
-          </>
-        )}
-        {!salesforceReady && <p class="dev-banner">Preview mode: this form isn't connected to Salesforce yet.</p>}
+        {!useProxy && <p class="dev-banner">Preview mode: this form isn't connected to Salesforce yet.</p>}
 
         <div class="field-row">
           <div class="field">
@@ -62,7 +55,7 @@ const teamSizeName = wtl.teamSizeFieldId || 'team_size';
         </div>
         <div class="field">
           <label for="team_size">Salesforce users in your team</label>
-          <select id="team_size" name={teamSizeName}>
+          <select id="team_size" name="team_size">
             <option value="1–10">1–10</option>
             <option value="11–50">11–50</option>
             <option value="51–200">51–200</option>
@@ -78,7 +71,8 @@ const teamSizeName = wtl.teamSizeFieldId || 'team_size';
           <label for="consent">I agree to LoomConnect contacting me about this request. See the <a href="/privacy">privacy policy</a>.</label>
         </div>
 
-        <!-- reCAPTCHA widget from Salesforce goes here -->
+        <FormGuard proxy={useProxy} />
+        <Turnstile />
 
         <button class="btn btn-primary btn-block" type="submit">Request my demo</button>
         <p class="hint text-center">We usually reply within one working day.</p>

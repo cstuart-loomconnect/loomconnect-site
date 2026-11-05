@@ -38,11 +38,21 @@ While `private: true` in `src/site.config.js`, every page carries `noindex` and 
 
 ## Connecting the forms to Salesforce
 
-1. In your Partner Business Org, generate the Web-to-Lead and Web-to-Case forms.
-2. Copy the Org ID and custom field IDs into `salesforce` in `src/site.config.js`.
-3. Paste the reCAPTCHA script and widget into the marked spots in `src/pages/demo/index.astro` and `src/pages/support/index.astro`.
+The demo and support forms post to this site's own Worker (`src/worker.js`) at `/api/demo` and `/api/support`. The Worker checks the request and then forwards it to Salesforce Web-to-Lead or Web-to-Case. No keys or IDs are stored in the code.
 
-Until `orgId` is set, both forms go straight to their thank-you pages so you can click through the journey.
+| Value | Where it lives | Set it with |
+| --- | --- | --- |
+| Turnstile secret key | Worker secret `TURNSTILE_SECRET` | `npx wrangler secret put TURNSTILE_SECRET` (add `--env dev` for the dev Worker) |
+| Salesforce org ID | Worker secret `SALESFORCE_ORG_ID` | `npx wrangler secret put SALESFORCE_ORG_ID` (add `--env dev` for the dev Worker) |
+| Turnstile site key (public) | Build variable `PUBLIC_TURNSTILE_SITE_KEY` | Cloudflare dashboard: Workers & Pages, the Worker, Settings, Build, Variables. Locally, put it in a `.env` file, which git ignores. |
+
+Set all three on both the production Worker and the dev Worker. The secrets survive deploys. The site key is read at build time, so rebuild after changing it. If the secrets are missing, the Worker rejects every submission instead of letting it through. If the site key is missing, the forms show a "Preview mode" banner and go straight to the thank-you pages, which is what you want for local work.
+
+On each submission the Worker checks, in order: same-origin request, a rate limit (5 posts per visitor per minute, set under `ratelimits` in `wrangler.jsonc`), a hidden honeypot field, time-to-submit (under 2 seconds counts as a bot), and the Turnstile token. Bots that trip the honeypot or timer get a fake success page. Nothing needs creating in Salesforce for these checks. Only an allowlist of fields is forwarded.
+
+To create the Turnstile widget: Cloudflare dashboard, Turnstile, Add widget, with hostnames `loomconnect.com` and the dev Worker's `workers.dev` hostname. Cloudflare's test keys (site key `1x00000000000000000000AA`, secret `1x0000000000000000000000000000000AA`) always pass, for trying it out.
+
+If the demo form's team-size field or the support form's Org ID field doesn't exist in Salesforce, the Worker adds the answer to the description so it isn't lost. If you create those fields, put their IDs in `src/site.config.js`.
 
 ## Branches
 
