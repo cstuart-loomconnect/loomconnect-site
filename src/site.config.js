@@ -90,4 +90,15 @@ export const salesforce = {
   },
 };
 
+// Cloudflare Turnstile (the anti-bot check). Paste the PUBLIC site key from the Cloudflare dashboard.
+// The secret key never goes here: store it with `npx wrangler secret put TURNSTILE_SECRET`.
+// While siteKey is empty the forms post straight to Salesforce, as before. Once it is set, they post to
+// the Worker (src/worker.js), which checks Turnstile and only then forwards to Salesforce.
+export const turnstile = {
+  siteKey: '', // e.g. 0x4AAAAAAA...
+  verifyUrl: 'https://challenges.cloudflare.com/turnstile/v0/siteverify',
+};
+
+export const useProxy = turnstile.siteKey.length > 0;
+
 export const salesforceReady = salesforce.orgId.length > 0;

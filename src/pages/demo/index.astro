@@ -2,12 +2,14 @@
 import Base from '../../layouts/Base.astro';
 import Check from '../../components/Check.astro';
 import FormGuard from '../../components/FormGuard.astro';
-import { site, salesforce, salesforceReady } from '../../site.config.js';
+import Turnstile from '../../components/Turnstile.astro';
+import { site, salesforce, salesforceReady, useProxy } from '../../site.config.js';
 
 const wtl = salesforce.webToLead;
 // Until Salesforce is connected, the form goes straight to the thank-you page.
-const action = salesforceReady ? wtl.action : '/demo/thanks';
-const method = salesforceReady ? 'post' : 'get';
+// With a Turnstile key set, the form posts to the Worker, which adds the org ID and talks to Salesforce.
+const action = useProxy ? '/api/demo' : salesforceReady ? wtl.action : '/demo/thanks';
+const method = useProxy || salesforceReady ? 'post' : 'get';
 const teamSizeName = wtl.teamSizeFieldId || 'team_size';
 ---
 <Base title="Request a demo" description="Book a 30-minute walkthrough of LoomConnect AI.">
@@ -28,14 +30,14 @@ const teamSizeName = wtl.teamSizeFieldId || 'team_size';
            When you generate the form in Salesforce, also paste its reCAPTCHA
            script and captcha_settings field where marked below. -->
       <form class="form-card" action={action} method={method} aria-label="Request a demo">
-        {salesforceReady && (
+        {salesforceReady && !useProxy && (
           <>
             <input type="hidden" name="oid" value={salesforce.orgId} />
             <input type="hidden" name="retURL" value={wtl.returnUrl} />
             <input type="hidden" name="lead_source" value={wtl.leadSource} />
           </>
         )}
-        {!salesforceReady && <p class="dev-banner">Preview mode: this form isn't connected to Salesforce yet.</p>}
+        {!salesforceReady && !useProxy && <p class="dev-banner">Preview mode: this form isn't connected to Salesforce yet.</p>}
 
         <div class="field-row">
           <div class="field">
@@ -79,7 +81,8 @@ const teamSizeName = wtl.teamSizeFieldId || 'team_size';
           <label for="consent">I agree to LoomConnect contacting me about this request. See the <a href="/privacy">privacy policy</a>.</label>
         </div>
 
-        <FormGuard honeypotFieldId={wtl.honeypotFieldId} timerFieldId={wtl.timerFieldId} />
+        <FormGuard proxy={useProxy} honeypotFieldId={wtl.honeypotFieldId} timerFieldId={wtl.timerFieldId} />
+        <Turnstile />
 
         <!-- reCAPTCHA widget from Salesforce goes here -->
 

@@ -1,11 +1,13 @@
 ---
 import Base from '../../layouts/Base.astro';
 import FormGuard from '../../components/FormGuard.astro';
-import { site, salesforce, salesforceReady } from '../../site.config.js';
+import Turnstile from '../../components/Turnstile.astro';
+import { site, salesforce, salesforceReady, useProxy } from '../../site.config.js';
 
 const wtc = salesforce.webToCase;
-const action = salesforceReady ? wtc.action : '/support/thanks';
-const method = salesforceReady ? 'post' : 'get';
+// With a Turnstile key set, the form posts to the Worker, which adds the org ID and talks to Salesforce.
+const action = useProxy ? '/api/support' : salesforceReady ? wtc.action : '/support/thanks';
+const method = useProxy || salesforceReady ? 'post' : 'get';
 const orgIdName = wtc.orgIdFieldId || 'salesforce_org_id';
 ---
 <Base title="Support" description="Get help with LoomConnect AI: documentation, email support and support requests.">
@@ -36,14 +38,14 @@ const orgIdName = wtc.orgIdFieldId || 'salesforce_org_id';
     <div class="container narrow">
       <!-- Web-to-Case form. Settings live in src/site.config.js. -->
       <form class="form-card" action={action} method={method} aria-label="Raise a support request">
-        {salesforceReady && (
+        {salesforceReady && !useProxy && (
           <>
             <input type="hidden" name="orgid" value={salesforce.orgId} />
             <input type="hidden" name="retURL" value={wtc.returnUrl} />
           </>
         )}
         <h2 class="h-section">Raise a support request</h2>
-        {!salesforceReady && <p class="dev-banner">Preview mode: this form isn't connected to Salesforce yet.</p>}
+        {!salesforceReady && !useProxy && <p class="dev-banner">Preview mode: this form isn't connected to Salesforce yet.</p>}
 
         <div class="field-row">
           <div class="field">
@@ -89,7 +91,8 @@ const orgIdName = wtc.orgIdFieldId || 'salesforce_org_id';
           <textarea id="description" name="description" rows="5" required></textarea>
         </div>
 
-        <FormGuard honeypotFieldId={wtc.honeypotFieldId} timerFieldId={wtc.timerFieldId} />
+        <FormGuard proxy={useProxy} honeypotFieldId={wtc.honeypotFieldId} timerFieldId={wtc.timerFieldId} />
+        <Turnstile />
 
         <!-- reCAPTCHA widget from Salesforce goes here -->
 
