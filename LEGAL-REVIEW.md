@@ -22,14 +22,14 @@ All of these live in `src/site.config.js` unless noted.
 ## Assumptions the drafts make (check they are still true)
 
 - [ ] LoomConnect AI calls the AI provider directly from the subscriber's org through their own Named Credential. Checked against the LoomConnectAI repo on 4 Nov 2026: every callout uses `callout:<NamedCredential>`, and logs and platform events stay in the subscriber's org. Re-check before each release.
-- [ ] No telemetry, usage metering or error reporting is sent to Loom Connect.
-- [ ] Loom Connect never supplies a hosted or default AI key.
-- [ ] The only data Loom Connect receives from installs is Salesforce's License Management App data (Org ID, company, installing admin, licence count).
+- [ ] No telemetry, usage metering or error reporting is sent to LoomConnect.
+- [ ] LoomConnect never supplies a hosted or default AI key.
+- [ ] The only data LoomConnect receives from installs is Salesforce's License Management App data (Org ID, company, installing admin, licence count).
 - [ ] Admins accept the terms in the app, and each user acknowledges the Acceptable Use Policy the first time they open LoomConnect AI (the AUP and Terms say this happens; confirm the package does it, or change the wording).
 - [ ] Only Anthropic and OpenAI are supported providers (AI transparency page).
 - [ ] Uninstalling LoomConnect AI deletes its objects and records.
 
-If any of these stop being true, Loom Connect becomes a processor for that flow. Update `src/components/legal/DataPath.astro`, the Data processing page and the sub-processors list, and you'll need a DPA.
+If any of these stop being true, LoomConnect becomes a processor for that flow. Update `src/components/legal/DataPath.astro`, the Data processing page and the sub-processors list, and you'll need a DPA.
 
 ## Questions for the solicitor
 
