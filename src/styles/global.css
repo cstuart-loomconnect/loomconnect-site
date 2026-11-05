@@ -189,6 +189,9 @@ p { margin: 0; }
 .video-frame { margin: 0; display: flex; flex-direction: column; gap: 12px; }
 .video-frame video { display: block; width: 100%; height: auto; border-radius: var(--radius-lg); border: 1px solid rgba(255, 255, 255, 0.12); background: var(--ink); }
 .video-frame figcaption { color: var(--on-ink-faint); }
+/* Logo sting on the About page */
+.logo-sting { margin: 40px 0 0; display: flex; flex-direction: column; gap: 8px; }
+.logo-sting video { display: block; width: 100%; max-width: 520px; height: auto; }
 @media (max-width: 600px) { .cta-band { padding: 36px 24px; } }
 
 /* Pricing */
