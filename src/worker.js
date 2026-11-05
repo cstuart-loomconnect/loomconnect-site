@@ -88,6 +88,12 @@ function clean(value, max) {
   return value.replace(/[^\P{Cc}\n]/gu, '').trim().slice(0, max);
 }
 
+// One log line per submission, visible in Cloudflare (Workers Logs or `npx wrangler tail`).
+// Only the form and the outcome are logged, never names, emails or message text.
+function log(url, outcome, detail = {}) {
+  console.log(JSON.stringify({ form: url.pathname, outcome, ...detail }));
+}
+
 function redirect(url, path) {
   return new Response(null, { status: 303, headers: { Location: new URL(path, url.origin).href, 'Cache-Control': 'no-store' } });
 }
@@ -98,14 +104,20 @@ function reject(status, message) {
 
 async function handleForm(request, env, url, form) {
   if (request.method !== 'POST') return new Response('Method not allowed', { status: 405, headers: { Allow: 'POST' } });
-  if (request.headers.get('Origin') !== url.origin) return reject(403, 'Forbidden');
+  if (request.headers.get('Origin') !== url.origin) {
+    log(url, 'blocked-origin');
+    return reject(403, 'Forbidden');
+  }
   if (!(request.headers.get('Content-Type') || '').includes('application/x-www-form-urlencoded')) return reject(415, 'Unsupported media type');
   if (Number(request.headers.get('Content-Length') || 0) > MAX_BODY_BYTES) return reject(413, 'Too large');
 
   const ip = request.headers.get('CF-Connecting-IP') || 'unknown';
   if (env.FORM_LIMITER) {
     const { success } = await env.FORM_LIMITER.limit({ key: `${url.pathname}:${ip}` });
-    if (!success) return reject(429, 'Too many requests. Please wait a minute and try again.');
+    if (!success) {
+      log(url, 'rate-limited');
+      return reject(429, 'Too many requests. Please wait a minute and try again.');
+    }
   }
 
   let data;
@@ -116,36 +128,47 @@ async function handleForm(request, env, url, form) {
   }
 
   const thanks = new URL(form.settings.returnUrl).pathname;
-  if (!env.SALESFORCE_ORG_ID) return reject(503, 'Form temporarily unavailable'); // fail closed
+  if (!env.SALESFORCE_ORG_ID) {
+    log(url, 'missing-org-id');
+    return reject(503, 'Form temporarily unavailable'); // fail closed
+  }
 
   // Bots get a fake success so they don't learn what tripped them
   const seconds = Number(data.get(TIMER_NAME));
   if (clean(data.get(HONEYPOT_NAME), 200) || !Number.isFinite(seconds) || seconds < MIN_SECONDS) {
+    log(url, 'bot-trap', { seconds });
     return redirect(url, thanks);
   }
 
   if (!(await verifyTurnstile(env, data.get('cf-turnstile-response'), ip))) {
+    log(url, 'turnstile-failed');
     return redirect(url, `${form.page}?error=verify`);
   }
 
   const values = {};
   const rules = { ...form.fields, ...form.extra };
   for (const [name, rule] of Object.entries(rules)) values[name] = clean(data.get(name), rule.max);
+  const invalid = () => {
+    log(url, 'invalid');
+    return redirect(url, `${form.page}?error=invalid`);
+  };
   for (const [name, rule] of Object.entries(form.fields)) {
-    if (rule.required && !values[name]) return redirect(url, `${form.page}?error=invalid`);
-    if (rule.email && values[name] && !EMAIL.test(values[name])) return redirect(url, `${form.page}?error=invalid`);
+    if (rule.required && !values[name]) return invalid();
+    if (rule.email && values[name] && !EMAIL.test(values[name])) return invalid();
   }
 
   const params = new URLSearchParams();
   params.set(form.oidName, env.SALESFORCE_ORG_ID);
   params.set('retURL', form.settings.returnUrl);
   for (const name of Object.keys(form.fields)) if (values[name]) params.set(name, values[name]);
-  if (!form.build(values, params, form.settings)) return redirect(url, `${form.page}?error=invalid`);
+  if (!form.build(values, params, form.settings)) return invalid();
 
   try {
     const response = await fetch(form.settings.action, { method: 'POST', body: params, redirect: 'manual' });
+    log(url, response.status >= 400 ? 'salesforce-error' : 'sent-to-salesforce', { status: response.status });
     if (response.status >= 400) return redirect(url, `${form.page}?error=send`);
-  } catch {
+  } catch (error) {
+    log(url, 'salesforce-unreachable', { error: String(error) });
     return redirect(url, `${form.page}?error=send`);
   }
   return redirect(url, thanks);

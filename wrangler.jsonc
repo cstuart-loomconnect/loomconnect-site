@@ -3,6 +3,8 @@
   "name": "loomconnect-site",
   "main": "src/worker.js",
   "compatibility_date": "2026-09-01",
+  // Keeps the Worker's log lines in the Cloudflare dashboard (Observability tab)
+  "observability": { "enabled": true },
   "assets": {
     "directory": "./dist",
     "binding": "ASSETS",
@@ -20,6 +22,7 @@
     // with `npx wrangler deploy --env dev`.
     "dev": {
       "main": "src/worker.js",
+      "observability": { "enabled": true },
       "assets": {
         "directory": "./dist",
         "binding": "ASSETS",
