@@ -27,7 +27,7 @@ export const screenshots = {
     file: 'principal-access.png',
     width: 1600, height: 900,
     alt: 'A permission set giving access to the External Credential principal',
-    capture: 'A permission set\'s External Credential Principal Access page with your AI Assist principal added.',
+    capture: 'A permission set\'s External Credential Principal Access page with your LoomConnect AI principal added.',
   },
   'model-connected': {
     file: '',
@@ -74,8 +74,8 @@ export const screenshots = {
   'app-builder-chat': {
     file: 'app-builder-chat.png',
     width: 1600, height: 900,
-    alt: 'Lightning App Builder with the AI Assist Chat component on a record page',
-    capture: 'Lightning App Builder with AI Assist Chat dropped into the right-hand column and its settings showing.',
+    alt: 'Lightning App Builder with the LoomConnect AI Chat component on a record page',
+    capture: 'Lightning App Builder with LoomConnect AI Chat dropped into the right-hand column and its settings showing.',
   },
   'terms-screen': {
     file: 'terms-screen.png',
@@ -86,7 +86,7 @@ export const screenshots = {
   'chat-window': {
     file: 'chat-window.png',
     width: 900, height: 1100,
-    alt: 'The AI Assist chat window answering a question about a record',
+    alt: 'The LoomConnect AI chat window answering a question about a record',
     capture: 'The chat window on a record page with a question and an answer. Use a test record.',
   },
   'data-source-builder': {
@@ -110,8 +110,8 @@ export const screenshots = {
   'settings-tab': {
     file: 'settings-tab.png',
     width: 1600, height: 900,
-    alt: 'The AI Assist Settings tab',
-    capture: 'The AI Assist Settings tab, scrolled to the top.',
+    alt: 'The LoomConnect AI Settings tab',
+    capture: 'The LoomConnect AI Settings tab, scrolled to the top.',
   },
   'conversations-list': {
     file: 'conversations-list.png',

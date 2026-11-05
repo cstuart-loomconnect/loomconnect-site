@@ -4,7 +4,7 @@ import DataPath from '../components/legal/DataPath.astro';
 import { site } from '../site.config.js';
 const sections = [
   { id: 'statement', label: 'Our role under data protection law' },
-  { id: 'why-no-dpa', label: 'Why AI Assist needs no DPA' },
+  { id: 'why-no-dpa', label: 'Why LoomConnect AI needs no DPA' },
   { id: 'what-we-do-hold', label: 'Data we do hold about you' },
   { id: 'your-provider', label: 'Your agreement with your AI provider' },
   { id: 'support-access', label: 'If we access your org for support' },
@@ -14,8 +14,8 @@ const sections = [
 ---
 <PolicyPage
   title="Data processing"
-  description="Why Loom Connect is not a processor of your AI Assist data, and when a DPA applies."
-  summary="Your data goes straight from your Salesforce org to your AI provider. We never receive it, so we're not your data processor and AI Assist needs no data processing agreement with us."
+  description="Why Loom Connect is not a processor of your LoomConnect AI data, and when a DPA applies."
+  summary="Your data goes straight from your Salesforce org to your AI provider. We never receive it, so we're not your data processor and LoomConnect AI needs no data processing agreement with us."
   sections={sections}
 >
   <DataPath slot="statement" />

@@ -6,7 +6,7 @@ import { site } from '../site.config.js';
 
 const {
   title,
-  description = 'AI Assist puts a secure AI chat assistant on your Salesforce record pages.',
+  description = 'LoomConnect AI puts a secure AI chat assistant on your Salesforce record pages.',
 } = Astro.props;
 const fullTitle = title ? `${title} · ${site.name}` : `${site.product} · ${site.name}`;
 const canonical = new URL(Astro.url.pathname, site.url).href;

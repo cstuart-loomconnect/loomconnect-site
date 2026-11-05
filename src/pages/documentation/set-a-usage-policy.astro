@@ -5,8 +5,8 @@ import Note from '../../components/docs/Note.astro';
 import Screenshot from '../../components/docs/Screenshot.astro';
 ---
 <DocsLayout slug="set-a-usage-policy">
-  <p class="docs-lede">A usage policy sets how much each person can use AI Assist in a day, and what they're allowed to do. Every user needs one, so start with a default policy that covers everyone.</p>
-  <Note type="watch" title="Without a policy, nobody can chat">AI Assist doesn't create a policy when it's installed. Until one is the default, users see "AI Assist has not been set up for your user".</Note>
+  <p class="docs-lede">A usage policy sets how much each person can use LoomConnect AI in a day, and what they're allowed to do. Every user needs one, so start with a default policy that covers everyone.</p>
+  <Note type="watch" title="Without a policy, nobody can chat">LoomConnect AI doesn't create a policy when it's installed. Until one is the default, users see "LoomConnect AI has not been set up for your user".</Note>
 
   <h2 id="default">Create the default policy</h2>
   <ol class="docs-steps">
@@ -22,13 +22,13 @@ import Screenshot from '../../components/docs/Screenshot.astro';
     <table>
       <thead><tr><th>Setting</th><th>What it controls</th></tr></thead>
       <tbody>
-        <tr><td>Tokens per 24 hours</td><td>Total AI use across all of a person's conversations. Leave blank for no limit.</td></tr>
-        <tr><td>Conversations per 24 hours</td><td>How many new conversations a person can start.</td></tr>
+        <tr><td>Tokens per day</td><td>Total AI use across all of a person's conversations in a day. The count starts again at midnight. Leave blank for no limit.</td></tr>
+        <tr><td>Conversations per day</td><td>How many new conversations a person can start in a day.</td></tr>
         <tr><td>Open conversations at once</td><td>How many conversations a person can have open together.</td></tr>
         <tr><td>When a limit is hit</td><td><strong>Block new messages</strong> stops them straight away. <strong>Block new conversations only</strong> lets them finish what they're doing. <strong>Notify only</strong> shows a warning.</td></tr>
         <tr><td>Start a chat themselves</td><td>Off means users can only use suggested prompts and slash commands.</td></tr>
         <tr><td>See conversations</td><td>Whose conversations appear in a person's history: their own, their team's, or everyone's.</td></tr>
-        <tr><td>Channels</td><td>Where they can use AI Assist: Record Page Chat, Utility Bar or Mobile. Tick none to allow every channel.</td></tr>
+        <tr><td>Channels</td><td>Where they can use LoomConnect AI: Record Page Chat or Utility Bar. Tick none to allow every channel.</td></tr>
         <tr><td>Debug mode</td><td>Shows the steps behind each reply. Useful while testing, not for everyone.</td></tr>
       </tbody>
     </table>
