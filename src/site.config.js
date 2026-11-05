@@ -95,7 +95,7 @@ export const salesforce = {
 // While siteKey is empty the forms post straight to Salesforce, as before. Once it is set, they post to
 // the Worker (src/worker.js), which checks Turnstile and only then forwards to Salesforce.
 export const turnstile = {
-  siteKey: '', // e.g. 0x4AAAAAAA...
+  siteKey: '0x4AAAAAAF1R7T5vYujf_4BY', // e.g. 0x4AAAAAAA...
   verifyUrl: 'https://challenges.cloudflare.com/turnstile/v0/siteverify',
 };
 
