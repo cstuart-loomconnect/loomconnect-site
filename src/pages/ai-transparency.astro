@@ -19,7 +19,7 @@ const sections = [
   sections={sections}
 >
   <p slot="what">LoomConnect AI is a chat assistant inside Salesforce. It uses a large language model to summarise records, draft text and answer questions about data your admin has made available to it. Everything LoomConnect AI shows you is AI-generated unless it is labelled as a Salesforce field value.</p>
-  <p slot="models">Your admin chooses the provider and model, currently Anthropic or OpenAI, and connects it using your organisation's own API key. Loom Connect does not provide or host a model.</p>
+  <p slot="models">Your admin chooses the provider and model, currently Anthropic or OpenAI, and connects it using your organisation's own API key. LoomConnect does not provide or host a model.</p>
   <div slot="data">
     <DataPath />
     <p>Within that:</p>
@@ -38,6 +38,6 @@ const sections = [
     </ul>
   </div>
   <p slot="control">Admins control which data sources and actions are available, set usage rules that flag or block misuse, and can review the audit log of every request. Users can rate answers and report problems from the chat panel.</p>
-  <p slot="training">That depends on the terms between your organisation and your AI provider. Most business API agreements do not use your data for training by default, but check your provider's terms. Loom Connect never receives or trains on your data.</p>
+  <p slot="training">That depends on the terms between your organisation and your AI provider. Most business API agreements do not use your data for training by default, but check your provider's terms. LoomConnect never receives or trains on your data.</p>
   <p slot="questions">Email <a href={`mailto:${site.email.security}`}>{site.email.security}</a>, or read the <a href="/security">security overview</a>.</p>
 </PolicyPage>

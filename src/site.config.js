@@ -2,7 +2,7 @@
 // Change values here and every page picks them up.
 
 export const site = {
-  name: 'Loom Connect',
+  name: 'LoomConnect',
   product: 'LoomConnect AI',
   url: 'https://loomconnect.com',
 
