@@ -2,16 +2,14 @@
 # Each indented line under a path is one header. Lines starting with # are comments.
 #
 # Content-Security-Policy says where the browser may load things from. Everything comes from this site, except:
-#   form-action  - the demo and support forms post to Salesforce Web-to-Lead and Web-to-Case.
-#   challenges.cloudflare.com - the Turnstile anti-bot widget on the demo and support forms.
-# Once the forms post to the Worker (a Turnstile site key is set in site.config.js), remove
-# https://webto.salesforce.com from form-action so the browser can only post forms to this site.
+#   challenges.cloudflare.com (script, frame, connect) - the Turnstile anti-bot widget on the demo and support forms.
+# The forms post to this site's own Worker (/api/demo, /api/support), which talks to Salesforce, so form-action stays 'self'.
 # If you add the Salesforce reCAPTCHA to those forms, also add https://www.google.com and https://www.gstatic.com
 # to script-src and frame-src. Turnstile makes the Salesforce reCAPTCHA unnecessary.
 # Nothing runs or styles inline: keep it that way by putting CSS in src/styles and scripts in src/scripts.
 
 /*
-  Content-Security-Policy: default-src 'self'; script-src 'self' https://challenges.cloudflare.com; style-src 'self'; img-src 'self'; font-src 'self'; connect-src 'self' https://challenges.cloudflare.com; media-src 'self'; manifest-src 'self'; worker-src 'none'; frame-src https://challenges.cloudflare.com; form-action 'self' https://webto.salesforce.com; frame-ancestors 'none'; base-uri 'self'; object-src 'none'; upgrade-insecure-requests
+  Content-Security-Policy: default-src 'self'; script-src 'self' https://challenges.cloudflare.com; style-src 'self'; img-src 'self'; font-src 'self'; connect-src 'self' https://challenges.cloudflare.com; media-src 'self'; manifest-src 'self'; worker-src 'none'; frame-src https://challenges.cloudflare.com; form-action 'self'; frame-ancestors 'none'; base-uri 'self'; object-src 'none'; upgrade-insecure-requests
   Strict-Transport-Security: max-age=31536000
   X-Content-Type-Options: nosniff
   X-Frame-Options: DENY

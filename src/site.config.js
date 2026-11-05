@@ -64,41 +64,25 @@ export const site = {
   },
 };
 
-// Salesforce form settings. Leave orgId empty until your Partner Business Org
-// is live: the forms then skip Salesforce and go straight to the thank-you
-// pages, so you can click through the journey while building.
+// Salesforce form settings. The org ID is NOT stored here: the Worker (src/worker.js) reads it from the
+// Worker secret SALESFORCE_ORG_ID, so it never appears in the code or the page. See the README.
 export const salesforce = {
-  orgId: '00DQH00000LU85h', // 15-character Org ID, e.g. 00D5g000001AbCd
-
   webToLead: {
     action: 'https://webto.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8',
     returnUrl: 'https://loomconnect.com/demo/thanks',
     leadSource: 'Website - Demo',
-    teamSizeFieldId: '', // Field ID of TeamSize__c on Lead, e.g. 00N5g00000ABCDE
-    // Spam traps. Create these two fields on Lead, then paste their field IDs. See the README for the Flow that uses them.
-    honeypotFieldId: '', // Text field a human never fills in, e.g. WebsiteTrap__c
-    timerFieldId: '', // Number field for seconds taken to submit, e.g. SecondsToSubmit__c
+    teamSizeFieldId: '', // Field ID of TeamSize__c on Lead, e.g. 00N5g00000ABCDE. If empty, team size goes in the description.
   },
 
   webToCase: {
     action: 'https://webto.salesforce.com/servlet/servlet.WebToCase?encoding=UTF-8',
     returnUrl: 'https://loomconnect.com/support/thanks',
-    orgIdFieldId: '', // Field ID of SalesforceOrgId__c on Case
-    // Spam traps, same as Web-to-Lead. Create these two fields on Case, then paste their field IDs.
-    honeypotFieldId: '',
-    timerFieldId: '',
+    orgIdFieldId: '', // Field ID of SalesforceOrgId__c on Case. If empty, the customer's Org ID goes in the description.
   },
 };
 
-// Cloudflare Turnstile (the anti-bot check). Paste the PUBLIC site key from the Cloudflare dashboard.
-// The secret key never goes here: store it with `npx wrangler secret put TURNSTILE_SECRET`.
-// While siteKey is empty the forms post straight to Salesforce, as before. Once it is set, they post to
-// the Worker (src/worker.js), which checks Turnstile and only then forwards to Salesforce.
+// Cloudflare Turnstile (the anti-bot check). The site key is public but kept out of the code: it comes from the
+// build variable PUBLIC_TURNSTILE_SITE_KEY (see src/site-key.js). The secret key is the Worker secret TURNSTILE_SECRET.
 export const turnstile = {
-  siteKey: '0x4AAAAAAF1R7T5vYujf_4BY', // e.g. 0x4AAAAAAA...
   verifyUrl: 'https://challenges.cloudflare.com/turnstile/v0/siteverify',
 };
-
-export const useProxy = turnstile.siteKey.length > 0;
-
-export const salesforceReady = salesforce.orgId.length > 0;

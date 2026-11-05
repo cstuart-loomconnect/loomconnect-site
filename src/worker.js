@@ -10,7 +10,7 @@
 //   3. honeypot empty and not submitted instantly (bots fail these; they get a fake "success")
 //   4. Cloudflare Turnstile token verified server-side (needs the TURNSTILE_SECRET Worker secret)
 //   5. required fields present, lengths and picklist values valid
-// Only an allowlist of fields is forwarded, and the org ID and field IDs are added here, not in the page.
+// Only an allowlist of fields is forwarded. The org ID comes from the Worker secret SALESFORCE_ORG_ID and is added here, not in the page.
 
 import { salesforce, turnstile } from './site.config.js';
 import { HONEYPOT_NAME, TIMER_NAME } from './form-fields.js';
@@ -116,6 +116,7 @@ async function handleForm(request, env, url, form) {
   }
 
   const thanks = new URL(form.settings.returnUrl).pathname;
+  if (!env.SALESFORCE_ORG_ID) return reject(503, 'Form temporarily unavailable'); // fail closed
 
   // Bots get a fake success so they don't learn what tripped them
   const seconds = Number(data.get(TIMER_NAME));
@@ -136,7 +137,7 @@ async function handleForm(request, env, url, form) {
   }
 
   const params = new URLSearchParams();
-  params.set(form.oidName, salesforce.orgId);
+  params.set(form.oidName, env.SALESFORCE_ORG_ID);
   params.set('retURL', form.settings.returnUrl);
   for (const name of Object.keys(form.fields)) if (values[name]) params.set(name, values[name]);
   if (!form.build(values, params, form.settings)) return redirect(url, `${form.page}?error=invalid`);

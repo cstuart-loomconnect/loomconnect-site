@@ -1,26 +1,21 @@
 ---
-// Spam traps and the error message for a Salesforce form. Place inside the <form>.
-//
-// Proxy mode (Turnstile site key set): the traps use fixed names and the Worker (src/worker.js) checks them
-//   and never forwards them to Salesforce. No Salesforce fields are needed.
-// Direct mode: the traps post to Salesforce, so they only render once you create the fields and set
-//   honeypotFieldId / timerFieldId in src/site.config.js (Salesforce drops names it doesn't recognise).
+// Spam traps and the error message for the demo and support forms. Place inside the <form>.
+// The Worker (src/worker.js) checks the honeypot and the timer, and never forwards them to Salesforce,
+// so no Salesforce fields are needed. Names are shared with the Worker through src/form-fields.js.
 import { HONEYPOT_NAME, TIMER_NAME } from '../form-fields.js';
-const { proxy = false, honeypotFieldId = '', timerFieldId = '' } = Astro.props;
-const honeypotName = proxy ? HONEYPOT_NAME : honeypotFieldId;
-const timerName = proxy ? TIMER_NAME : timerFieldId;
+const { proxy = false } = Astro.props;
 ---
-{proxy && <p class="form-error" role="alert" data-form-error hidden></p>}
-{honeypotName && (
-  <div class="hp" aria-hidden="true">
-    <label for="contact_me_by_fax">Leave this field empty</label>
-    <input id="contact_me_by_fax" name={honeypotName} type="text" tabindex="-1" autocomplete="off" />
-  </div>
-)}
-{timerName && <input type="hidden" name={timerName} value="" data-form-timer />}
-{(proxy || honeypotName || timerName) && (
-  <script>
-    import { setUpFormGuard } from '../scripts/form-guard.js';
-    setUpFormGuard();
-  </script>
+{proxy && (
+  <>
+    <p class="form-error" role="alert" data-form-error hidden></p>
+    <div class="hp" aria-hidden="true">
+      <label for="contact_me_by_fax">Leave this field empty</label>
+      <input id="contact_me_by_fax" name={HONEYPOT_NAME} type="text" tabindex="-1" autocomplete="off" />
+    </div>
+    <input type="hidden" name={TIMER_NAME} value="" data-form-timer />
+    <script>
+      import { setUpFormGuard } from '../scripts/form-guard.js';
+      setUpFormGuard();
+    </script>
+  </>
 )}

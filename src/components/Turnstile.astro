@@ -2,11 +2,11 @@
 // Cloudflare Turnstile widget. Place inside the <form>. Renders only once a site key is set in src/site.config.js.
 // The widget adds a hidden "cf-turnstile-response" field that the Worker verifies.
 // The CSP in public/_headers already allows challenges.cloudflare.com.
-import { turnstile } from '../site.config.js';
+import { turnstileSiteKey } from '../site-key.js';
 ---
-{turnstile.siteKey && (
+{turnstileSiteKey && (
   <>
-    <div class="cf-turnstile" data-sitekey={turnstile.siteKey} data-theme="light"></div>
+    <div class="cf-turnstile" data-sitekey={turnstileSiteKey} data-theme="light"></div>
     <script is:inline src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
   </>
 )}
