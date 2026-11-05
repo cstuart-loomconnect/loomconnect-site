@@ -1,7 +1,14 @@
 ---
-const { size = 28 } = Astro.props;
+// LoomConnect "Twin Threads" mark. `size` is the width in px; height follows the mark's shape.
+// Master artwork: two strands that weave over and under each other (ink over on the left, amber over on the right).
+const { size = 32 } = Astro.props;
+const height = Math.round((size * 124) / 220);
 ---
-<svg width={size} height={size} viewBox="0 0 28 28" fill="none" aria-hidden="true">
-  <path d="M3 9c5 0 5 10 11 10s6-10 11-10" stroke="#1E1B4B" stroke-width="2.4" stroke-linecap="round" />
-  <path d="M3 19c5 0 5-10 11-10s6 10 11 10" stroke="#F59E0B" stroke-width="2.4" stroke-linecap="round" />
+<svg width={size} height={height} viewBox="18 66 220 124" fill="none" aria-hidden="true">
+  <path d="M36 172 C50.3 172 60 164.2 67.8 153.2 M96.2 102.8 C104 91.8 113.7 84 128 84 C175.8 84 172.2 172 220 172" stroke="#F59E0B" stroke-width="30" />
+  <circle cx="36" cy="172" r="15" fill="#F59E0B" />
+  <circle cx="220" cy="172" r="15" fill="#F59E0B" />
+  <path d="M36 84 C83.8 84 80.2 172 128 172 C142.3 172 152 164.2 159.8 153.2 M188.2 102.8 C196 91.8 205.7 84 220 84" stroke="#1E1B4B" stroke-width="30" />
+  <circle cx="36" cy="84" r="15" fill="#1E1B4B" />
+  <circle cx="220" cy="84" r="15" fill="#1E1B4B" />
 </svg>
