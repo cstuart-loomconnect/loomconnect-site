@@ -30,7 +30,7 @@ export const screenshots = {
     capture: 'A permission set\'s External Credential Principal Access page with your LoomConnect AI principal added.',
   },
   'model-connected': {
-    file: '',
+    file: 'model-connected.png',
     width: 1600, height: 900,
     alt: 'The AI Agent Models tab with a passing connection test',
     capture: 'The AI Agent Models tab, with a model open and the connection test showing Connected.',
@@ -76,6 +76,12 @@ export const screenshots = {
     width: 1600, height: 900,
     alt: 'Lightning App Builder with the LoomConnect AI Chat component on a record page',
     capture: 'Lightning App Builder with LoomConnect AI Chat dropped into the right-hand column and its settings showing.',
+  },
+  'utility-bar-chat': {
+    file: 'utility-bar-chat.png',
+    width: 1600, height: 900,
+    alt: 'App Manager with LoomConnect AI Chat added as a utility item, showing its label, panel size and settings',
+    capture: 'Setup > App Manager > edit the app > Utility Items, with LoomConnect AI Chat added and its properties showing.',
   },
   'terms-screen': {
     file: 'terms-screen.png',
