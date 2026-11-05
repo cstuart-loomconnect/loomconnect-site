@@ -13,6 +13,15 @@ import { site } from '../site.config.js';
       <p class="lead">I started on Salesforce as an apprentice and have spent years building on the platform. LoomConnect AI exists because teams wanted AI on their records without sending their data somewhere they couldn't see.</p>
       <p class="lead">Loom Connect is named for the idea behind it: weaving AI into the platform you already use, thread by thread.</p>
     </div>
+    <!-- Logo sting: plays once when scrolled into view (src/scripts/play-once.js). Files live in public/video/ -->
+    <div class="container narrow">
+      <figure class="logo-sting">
+        <video data-play-once muted playsinline preload="metadata" poster="/video/loomconnect-sting.jpg" width="1200" height="350" aria-label="The LoomConnect logo: two threads weaving together into one mark">
+          <source src="/video/loomconnect-sting.mp4" type="video/mp4" />
+        </video>
+        <figcaption class="small muted">Two threads, over and under: your records and your AI, woven together.</figcaption>
+      </figure>
+    </div>
   </section>
   <section class="section-sm bg-soft">
     <div class="container stack-lg">
@@ -28,3 +37,8 @@ import { site } from '../site.config.js';
     </div>
   </section>
 </Base>
+
+<script>
+  import { setUpPlayOnce } from '../scripts/play-once.js';
+  setUpPlayOnce();
+</script>
